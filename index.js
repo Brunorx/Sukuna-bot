@@ -1,0 +1,8509 @@
+//=======================================*/
+const { default: makeWASocket, downloadContentFromMessage, fetchLatestBaileysVersion, useSingleFileAuthState, makeInMemoryStore, DisconnectReason, WAGroupMetadata, relayWAMessage,	MediaPathMap, mentionedJid, processTime, MediaType, Browser, MessageType, Presence, Mimetype, Browsers, delay 
+} = require('@adiwajshing/baileys');
+
+//_-_-_-_-_-_-_-_-_-_-MODULOS/FUNÇÕES-_-_-_-_-_-_-_-_-_-_-_-\\
+
+const { hx, fs, Boom, axios, chalk, yts, crypto, util, P, encodeUrl, linkfy, request, cheerio, ms, ffmpeg, imgbb, googleImage, googleIt, fetch, imageToBase64, webp2gifFile, webp_mp4, EmojiAPI, qrterminal, emoji, exec, spawn, execSync, moment, color, time, hora, date, getBuffer, convertSticker, recognize, fetchJson, fetchText, getBase64, createExif, insert, response, addLimit, getLimit, mediafireDl, upload, nit, addBanned, unBanned, BannedExpired, cekBannedUser, isFiltered, addFilter, validmove, setGame, addComandosId, deleteComandos, getComandoBlock, getComandos, addComandos, palavrasANA, quizanime, quizanimais, getLevelingXp, getLevelingLevel, getLevelingId, addLevelingXp, addLevelingLevel, addLevelingId, bayarLimit, limitAdd, addATM, addKoinUser, checkATMuser, getRegisteredRandomId, addRegisteredUser, createSerial, checkRegisteredUser, confirmATM, runtime, getpc, supre, WinnerX, WinnerO, Tie, IA, IAmove1, IAalter, priorityC, addTTTId, addTTTwin, addTTTdefeat, addTTTtie, addTTTpoints, getTTTId, getTTTwins, getTTTdefeats, getTTTties, getTTTpoints, wait, getExtension, h2k, generateMessageID, getGroupAdmins, getRandom, banner2, banner3, infopd, success, start, close, temporizador, cmdadd, addMetadata, chyt, ttthelp, tttme, tttset, esp, kyun, simih } = require('./consts-func.js')
+
+//-_-_-_-_-_-_-_-_-_-_--_-JSON-FUNÇÕES-_-_-_-_-_-_-_-_-_-_-_-_\\
+
+const { adeuscara, welcome_group, welcome_group2, bye_group, bye_group2, voting, sotoy, addVote, delVote, countMessage, comandos, welkom2, modobn, nsfw, daily, nescessario, welkom, premium, limitefll, antiflood, samih, samih2, _leveling, _level, bancht, anticall, ban, afk, joguinhodavelhajs, joguinhodavelhajs2, setting, logoslink, antilink, antifake, antilinkhard, antilinkgp, antiimg, antisticker, antinotas, antictt, anticatalogo, antidoc, antiloc, antipv, antivid, antiaudio, palavra, palavrao, store, state, saveState } = require('./consts-func.js')
+
+//-_-_-_-_-_-_-_-_-_-_-JS-MENUS/INFORMAÇÕES-_-_-_-_-_-_-_-_-_-_\\
+
+const { menu, menudono, adms, menulogos, efeitos, menuprem, brincadeiras ,infovotacao, infocontador, infobemvindo, infolistanegra, infopalavrao, infobancarac, infodono, gitdobot, configbot, hospedar, cmd_termux, alteradores, destrava, destrava2, tabela, conselhob, palavras } = require('./consts-func.js')
+
+//_-_-_-_-_-_-_-_-_-_-_-_-(INFOS)_-_-_-_-_-_-_-_-_-_-_-_-_-_-_--\\
+
+const { prefix, NomeDoBot, NickDono, numerodono } = require("./dono/settings.json")
+
+const { linklogos, crtt, cdd, forwarding, imgnazista, verificado, gifmenu, imggay, imgcorno, imggostosa, imggostoso, imgfeio, imgvesgo, imgbebado, imggado, fundo1, fundo2, banChats, dono2, dono3, dono4, dono5, tapacmd, matarcmd, beijocmd, chutecmd} = require("./dono/nescessario.json")
+
+//====================≠≠===============\\
+
+logo = logoslink.logo
+
+limitefl = limitefll.limitefl
+
+offline = false
+
+numbernye = '0'
+
+blocked = [] 
+
+hitt = []
+
+alekey = 'ale652'
+
+keyale = "key-do-diego-de-assis-2.0"
+
+//=====================================\\
+
+
+async function startAle() {
+
+// ABAIXO: INÍCIO DE CONEXÃO
+
+const { version, isLatest } = await fetchLatestBaileysVersion()
+console.log(`usando WA v${version.join('.')}, é mais recente: ${isLatest}`)
+  
+console.log(banner3.string)   
+console.log(banner2.string)
+const conn = makeWASocket({
+version,  
+logger: P({ level: 'fatal' }),
+printQRInTerminal: true,
+auth: state
+})
+
+store.bind(conn.ev)
+
+conn.ev.on('chats.set', () => {
+//pode usar "store.chats" como quiser, mesmo depois que o soquete morre
+// "chats" => uma instância keyedDB
+console.log('Tem conversas', store.chats.all())
+})
+
+conn.ev.on('contacts.set', () => {
+console.log('Tem contatos', Object.values(store.contacts))
+})
+
+//===============(BEM VINDO)=============\\
+
+
+conn.ev.on('group-participants.update', async (ale) => {
+  
+const groupMetadata = await conn.groupMetadata(ale.id) 
+  
+const mdata = await conn.groupMetadata(ale.id)  
+
+
+// CONST DO CMD DE BANIR QUEM ESTIVER NA LISTA N
+
+const dbackid = []
+for(i=0;i<adeuscara.length;++i) dbackid.push(adeuscara[i].groupId)
+console.log(ale)
+if(dbackid.indexOf(ale.id) >= 0) {
+if (ale.action == 'add'){ 
+num = ale.participants[0]
+var ind = dbackid.indexOf(ale.id)
+if(adeuscara[ind].actived && adeuscara[ind].number.indexOf(num.split('@')[0]) >= 0) {
+await conn.sendMessage(mdata.id,{text: 'Olha quem deu as cara por aqui, sente o poder do ban'})
+conn.groupParticipantsUpdate(mdata.id, [ale.participants[0]], 'remove')
+return
+}
+}
+}
+
+// FIM LISTANEGRA CONST ^
+
+
+// ANTIFAKE QUE ESTÁ JUNTO COM BEM VINDO 
+
+if(antifake.includes(ale.id)) {
+if (ale.action === 'add' && !ale.participants[0].startsWith(55)){
+num = ale.participants[0]
+conn.sendMessage(mdata.id, {text: '𝗩𝗶𝘅𝗲 𝗼𝗹𝗵𝗮 𝗼 𝗻𝘂𝗺𝗲𝗿𝗼 𝗳𝗮𝗸𝗲 👀 𝘃𝗼𝘂 𝘁𝗲𝗿 𝗾𝘂𝗲 𝗯𝗮𝗻𝗶𝗿 𝘃𝗼𝗰𝗲,𝗾𝘂𝗮𝗹𝗾𝘂𝗲𝗿 𝗰𝗼𝗶𝘀𝗮 𝗰𝗵𝗮𝗺𝗮 𝗼 𝗔𝗗𝗠 🔒'})
+await delay(1000)
+conn.groupParticipantsUpdate(mdata.id, [ale.participants[0]], 'remove')
+}
+}
+
+if(antifake.includes(ale.id)) {
+if (ale.action === 'add' && ale.participants[0].startsWith(55800)){
+num = ale.participants[0]
+conn.sendMessage(mdata.id, {text: '𝗩𝗶𝘅𝗲 𝗼𝗹𝗵𝗮 𝗼 𝗻𝘂𝗺𝗲𝗿𝗼 𝗳𝗮𝗸𝗲 👀 𝘃𝗼𝘂 𝘁𝗲𝗿 𝗾𝘂𝗲 𝗯𝗮𝗻𝗶𝗿 𝘃𝗼𝗰𝗲,𝗾𝘂𝗮𝗹𝗾𝘂𝗲𝗿 𝗰𝗼𝗶𝘀𝗮 𝗰𝗵𝗮𝗺𝗮 𝗼 𝗔𝗗𝗠 '})
+await delay(1000)
+conn.groupParticipantsUpdate(mdata.id, [ale.participants[0]], 'remove')
+}
+}
+
+// FIM ANTIFAKE ^
+
+// BEM VINDO COMPLETO 
+
+
+if(welkom.includes(ale.id)) {
+if(antifake.includes(ale.id) && !ale.participants[0].startsWith(55)) return
+try {
+  
+// PEGAR DESCRIÇÃO DO GRUPO. 
+
+const groupDesc = await groupMetadata.desc  
+  
+try {
+ppimg = await conn.profilePictureUrl(ale.participants[0])
+} catch {
+ppimg = 'https://telegra.ph/file/b5427ea4b8701bc47e751.jpg'
+}
+
+try {
+ppgp = await conn.profilePictureUrl(mdata.id)
+} catch {
+ppgp = 'https://image.flaticon.com/icons/png/512/124/124034.png'
+}
+
+shortpc = await axios.get(`https://tinyurl.com/api-create.php?url=${ppimg}`)
+shortgc = await axios.get(`https://tinyurl.com/api-create.php?url=${ppgp}`)
+
+const groupIdWelcomed = []
+const groupIdBye = []
+for(let obj of welcome_group) groupIdWelcomed.push(obj.id)
+for(let obj of bye_group) groupIdBye.push(obj.id)
+
+
+const isByed = groupIdBye.indexOf(ale.id) >= 0 ? true : false
+
+const isWelcomed = (groupIdWelcomed.indexOf(ale.id) >= 0) ? true : false
+
+if(ale.action === 'add') {
+if(isWelcomed) {
+var ind = groupIdWelcomed.indexOf(ale.id)
+teks = welcome_group[ind].msg
+.replace('#hora#', time)
+.replace('#nomedogp#', mdata.subject)
+.replace('#numerodele#', '@'+ale.participants[0].split('@')[0])
+.replace('#numerobot#', conn.user.id)
+.replace('#prefixo#', prefix)
+.replace('#descrição#', groupDesc)
+} else {
+teks = welcome(ale.participants[0].split('@')[0], mdata.subject)
+}
+let buff = await getBuffer(ppimg)
+ran = getRandom('.jpg')
+await fs.writeFileSync(ran, buff)
+fs.unlinkSync(ran)
+imgbuff = await getBuffer(`https://aleatoryapi.herokuapp.com/welcome?titulo=BEM%20VINDO(A)&nome=${ale.participants[0].split('@')[0]}&perfil=${shortpc.data}&fundo=${fundo1}&grupo=SEJA BEM VINDO ${encodeUrl(mdata.subject)}`)
+conn.sendMessage(mdata.id, {image: imgbuff, 
+mentions: ale.participants, caption: teks})
+
+} else if(ale.action === 'remove') {
+mem = ale.participants[0]
+
+try {
+ppimg = await conn.profilePictureUrl(`${mem.split('@')[0]}@c.us`)
+} catch {
+ppimg = 'https://telegra.ph/file/b5427ea4b8701bc47e751.jpg'
+}
+
+
+if(isByed) {
+var ind = groupIdBye.indexOf(ale.id)
+teks = bye_group[ind].msg
+.replace('#hora#', time)
+.replace('#nomedogp#', mdata.subject)
+.replace('#numerodele#', ale.participants[0].split('@')[0])
+.replace('#numerobot#', conn.user.id)
+.replace('#prefixo#', prefix)
+.replace('#descrição#', groupDesc)
+} else {
+teks = bye(ale.participants[0].split('@')[0])
+}
+
+let buff = await getBuffer(ppimg)
+ran = getRandom('.jpg')
+fs.writeFileSync(ran, buff)
+
+imgbuff = await getBuffer(`https://aleatoryapi.herokuapp.com/welcome?titulo=Adeus&nome=${ale.participants[0].split('@')[0]}&perfil=${shortpc.data}&fundo=${fundo1}&grupo=SAIU DE ${encodeUrl(mdata.subject)}`)
+conn.sendMessage(mdata.id, {image: imgbuff, caption: teks, 
+mentions: ale.participants})
+ fs.unlinkSync(ran)
+
+}
+} catch (e) {
+console.log(e);
+}
+}
+})
+// FIM ^
+
+
+// BEM VINDO 2 ( SEM FOTO )
+
+conn.ev.on('creds.update', saveState);
+conn.ev.on('group-participants.update', async (ale) => {
+ 
+
+if(welkom2.includes(ale.id)) {
+if(antifake.includes(ale.id) && !ale.participants[0].startsWith(55)) return
+try {
+
+const groupMetadata = await conn.groupMetadata(ale.id) 
+  
+const mdata = await conn.groupMetadata(ale.id)  
+
+// PEGAR DESCRIÇÃO DO GRUPO
+
+const groupDesc = await groupMetadata.desc
+
+const groupIdWelcomed2 = []
+const groupIdBye2 = []
+for(let obj of welcome_group2) groupIdWelcomed2.push(obj.id)
+for(let obj of bye_group2) groupIdBye2.push(obj.id)
+
+
+const isByed2 = groupIdBye2.indexOf(ale.id) >= 0 ? true : false
+
+const isWelcomed2 = (groupIdWelcomed2.indexOf(ale.id) >= 0) ? true : false
+
+if(ale.action === 'add') {
+if(isWelcomed2) {
+var ind = groupIdWelcomed2.indexOf(ale.id)
+teks = welcome_group2[ind].msg
+.replace('#hora#', time)
+.replace('#nomedogp#', mdata.subject)
+.replace('#numerodele#', '@'+ale.participants[0].split('@')[0])
+.replace('#numerobot#', conn.user.id)
+.replace('#prefixo#', prefix)
+.replace('#descrição#', groupDesc)
+} else {
+teks = welcome(ale.participants[0].split('@')[0], mdata.subject)
+}
+
+conn.sendMessage(mdata.id, {text: teks}, {mentions: ale.participants})
+
+} else if(ale.action === 'remove') {
+mem = ale.participants[0]
+
+if(isByed2) {
+var ind = groupIdBye2.indexOf(ale.id)
+teks = bye_group2[ind].msg
+.replace('#hora#', time)
+.replace('#nomedogp#', mdata.subject)
+.replace('#numerodele#', ale.participants[0].split('@')[0])
+.replace('#numerobot#', conn.user.id)
+.replace('#prefixo#', prefix)
+.replace('#descrição#', groupDesc)
+} else {
+teks = bye(ale.participants[0].split('@')[0])
+}
+
+conn.sendMessage(mdata.id, {text: teks}, {mentions: ale.participants})
+ fs.unlinkSync(ran)
+}
+} catch (e) {
+console.log(e);
+}
+}
+})
+// FIM BEM VINDO (2)
+
+
+conn.ev.on('connection.update', (update) => {
+const { connection, lastDisconnect, qr} = update
+
+if(qr) {
+console.log(color("VOCÊ PRECISARÁ DE UM SEGUNDO CELULAR, PARA TIRAR FOTO DO QRCODE, PRA DEPOIS ESCANEAR A FOTO QUE TIROU"))
+}
+
+{
+if(!fs.existsSync("auth_info_multi.json")) return
+}
+
+if(connection === 'close') {
+var shouldReconnect = ((lastDisconnect.error)?.output?.statusCode !== DisconnectReason.loggedOut)
+
+console.log('Conexão fechada devido a ', lastDisconnect.error, ', Reconectar ', shouldReconnect)
+
+console.log(color("Boa sorte, caso de bugs, apenas desligue e ligue novamente, pressionando volume de menos do celular e apertando letra C"))
+
+if(String(lastDisconnect.error).includes("Connection Failure")) {
+exec("rm baileys_store_multi.json")  
+exec("rm auth_info_multi.json")
+console.log(color("QRCODE ESTÁ MORTO, NÃO ESCANEOU CORRETAMENTE, IREI APAGAR ELE E GERAR UM NOVO QRCODE, BOA SORTE..", "red"))
+process.exit()
+}
+
+if(String(lastDisconnect.error).includes("Stream Errored")) {
+process.exit()
+}
+
+if(String(lastDisconnect.error)) {
+startAle()
+}
+
+}
+
+if(connection === 'connecting') {
+ start('2', 'CONECTANDO SUKUNA-BOT MD 2.3..')    
+}
+
+if(connection === 'open') {
+success('2', 'SUKUNA-BOT MD 2.0 CONECTADO COM SUCESSO..')
+}
+
+if(update.isNewLogin) {
+ startAle()
+}
+
+})
+
+conn.ev.on('chats.set', item => console.log(`recv ${item.chats.length} Chats (is latest: ${item.isLatest})`))
+
+conn.ev.on('messages.set', item => console.log(`recv ${item.messages.length} Mensagens (is latest: ${item.isLatest})`))
+
+conn.ev.on('contacts.set', item => console.log(`recv ${item.contacts.length} Contatos`))
+
+
+conn.ev.on('messages.upsert', async ({ messages }) => {
+try {
+const info = messages ? messages[0]: messages[1]
+if (!info.message) return 
+saveState()
+if (info.message.protocolMessage) return 
+if(info.message > 1000) return
+await conn.sendReadReceipt(info.key.remoteJid, info.key.participant, [info.key.id])
+if (info.key && info.key.remoteJid == 'status@broadcast') return
+
+const altpdf = Object.keys(info.message)
+const type = altpdf[0] == 'senderKeyDistributionMessage' ? altpdf[1] == 'messageContextInfo' ? altpdf[2] : altpdf[1] : altpdf[0]
+
+global.prefix
+
+global.blocked
+
+const content = JSON.stringify(info.message)
+const speed = require('performance-now');
+const from = info.key.remoteJid
+const isGroup = from.endsWith('@g.us')
+
+//==============(BODY)================\\
+var body = (type === 'conversation') ? info.message.conversation : (type === 'imageMessage') ? info.message.imageMessage.caption : (type === 'videoMessage') ? info.message.videoMessage.caption : (type === 'extendedTextMessage') ? info.message.extendedTextMessage.text : (type === 'buttonsResponseMessage') ? info.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage') ? info.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'templateButtonReplyMessage') ? info.message.templateButtonReplyMessage.selectedId : ''
+
+const args = body.trim().split(/ +/).slice(1)
+const isCmd = body.startsWith(prefix)
+const command = isCmd ? body.slice(1).trim().split(/ +/).shift().toLocaleLowerCase() : null
+
+//================(BADY)================\\
+
+bady = (type === 'conversation') ? info.message.conversation : (type == 'imageMessage') ? info.message.imageMessage.caption : (type == 'videoMessage') ? info.message.videoMessage.caption : (type == 'extendedTextMessage') ? info.message.extendedTextMessage.text : (info.message.listResponseMessage && info.message.listResponseMessage.singleSelectReply.selectedRowId) ? info.message.listResponseMessage.singleSelectReply.selectedRowId: ''
+
+//=======================================\\
+
+
+//===============(BUDY)==================\\
+
+budy = (type === 'conversation') ? info.message.conversation : (type === 'extendedTextMessage') ? info.message.extendedTextMessage.text : ''
+
+//======================================\\
+
+var pes = (type === 'conversation' && info.message.conversation) ? info.message.conversation : (type == 'imageMessage') && info.message.imageMessage.caption ? info.message.imageMessage.caption : (type == 'videoMessage') && info.message.videoMessage.caption ? info.message.videoMessage.caption : (type == 'extendedTextMessage') && info.message.extendedTextMessage.text ? info.message.extendedTextMessage.text : ''
+
+//===========(ID DAS FIGUS)===========\\
+
+const figura = Object.keys(info.message)[0] == "stickerMessage" ? info.message.stickerMessage.fileSha256.toString('base64') : ""
+
+//=====================================\\
+
+const groupMetadata = isGroup ? await conn.groupMetadata(from) : ''
+const groupName = isGroup ? groupMetadata.subject : ''
+const sender = isGroup ? info.key.participant : info.key.remoteJid
+const pushname = info.pushName ? info.pushName : ''
+
+const messagesC = pes.slice(0).trim().split(/ +/).shift().toLowerCase()
+
+const arg = body.substring(body.indexOf(' ') + 1)
+
+const botNumber = conn.user.id.split(':')[0]+'@s.whatsapp.net'
+const argss = body.split(/ +/g)
+const testat = body
+const ants = body
+const tescuk = ["0@s.whatsapp.net"]
+const q = args.join(' ')
+
+const groupDesc = isGroup ? groupMetadata.desc : ''
+
+const groupMembers = isGroup ? groupMetadata.participants : ''
+
+const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
+
+//=======================================\\
+
+const nmrdn = setting.numerodono.replace(new RegExp("[()+-/ +/]", "gi"), "") + `@s.whatsapp.net`
+
+const numerodono = [`${nmrdn}`, `${nescessario.dono1}@s.whatsapp.net`, `${nescessario.dono2}@s.whatsapp.net`, `${nescessario.dono3}@s.whatsapp.net`, `${nescessario.dono4}@s.whatsapp.net`, `${nescessario.dono5}@s.whatsapp.net`, `${nescessario.dono6}@s.whatsapp.net`]
+
+//============(SORTEIO-CONST)============\\
+
+const { infosorteio } = require('./armor/js/infosorteio.js')
+
+//===========(enviar.espere)=============\\
+
+const { mensagens } = require('./armor/js/aleatoria.js');
+
+const { sortear } = require('./armor/js/aleatoria.js');
+
+var enviarmen = mensagens[Math.floor(Math.random() * mensagens.length)] 
+//========================================\\
+
+//=======(ADMS/DONO/ETC..CONST)========\\
+
+const quoted = info.quoted ? info.quoted : info
+
+const isBot = info.key.fromMe ? true : false
+
+const SoDono = numerodono.includes(sender) || isBot
+
+const DonoOficial = setting.numerodono.includes(sender) 
+
+const isPremium = premium.includes(sender)
+
+const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+
+const isGroupAdmins = groupAdmins.includes(sender) || false 
+
+//============(FUNÇÕES)============\\
+
+const isWelkom2 = isGroup ? welkom2.includes(from) : true
+
+const isVote = isGroup ? voting.includes(from) : false
+
+const isModobn =  isGroup ? modobn.includes(from) : true
+
+const isNsfw =  isGroup ? nsfw.includes(from) : true
+
+const isSimi = isGroup ? samih.includes(from) : false
+
+const isSimi2 = isGroup ? samih2.includes(from) : false
+
+const isBanned = ban.includes(sender)
+
+//===========(ANTIS-PROTEÇÕES)===========\\
+
+const isAntifake = isGroup ? antifake.includes(from) : false
+
+const isAntiCtt = isGroup ? antictt.includes(from) : false
+
+const isAnticatalogo = isGroup ? anticatalogo.includes(from) : false
+
+const isAntiLink = isGroup ? antilink.includes(from) : false
+
+const isAntiFlood = isGroup ? antiflood.includes(from) : false	
+
+const isnit = nit.includes(sender) 
+
+const isAntiLinkHard = isGroup ? antilinkhard.includes(from) : false
+
+const isJoguin = isGroup ? joguinhodavelhajs.includes(sender) : false
+
+const isAntilinkgp = isGroup ? antilinkgp.includes(from) : false
+
+const isAntiAudio = isGroup ? antiaudio.includes(from) : false	
+	
+const isAntiImg = isGroup ? antiimg.includes(from) : false
+
+const isAntiSticker = isGroup ? antisticker.includes(from) : false
+
+const isAntiNotas = isGroup ? antinotas.includes(from) : false
+
+const Antidoc = isGroup ? antidoc.includes(from) : false
+
+const Antiloc = isGroup ? antiloc.includes(from) : false
+
+const isAntiVid = isGroup ? antivid.includes(from) : false	
+
+const ischyt = chyt.includes(sender)
+
+const isAntiPv = (antipv.indexOf('Ativado') >= 0) ? true : false	
+
+const isAnticall = (anticall.indexOf('Ativado') >= 0) ? true : false
+
+const isPalavrao = isGroup ? palavrao.includes(from) : false	
+
+const isViewOnce = (type == 'viewOnceMessage')
+
+//=======================================\\
+
+enviar = {
+espere: `${enviarmen}`,
+successo: '️❬ ✔ ❭ Sucesso 🖤',
+levelon: '❬ ✔ ❭ *leveling* *ativado*',
+leveloff: '❬ X ❭  *leveling* *desativado*',
+levelnoton: '❬ X ❭ *leveling não ativado*',
+levelnol: '*error* 0 °-°',
+error: {
+stick: 'falhou, tente novamente ^_^',
+Iv: 'Link invalido ☹️'
+},
+msg: {
+grupo: '[❗] Este comando só pode ser usado em grupos! ❌',
+premium: '[❗] ESTE PEDIDO É SO PARA *USUÁRIOS PREMIUMS*',
+mod: `[❗] ESTE PEDIDO É ESPECÍFICO PARA USUARIO MOD ${setting.NickDono}*`,
+banido: '❌ Você foi banido de utilizar os comandos, entre em contato com o proprietário pra saber o porque ❌' ,
+donosmt: '[❗] Este é um recurso especial para o proprietário ❌',
+donosmt2: '[❗] Este é um recurso especial para o proprietário ❌',
+adm: '[❗] Este comando só pode ser usado por administradores de grupo! ❌',
+Badmin: ' [❗] Este comando só pode ser usado quando o bot se torna administrador! ❌',
+}
+}
+
+//=========(CONSTS-FUNÇÕES)============\\
+
+const isWelkom = isGroup ? welkom.includes(from) : false
+
+const issupre = supre.includes(sender)
+
+const isLevelingOn = isGroup ? _leveling.includes(from) : false
+
+const isBanchat = isGroup ? bancht.includes(from) : false	
+
+//=====================================\\
+
+
+
+//==========(VERIFICADO)===============\\
+
+const selo = { key: {fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg","caption": `${NomeDoBot}`, 'jpegThumbnail': fs.readFileSync('./logos/logo2.jpg')}}}
+
+//=====================================\\
+
+const reply = (texto) => {
+conn.sendMessage(from, { text: texto }, {quoted: info})
+}
+
+const getGroup = async function(totalchat){
+let grup = []
+let a = []
+let b = []
+for (c of totalchat){
+a.push(c.id)
+}
+for (d of a){
+if (d && d.includes('g.us')){
+b.push(d)
+}
+}
+for (e of b){
+let ingfo = await conn.groupMetadata(e)
+grup.push(ingfo)
+}
+return grup
+}  
+
+
+const isUrl = (url) => {
+if(linkfy.find(url)[0]) return true
+return false
+}	
+
+const time2 = moment().tz('America/Sao_Paulo').format('HH:mm:ss')
+if(time2 > "00:00:00"){
+var tempo = 'Boa madrugada'
+                                        } 
+if(time2 > "05:30:00"){
+var tempo = 'Bom dia'
+                                        }
+if(time2 > "12:00:00"){
+var tempo = 'Boa tarde'
+                                        }
+if(time2 > "19:00:00"){
+var tempo = 'Boa noite'
+                                        }
+
+
+const getFileBuffer = async (mediakey, MediaType) => {
+  
+const stream = await downloadContentFromMessage(mediakey, MediaType)
+
+let buffer = Buffer.from([])
+for await(const chunk of stream) {
+buffer = Buffer.concat([buffer, chunk])
+}
+return buffer
+}
+
+const sendSticker = (from, filename, info) => {
+conn.sendMessage(from, {sticker: filename}, {quoted: info})
+}
+
+const sendImage = (ytb) => {
+conn.sendMessage(from, {image: ytb}, {quoted:info})
+}
+
+
+const sendMess = (hehe, ytb) => {
+conn.sendMessage(hehe, {text: ytb})
+}
+
+
+const mentions = (teks, memberr, id) => {
+(id == null || id == undefined || id == false) ? conn.sendMessage(from, {text: teks.trim(), mentions: memberr}) : conn.sendMessage(from, {text: teks.trim(), mentions: memberr})
+}
+	
+const costum = (pesan, tipe, target, target2) => {
+conn.sendMessage(from, pesan, tipe, {quoted: {key: {fromMe: false, participant: `${target}`, ...(from ? {remoteJid: from}: {})}, message: {conversation: `${target2}` }}})
+}
+
+
+const groupIdWelcomed = []	
+for(let obj of welcome_group) groupIdWelcomed.push(obj.id)
+
+const groupIdBye = []
+for(let obj of bye_group) groupIdBye.push(obj.id)
+
+const isWelcomed = (groupIdWelcomed.indexOf(from) >= 0) ? true : false
+
+const isByed = (groupIdBye.indexOf(from) >= 0) ? true : false
+
+const groupIdWelcomed2 = []	
+
+for(let obj of welcome_group2) groupIdWelcomed2.push(obj.id)
+
+const groupIdBye2 = []
+
+for(let obj of bye_group2) groupIdBye2.push(obj.id)
+
+
+const isWelcomed2 = (groupIdWelcomed2.indexOf(from) >= 0) ? true : false
+
+const isByed2 = (groupIdBye2.indexOf(from) >= 0) ? true : false	
+	
+	
+//=====(FUNÇÃO-CHECAR-LIMIT)====\\
+const checkLimit = (sender) => {
+let found = false
+for (let lmt of _limit) {
+if (lmt.id === sender) {
+let limitCounts = limitawal - lmt.limit
+if (limitCounts <= 0) return conn.sendMessage(from,{text: `[👾] *LIMIT ESGOTADO*\n\n_Nota : para obter mais limit compre usando *${prefix}buylimit* ou suba de nível...`},{sendEphemeral: true, contextInfo: { forwardingScore: 50, isForwarded: true}, quoted: info})
+conn.sendMessage(from, {text: jrpl.limitcount(limitCounts)}, { quoted : info})
+found = true
+}
+}
+if (found === false) {
+let obj = { id: sender, limit: 0 }
+_limit.push(obj)
+fs.writeFileSync('./datab/grupos/limit.json', JSON.stringify(_limit))
+conn.sendMessage(from, {text: jrpl.limitcount(limitCounts)}, { quoted : info})
+}
+} 
+							
+	//funtion limitado
+const isLimit = (sender) =>{ 
+if (issupre) {return false;}
+let position = false
+for (let i of _limit) {
+if (i.id === sender) {
+let limits = i.limit
+if (limits >= limitawal ) {
+position = true
+conn.sendMessage(from, {text: jrpl.limitend(pushname)}, {sendEphemeral: true, contextInfo: { forwardingScore: 50, isForwarded: true}, quoted: info})
+return true
+} else {
+_limit
+position = true
+return false
+}
+}
+}
+if (position === false) {
+const obj = { id: sender, limit: 0 }
+_limit.push(obj)
+fs.writeFileSync('./datab/grupos/limit.json',JSON.stringify(_limit))
+return false
+}
+}
+	
+const sendFileFromUrl = async (from, url, caption, info, men) => {
+let mime = ''; 
+let res = await axios.head(url)
+mime = res.headers['content-type'] 
+if (mime.split("/")[1] === "gif") { 
+return conn.sendMessage(from, {video: await getBuffer(url),
+caption: caption, gifPlayback: true, 
+mentions: men ? men : []}, {quoted: info}) 
+}
+ 
+let type = mime.split("/")[0]+"Message" 
+if(mime === "application/pdf"){ 
+return conn.sendMessage(from, {document: await getBuffer(url), mimetype: 'application/pdf', 
+caption: caption, mentions: men ? men : []}, {quoted: info}) 
+} 
+
+if(mime.split("/")[0] === "image"){ 
+return conn.sendMessage(from, {image: await getBuffer(url), caption: caption, mentions: men ? men : []}, {quoted: info}) 
+}
+if(mime.split("/")[0] === "video"){ 
+return conn.sendMessage(from, {video: await getBuffer(url), caption: caption, mentions: men ? men : []}, {quoted: info}) 
+} 
+if(mime.split("/")[0] === "audio"){ 
+return conn.sendMessage(from, {audio: await getBuffer(url), caption: caption, mentions: men ? men : [], mimetype: 'audio'}, {quoted: info}) 
+}
+}
+	
+const sendMediaURL = async(to, url, text ="", mids=[]) =>{
+if(mids.length > 0){
+text = normalizeMention(to, text, mids)
+}
+const fn = Date.now() / 10000;
+const filename = fn.toString()
+let mime = ""
+var download = function (uri, filename, callback) {
+request.head(uri, function (err, res, body) {
+mime = res.headers['content-type']
+request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+});
+};
+download(url, filename, async function () {
+console.log('done');
+let media = fs.readFileSync(filename)
+let type = mime.split("/")[0]+"Message"
+if(mime === "image/gif"){
+type = video
+mime = Mimetype.gif
+}
+if(mime.split("/")[0] === "audio"){
+mime = Mimetype.mp4Audio
+}
+conn.sendMessage(to, {type: media, mimetype: mime, caption: text, contextInfo: {"mentionedJid": mids}}, { quoted: info})
+fs.unlinkSync(filename)
+});
+}   
+
+/********** ANTI NOME MODIFICADO **********/
+function isDoubleByte(str) {
+for (let i = 0, n = str.length; i < n; i++) {
+if (str.charCodeAt(i) > 255) {
+return true;
+}
+}
+return false;
+}
+
+// ENVIAR BOTÃO COM TEXTO
+const sendBtext = async (id, text1, desc1, but = [], vr) => {
+buttonMessage = {
+text: text1,
+footer: desc1,
+buttons: but,
+headerType: 1
+}
+conn.sendMessage(id, buttonMessage, {quoted: vr})
+}
+
+// ENVIAR BOTÃO COM IMAGEM
+const sendBimg = async (id, img1, text1, desc1, but = [], vr) => {
+buttonMessage = {
+image: {url: img1},
+caption: text1,
+footerText: desc1,
+buttons: but,
+headerType: 4
+}
+conn.sendMessage(id, buttonMessage, {quoted: vr})
+}
+
+// PRA ENVIAR BOTÃO DE TEMPLATE
+const sendBimgT = async (id, img1, text1, desc1, but = [], vr) => {
+templateMessage = {
+image: {url: img1},
+caption: text1,
+footer: desc1,
+templateButtons: but,
+}
+conn.sendMessage(id, templateMessage, {quoted: vr})
+}
+
+const enviarfigu = async (figu, tag) => {
+bla = fs.readFileSync(figu)
+conn.sendMessage(from, {sticker: bla}, {quoted: info})
+}
+
+var nmrdnofc1 = setting.numerodono.replace(new RegExp("[()+-/ +/]", "gi"), "")
+
+if(isGroup && fs.existsSync(`./func/afk/afk-@${nmrdnofc1}.json`)) {
+if(budy.includes(`@${nmrdnofc1}`)) {
+const tabelin = JSON.parse(fs.readFileSync(`./func/afk/afk-@${nmrdnofc1}.json`));  
+
+txt = `- Olá, o ${NickDono} Está ausente.\n\n - Desde: ${tabelin.Ausente_Desde}\n\n- 😇 Mensagem de ausência : ${tabelin.Motivo_Da_Ausência}`
+
+conn.sendMessage(from, {text: txt}, {quoted: info})
+}
+}
+ 
+if(isGroup) {
+if(info.message == "inviteLinkGroupType") return reply("oi") 
+}
+ 
+ 
+//========================================\\
+//BAN CHATS/GRUPOS
+if (isBanchat && !isGroupAdmins && !SoDono){
+if (!isGroupAdmins && !SoDono) return
+if (budy.toLowerCase().startsWith('unbangp')){
+if (isCmd && !isBanchat && !isGroupAdmins) return reply(`Este grupo esta banido, ou seja não estou ouvindo ninguém`)
+let lfd = bancht.indexOf(from)
+bancht.splice(lfd, 1)
+fs.writeFileSync('./datab/grupos/banchat.json', JSON.stringify(bancht))
+reply(`Grupo desbanido...`)
+}
+}
+
+//=======FUNCIONALIDADE PATENTE=========\\
+const nivelAtual = getLevelingLevel(sender)
+var patt = 'Bronze I🥉'
+if (nivelAtual === 1) {patt = 'Bronze  I🥉' } else if (nivelAtual === 2) {patt = 'Bronze II🥉'} else if (nivelAtual === 3) {patt = 'Bronze  III🥉'} else if (nivelAtual === 4) {patt = 'Bronze  IV🥉'} else if (nivelAtual === 5) {patt = 'Bronze  V🥉'} else if (nivelAtual === 6) {patt = 'Prata I🥈'} else if (nivelAtual === 7) {patt = 'Prata II🥈'} else if (nivelAtual === 8) {patt = 'Prata III🥈'} else if (nivelAtual === 9) {patt = 'Prata IV🥈'} else if (nivelAtual === 10) {patt = 'Prata V🥈'} else if (nivelAtual === 11) {patt = 'Ouro I🥇'} else if (nivelAtual === 12) {patt = 'Ouro II🥇'} else if (nivelAtual === 13) {patt = 'Ouro III🥇'} else if (nivelAtual === 14) {patt = 'Ouro IV🥇'} else if (nivelAtual === 15) {patt = 'Ouro V🥇'} else if (nivelAtual === 16) {patt = 'Campeão I🏆'} else if (nivelAtual === 17) {patt = 'Campeão II🏆'} else if (nivelAtual === 18) {patt = 'Campeão III🏆'} else if (nivelAtual === 19) {patt = 'Campeão IV🏆'} else if (nivelAtual === 20) {patt = 'Campeão V🏆'} else if (nivelAtual === 21) {patt = 'Diamante I 💎'} else if (nivelAtual === 22) {patt = 'Diamante II 💎'} else if (nivelAtual === 23) {patt = 'Diamante III 💎'} else if (nivelAtual === 24) {patt = 'Diamante IV 💎'} else if (nivelAtual === 25) {patt = 'Diamante V 💎'} else if (nivelAtual === 26) {patt = 'Mestre I 🐂'} else if (nivelAtual === 27) {patt = 'Mestre II 🐂'} else if (nivelAtual === 28) {patt = 'Mestre III 🐂'} else if (nivelAtual === 29) {patt = 'Mestre IV 🐂'} else if (nivelAtual === 30) {patt = 'Mestre V 🐂'} else if (nivelAtual === 31) {patt = 'Mítico I 🔮'} else if (nivelAtual === 32) {patt = 'Mítico II 🔮'} else if (nivelAtual === 33) {patt = 'Mítico III 🔮'} else if (nivelAtual === 34) {patt = 'Mítico IV 🔮'} else if (nivelAtual === 35) {patt = 'Mítico V 🔮'} else if (nivelAtual === 36) {patt = 'God I🕴'} else if (nivelAtual === 37) {patt = 'God II🕴'} else if (nivelAtual === 38) {patt = 'God III🕴'} else if (nivelAtual === 39) {patt = 'God IV🕴'} else if (nivelAtual === 40) {patt = 'God V🕴'} else if (nivelAtual > 41) {patt = '🛐Grande Mestre🛐'}
+//========================================\\
+
+
+
+//==========(FUNÇÃO DE LEVEL)=============\\
+if (isGroup && isLevelingOn) {
+const currentLevel = getLevelingLevel(sender)
+const checkId = getLevelingId(sender)
+try {
+if (currentLevel === undefined && checkId === undefined) addLevelingId(sender)
+const amountXp = Math.floor(Math.random() * 10) + 500
+const requiredXp = 5000 * (Math.pow(2, currentLevel) - 1)
+const getLevel = getLevelingLevel(sender)
+addLevelingXp(sender, amountXp)
+if (requiredXp <= getLevelingXp(sender)) {
+addLevelingLevel(sender, 1)
+await reply(`            ◪ LEVEL UP ◪\n\n├─ ❏ NÚMERO: ${sender.split("@")[0]}.                                                                                       ├─ ❏ *PATENTE*: ${patt}\n├─ ❏ XP: ${getLevelingXp(sender)}\n└─ ❏ LEVEL: ${getLevel} -> ${getLevelingLevel(sender)}`)
+}
+} catch (err) {
+console.error(err)
+}
+}
+//=======================================\\
+
+
+
+const sendStickerFromUrl = async(to, url) => {
+var names = Date.now() / 10000;
+var download = function (uri, filename, callback) {
+request.head(uri, function (err, res, body) {
+request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+});
+};
+download(url, './sticker' + names + '.png', async function () {
+console.log('enviando sticker');
+let filess = './sticker' + names + '.png'
+let asw = './sticker' + names + '.webp'
+exec(`ffmpeg -i ${filess} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 800:800 ${asw}`, (err) => {
+let media = fs.readFileSync(asw)
+conn.sendMessage(to, {sticker: media}, {sendEphemeral: true, contextInfo: { forwardingScore: 50, isForwarded: true}, quoted: info})
+fs.unlinkSync(filess)
+fs.unlinkSync(asw)
+});
+});
+}
+
+
+//===================================\\
+
+		//JOGO DO ANAGRAM
+if(isGroup && fs.existsSync(`./armor/anagrama-${from}.json`)){
+let dataAnagrama = JSON.parse(fs.readFileSync(`./armor/anagrama-${from}.json`))
+if(budy.slice(0,4).toUpperCase() == dataAnagrama.original.slice(0,4).toUpperCase() && budy.toUpperCase() != dataAnagrama.original) return reply('está perto')
+xp = Math.floor(Math.random() * 14) + 3000
+if(budy.toUpperCase() == dataAnagrama.original) { conn.sendMessage(from, {text: `parabéns ${pushname} 🥳 você ganhou o jogo\nPalavra : ${dataAnagrama.original}\nIniciando o proximo jogo em 5 segundos...`}, {"mentionedJid": [sender]}), fs.unlinkSync(`./armor/anagrama-${from}.json`)		
+addLevelingXp(sender, xp)
+recompensa = `🎉🎉RECOMPENSA🎉🎉\nVocê ganhou ${xp} em *xp*`
+reply(recompensa)
+		setTimeout(async() => {
+fs.writeFileSync(`./armor/anagrama-${from}.json`, `${JSON.stringify(palavrasANA[Math.floor(Math.random() * palavrasANA.length)])}`)
+let dataAnagrama2 = JSON.parse(fs.readFileSync(`./armor/anagrama-${from}.json`))
+conn.sendMessage(from, {text:`
+╭─────≽「 👾 ANAGRAMA 👾 」
+│➽ DESCUBRA A PALAVRA
+│➽ ANAGRAMA: ${dataAnagrama2.embaralhada}
+│➽ DICA: ${dataAnagrama2.dica}
+╰────────────────────────
+`}) 
+}, 5000)
+}}
+
+//========================================\\
+
+
+		//JOGO QUIZ
+if(isGroup && fs.existsSync(`./armor/quizanim-${from}.json`)){
+let dataAnagramaa = JSON.parse(fs.readFileSync(`./armor/quizanim-${from}.json`))
+if(budy.slice(0,4).toUpperCase() == dataAnagramaa.original.slice(0,4).toUpperCase() && budy.toUpperCase() != dataAnagramaa.original) return reply('está perto')
+if(budy.toUpperCase() == dataAnagramaa.original) { 
+conn.sendMessage(from,{text: `Parabéns ${pushname} você acertou\n${dataAnagramaa.original}\nProximo em 5 segundos...`}, {"mentionedJid": [sender]}), fs.unlinkSync(`./armor/quizanim-${from}.json`)		
+setTimeout(async() => {
+fs.writeFileSync(`./armor/quizanim-${from}.json`, `${JSON.stringify(quizanimais[Math.floor(Math.random() * quizanimais.length)])}`)
+let dataAnagrama2 = JSON.parse(fs.readFileSync(`./armor/quizanim-${from}.json`))
+imagemtexto =`                             「❓Quiz❓」`
+wew = await getBuffer(`${dataAnagrama2.foto}`)   
+if(verificado === true) {
+await conn.sendMessage(from, {image: wew, caption: imagemtexto, thumbnail: wew}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {image: wew, caption: imagemtexto, thumbnail: wew}, {quoted: info})  
+}
+}, 5000)
+}}
+
+const sleep = async (ms) => {return new Promise(resolve => setTimeout(resolve, ms))}
+
+//=========(isQuoted/consts)=============\\
+const isImage = type == 'imageMessage'
+const isVideo = type == 'videoMessage'
+const isAudio = type == 'audioMessage'
+const isSticker = type == 'stickerMessage'
+const isContact = type == 'contactMessage'
+const isLocation = type == 'locationMessage'
+const isProduct = type == 'productMessage'
+const isMedia = (type === 'imageMessage' || type === 'videoMessage' || type === 'audioMessage')
+typeMessage = body.substr(0, 50).replace(/\n/g, '')
+if (isImage) typeMessage = "Image"
+else if (isVideo) typeMessage = "Video"
+else if (isAudio) typeMessage = "Audio"
+else if (isSticker) typeMessage = "Sticker"
+else if (isContact) typeMessage = "Contact"
+else if (isLocation) typeMessage = "Location"
+else if (isProduct) typeMessage = "Product"
+
+const isQuotedMsg = type === 'extendedTextMessage' && content.includes('textMessage')
+
+const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
+
+const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
+
+const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
+
+const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
+
+const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
+
+const isQuotedContact = type === 'extendedTextMessage' && content.includes('contactMessage')
+
+const isQuotedLocation = type === 'extendedTextMessage' && content.includes('locationMessage')
+
+const isQuotedProduct = type === 'extendedTextMessage' && content.includes('productMessage')
+             
+
+///////////ANTI-SPAM BY ITALU/////////
+if (isCmd && isFiltered(sender) && !isGroup) {
+console.log(color('~> [SPAM]', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
+const ff = `𝙽𝙸𝙽𝙶𝚄𝙴𝙼 𝙼𝙰𝙽𝙳𝙾𝚄 𝚂𝙴𝚁 𝙰𝙿𝚁𝙴𝚂𝚂𝙰𝙳𝙾😅 𝙰𝙶𝙾𝚁𝙰 𝙴𝚂𝙿𝙴𝚁𝙴 𝟻 𝚂𝙴𝙶𝚄𝙽𝙳𝙾𝚂❗❗`
+return reply(ff)
+}
+if (isCmd && isFiltered(sender) && isGroup) {
+console.log(color('~> [SPAM]', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
+const ff1 = `𝙽𝙸𝙽𝙶𝚄𝙴𝙼 𝙼𝙰𝙽𝙳𝙾𝚄 𝚂𝙴𝚁 𝙰𝙿𝚁𝙴𝚂𝚂𝙰𝙳𝙾😅 𝙰𝙶𝙾𝚁𝙰 𝙴𝚂𝙿𝙴𝚁𝙴 𝟻 𝚂𝙴𝙶𝚄𝙽𝙳𝙾𝚂❗❗`
+return reply(ff1)
+}
+
+//////BLOCK CMD///////
+//(CREDITOS AO KAUAN GAY)\\
+if(isGroup){
+const checar = getComandos(from)
+if(checar === undefined) addComandosId(from)
+}
+if(isGroup && isCmd && !SoDono && !isnit && getComandoBlock(from).includes(command))return reply('comando blockeado')
+
+////FIMMMMMMMMM/////,
+
+if (!isGroup && isCmd) console.log('\033[0;35m~\x1b[1;37m>', '[\x1b[1;32mCOMANDO\x1b[1;37m]', time, color(command), 'do ', color(sender.split('@')[0]))
+
+ //(!isGroup && !isCmd && !info.key.fromMe) console.log('\033[0;35m~\x1b[1;37m>', '[\033[0;35mMENSAGEM\x1b[1;37m]', 'do ', color(sender.split('@')[0]))
+
+if (isCmd && isGroup) console.log('\033[0;35m~\x1b[1;37m>', '[\x1b[1;32mCOMANDO\x1b[1;37m]', time, color(command), 'do ', color(sender.split('@')[0]), 'no gp: ', color(groupName))
+
+ //(!isCmd && isGroup && !info.key.fromMe) console.log('\033[0;35m~\x1b[1;37m>', '[\033[0;35mMENSAGEM\x1b[1;37m]',  'do ', color(sender.split('@')[0]), 'no gp: ', color(groupName))
+//======(JOGO-DA-VELHA)=======(Função)===\\
+
+//////////_FUNÇÕES DO JOGO DA VELHA_//////
+async function joguinhodavelha() {
+if(joguinhodavelhajs2.includes(from) || joguinhodavelhajs.includes(sender)) {
+const cmde = budy.toLowerCase().split(" ")[0] || "";
+let arrNum = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+if (fs.existsSync(`./armor/tictactoe/db/${from}.json`)) {
+const boardnow = setGame(`${from}`);
+if (budy == "Cex") return reply("why");
+if (
+budy.toLowerCase() == "s" ||
+budy.toLowerCase() == "sim" ||
+budy.toLowerCase() == "ok"
+) {
+if (boardnow.O == sender.replace("@s.whatsapp.net", "")) {
+if (boardnow.status)
+return reply(`O jogo já começou antes!`);
+const matrix = boardnow._matrix;
+boardnow.status = true;
+fs.writeFileSync(`./armor/tictactoe/db/${from}.json`,
+JSON.stringify(boardnow, null, 2)
+);
+const chatAccept = `*🎮Ꮐ̸Ꭺ̸Ꮇ̸Ꭼ̸ Ꭰ̸Ꭺ̸ Ꮩ̸Ꭼ̸Ꮮ̸Ꮋ̸Ꭺ̸🕹️*
+                    
+❌ : @${boardnow.X}
+⭕ : @${boardnow.O}
+               
+Sua vez... : @${boardnow.turn == "X" ? boardnow.X : boardnow.O}
+
+${matrix[0][0]}  ${matrix[0][1]}  ${matrix[0][2]}
+${matrix[1][0]}  ${matrix[1][1]}  ${matrix[1][2]}
+${matrix[2][0]}  ${matrix[2][1]}  ${matrix[2][2]}
+`;
+conn.sendMessage(from, {text: chatAccept}, {quoted: info,
+contextInfo: {
+mentionedJid: [
+boardnow.X + "@s.whatsapp.net",
+boardnow.O + "@s.whatsapp.net", 
+],
+},
+});
+}
+} else if (
+budy.toLowerCase() == "n" ||
+budy.toLowerCase() == "não" ||
+budy.toLowerCase() == "no"
+) {
+if (boardnow.O == sender.replace("@s.whatsapp.net", "")) {
+if (boardnow.status)
+return reply(`O jogo já começou!`);
+fs.unlinkSync(`./armor/tictactoe/db/${from}.json`);
+ conn.sendMessage(from, {text:
+ `@${boardnow.X} _Infelizmente seu oponente não aceitou o desafio ❌😕_`}, {quoted: info,
+ contextInfo: {
+ mentionedJid: [boardnow.X + "@s.whatsapp.net"],
+},
+}
+);
+joguinhodavelhajs.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha.json', JSON.stringify(joguinhodavelhajs))
+joguinhodavelhajs2.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha2.json', JSON.stringify(joguinhodavelhajs2))
+}
+}
+}
+
+if (arrNum.includes(cmde)) {
+const boardnow = setGame(`${from}`);
+if (!boardnow.status) return reply(`Parece que seu oponente não aceitou o desafio ainda...`)
+if (
+(boardnow.turn == "X" ? boardnow.X : boardnow.O) !=
+     
+sender.replace("@s.whatsapp.net", "")
+)
+return;
+const moving = validmove(Number(budy), `${from}`);
+const matrix = moving._matrix;
+if (moving.isWin) {
+if (moving.winner == "SERI") {
+const chatEqual = `*🎮Ꮐ̸Ꭺ̸Ꮇ̸Ꭼ̸ Ꭰ̸Ꭺ̸ Ꮩ̸Ꭼ̸Ꮮ̸Ꮋ̸Ꭺ̸🕹️*
+          
+Jogo termina empatado 😐
+`;
+reply(chatEqual);
+fs.unlinkSync(`./armor/tictactoe/db/${from}.json`);
+joguinhodavelhajs.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha.json', JSON.stringify(joguinhodavelhajs)) 
+joguinhodavelhajs2.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha2.json', JSON.stringify(joguinhodavelhajs2))
+return;
+}
+const abt = Math.ceil(Math.random() + 4000)
+const winnerJID = moving.winner == "O" ? moving.O : moving.X;
+const looseJID = moving.winner == "O" ? moving.X : moving.O;
+const limWin = Math.floor(Math.random() * 1) + 10;
+const limLoose = Math.floor(Math.random() * 1) + 5;
+const chatWon = `*🎮Ꮐ̸Ꭺ̸Ꮇ̸Ꭼ̸ Ꭰ̸Ꭺ̸ Ꮩ̸Ꭼ̸Ꮮ̸Ꮋ̸Ꭺ̸🕹️*
+          
+Vencido por @${winnerJID} 😎👑
+`;
+addLevelingXp(winnerJID + "@s.whatsapp.net", abt)
+
+conn.sendMessage(from, {text: chatWon}, {quoted: info,
+contextInfo: {
+mentionedJid: [
+moving.winner == "O" ?
+moving.O + "@s.whatsapp.net" :
+moving.X + "@s.whatsapp.net",
+],
+},
+});
+setTimeout( () => {
+if (fs.existsSync("./armor/tictactoe/db/" + from + ".json")) {
+ fs.unlinkSync("./armor/tictactoe/db/" + from + ".json");
+ reply(`*🕹️JOGO DA VELHA RESETADO...🕹️*`);
+ } else {
+console.log(color(time, "red"), color("[ ESPIRADO ]", "magenta"), color('Jogo da velha espirado', "red"));
+ }
+joguinhodavelhajs.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha.json', JSON.stringify(joguinhodavelhajs))
+joguinhodavelhajs2.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha2.json', JSON.stringify(joguinhodavelhajs2))
+}, 300000) //5 minutos
+reply(`_*🥳Parabéns @${winnerJID} Você ganhou "${abt}" em xp por ter ganhado o jogo da velha🎉...*_`)      
+fs.unlinkSync(`./armor/tictactoe/db/${from}.json`);
+joguinhodavelhajs.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha.json', JSON.stringify(joguinhodavelhajs)) 
+joguinhodavelhajs2.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha2.json', JSON.stringify(joguinhodavelhajs2))
+} else {
+const chatMove = `*🎮Ꮐ̸Ꭺ̸Ꮇ̸Ꭼ̸ Ꭰ̸Ꭺ̸ Ꮩ̸Ꭼ̸Ꮮ̸Ꮋ̸Ꭺ̸🕹️*
+          
+❌ : @${moving.X}
+⭕ : @${moving.O}
+
+Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
+
+${matrix[0][0]}  ${matrix[0][1]}  ${matrix[0][2]}
+${matrix[1][0]}  ${matrix[1][1]}  ${matrix[1][2]}
+${matrix[2][0]}  ${matrix[2][1]}  ${matrix[2][2]}
+`;
+conn.sendMessage(from, {text: chatMove}, {quoted: info,
+contextInfo: {
+mentionedJid: [
+moving.X + "@s.whatsapp.net",
+moving.O + "@s.whatsapp.net",
+],
+},
+});
+}
+} 
+} 
+}
+
+
+//=================================\\
+
+async function AntilinkHardF() {
+if(isUrl(body) && isAntiLinkHard && isGroupAdmins && isBotGroupAdmins) {
+linkgpp = await conn.groupInviteCode(from)
+if(!isUrl(body)) return 
+if(budy.match(`${linkgpp}`)) return 
+if(isBot) return 
+reply('Link detectado, porém usuário é admin')
+}
+
+if(isUrl(body) && isAntiLinkHard && !isGroupAdmins && isBotGroupAdmins) {
+linkgpp = await conn.groupInviteCode(from)
+if(budy.match(`${linkgpp}`)) return reply('Link do nosso grupo, não irei remover.. ')  
+if(!isUrl(body)) return 
+reply('Link detectado, punindo usuário..')
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}
+} 
+AntilinkHardF()
+joguinhodavelha()
+
+if(isUrl(body) && isAntilinkgp && isGroup && isBotGroupAdmins) {
+if(!isAntilinkgp) return
+if(!isUrl(body)) return 
+if(isGroupAdmins) return reply("Você é adm, não removerei você..") 
+if(budy.includes("chat.whatsapp.com/")){
+if(!budy.includes("chat.whatsapp.com/")) return
+if(isBot) return 
+linkgpp = await conn.groupInviteCode(from)
+if(budy.match(`${linkgpp}`)) return reply('Link do nosso grupo, não irei remover.. ')  
+reply('*Link de grupo detectado, punindo usuário...*')
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}
+}
+
+//========(CONTADOR-DE-MENSAGENS)========\\
+
+const groupIdscount = []
+const numbersIds = []
+for(let obj of countMessage) {
+groupIdscount.push(obj.groupId)
+}
+if(isGroup && groupIdscount.indexOf(from) >= 0) {
+var ind = groupIdscount.indexOf(from)
+for(let obj of countMessage[ind].numbers) {numbersIds.push(obj.id)}
+if(numbersIds.indexOf(sender) >=0) {
+var indnum = numbersIds.indexOf(sender)
+countMessage[ind].numbers[indnum].messages += 1
+countMessage[ind].numbers[indnum].cmd_messages += isCmd ? 1 : 0
+fs.writeFileSync('./datab/grupos/countmsg.json', JSON.stringify(countMessage, null, 2)+ '\n')
+} else {
+const messages = 1
+const cmd_messages = isCmd ? 1 : 0
+countMessage[ind].numbers.push({
+id: sender,
+messages: messages,
+cmd_messages: cmd_messages
+})
+fs.writeFileSync('./datab/grupos/countmsg.json', JSON.stringify(countMessage, null, 2) + '\n')
+}
+} else if(isGroup) {
+countMessage.push({
+groupId: from,
+numbers: [{
+id: sender,
+messages: 2,
+cmd_messages: isCmd ? 1 : 0
+}]
+})
+fs.writeFileSync('./datab/grupos/countmsg.json', JSON.stringify(countMessage, null, 2) + '\n')
+}
+//======================================\\
+
+//===============(AUTO-BAN)=============\\
+const dbids = []
+for(i=0;i<adeuscara.length;++i) {
+dbids.push(adeuscara[i].groupId)
+}
+const isAdeusCara = (isGroup && dbids.indexOf(from) >= 0) ? true : false
+
+//======================================\\
+
+
+//============(EVAL-EXECUÇÕES)===========\\
+
+if (budy.startsWith('>')){
+try {
+if(!SoDono && !isnit && !issupre && !ischyt && !info.key.fromMe && !issupre && !ischyt) return
+console.log('[', color('EVAL', 'silver'),']', color(moment(info.messageTimestamp * 1000).format('DD/MM HH:mm:ss'), 'yellow'), color(budy))
+
+return reply(JSON.stringify(eval(budy.slice(2)),null,'\t')) 
+} catch (e){
+reply(e)
+}
+}
+
+if (budy.startsWith('=>')){
+try {
+if (!SoDono && !isnit && !issupre && !ischyt && !info.key.fromMe && !issupre && !ischyt) return 
+var konsol = budy.slice(3)
+Return = (sul) => {
+var sat = JSON.stringify(sul, null, 2)
+bang = util.format(sat)
+if (sat == undefined){
+bang = util.format(sul)
+}
+return reply(bang)
+}
+
+reply(util.format(eval(`;(async () => { ${konsol} })()`)))
+console.log('\x1b[1;37m>', '[', '\x1b[1;32mEXEC\x1b[1;37m', ']', time, color(">", "green"), 'from', color(sender.split('@')[0]), 'args :', color(args.length))
+} catch (e) {
+reply(String(e))  
+}
+}
+
+
+if (body.startsWith('$')) {
+if(!SoDono && !isnit) return 
+if (!q && !SoDono && !isnit && !issupre && !ischyt && !info.key.fromMe) return
+exec(q, (err, stdout) => {
+if(err) return reply(`${err}`)
+if (stdout) {
+reply(stdout)
+}
+})
+}
+
+//======================================\\
+
+
+//======(ANTI-IMAGEM)========\\
+if(isAntiImg && isBotGroupAdmins && type == 'imageMessage') {
+if (info.key.fromMe) return
+if(isGroupAdmins) return conn.sendMessage(from, {text:'*mensagem proibida detectada, porém é admin logo a punição será anulada*'}, {quoted: info})
+await conn.sendMessage(from, {text: '*mensagem proibida detectada, banindo...*'}, {quoted: info})
+setTimeout(async function () {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+}
+
+//======(ANTI-STICKER)========\\
+if(isAntiSticker && isBotGroupAdmins && type == 'stickerMessage') {
+if (info.key.fromMe) return
+if(isGroupAdmins) return conn.sendMessage(from, {text:'mensagem proibida detectada, porém é admin logo a punição será anulada'}, {quoted: info})
+await conn.sendMessage(from, {text: 'mensagem proibida detectada, banindo...'}, {quoted: info})
+setTimeout(async function () {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+}
+
+if(Antidoc && isBotGroupAdmins && type == 'documentMessage') {
+if (info.key.fromMe) return
+if(isGroupAdmins) return conn.sendMessage(from, {text:'mensagem proibida detectada, porém é admin logo a punição será anulada'}, {quoted: info})
+await conn.sendMessage(from, {text: 'mensagem proibida detectada, banindo...'}, {quoted: info})
+setTimeout(async function () {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+}
+
+// ANTI NOTAS FAKES ======================>
+
+if(isAntiNotas && bady.toString().match(/(💳|💎|💸|💵|💷|💶|🪙|💰|🤑|⚖️)/gi) && isBotGroupAdmins) {
+if(type == 'stickerMessage') return
+let verificar = bady.toString().match(/(💳|💎|💸|💵|💷|💶|🪙|💰|🤑|⚖️)/gi)
+if (verificar && bady.length < 100) return  
+await conn.sendMessage(from, {text: '*mensagem proibida detectada, banindo...*'}, {quoted: info})
+setTimeout(async function () {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+}
+
+//FINALZIN ==============================>
+
+
+//======(ANTI-VIDEO)========\\
+if(isAntiVid && isBotGroupAdmins && type == 'videoMessage') {
+if(isGroupAdmins) return conn.sendMessage(from,{text:'*mensagem proibida detectada, porém é admin logo a punição será anulada*'}, {quoted: info})
+await conn.sendMessage(from, {text: '*mensagem proibida detectada, banindo...*'}, {quoted: info})
+setTimeout(async function () {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+}
+
+//======(ANTI-AUDIO)=======\\
+if(isAntiAudio && isBotGroupAdmins && type == 'audioMessage') {
+if(isGroupAdmins) return conn.sendMessage(from, {text:'mensagem proibida detectada, porém é admin logo a punição será anulada'}, {quoted: info})
+await conn.sendMessage(from, {text: '*mensagem proibida detectada, banindo...*'}, {quoted: info})
+setTimeout(async function () {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+}
+//=======================================\\
+
+
+
+//========(ANTI-PV-QUE-BLOQUEIA)======\\
+if(isAntiPv && !isGroup && !SoDono && !isnit && !isPremium){ 
+	reply('Anti-pv ativado,você será bloqueado!\npara utilizar meus comados,entre no "chat-bot" é fique a vontade para utilizar os comandos do bot 😉\n\nhttps://chat.whatsapp.com/HCRJpykYY7XJR9H5gpPKaS')
+delay(4000)
+conn.updateBlockStatus(sender, 'block')
+return
+}
+//======================================\\
+
+
+//=========(ANTIPV-QUE-SÓ-FALA)==========\\
+
+if(!isGroup && !isPremium && !SoDono && !isnit && !issupre && !ischyt && !info.key.fromMe && banChats === true) return reply(`Olá, sou uma inteligência artificial, programado(a) para realizar ações, por adms e o dono, se você está enviando mensagem, provavelmente você não sabe disso, eu removo diariamente pessoas por enviar links e muito mais..`)
+const atibot = info.isBaileys
+if (atibot === true) return 
+
+
+//======================================\\
+
+// ANTI_LIGAR \\
+
+if(isAnticall) {
+conn.ws.on('CB:call', async (B) => {
+if (B.content[0].tag == 'offer') {
+conn.sendMessage(B.content[0].attrs['call-creator'], { text: "Não pode ligar para o bot, você será bloqueado.." }).then(() => { 
+delay(4000)
+conn.updateBlockStatus(B.content[0].attrs['call-creator'], "block") })
+}
+})
+}
+
+//==SISTEMA DE VOTAÇÃO: CRÉDITOS: KAUAN==\\
+if(isGroup) {
+if (budy.toLowerCase() === 'voto'){
+let vote = JSON.parse(fs.readFileSync(`./armor/${from}.json`))
+let _votes = JSON.parse(fs.readFileSync(`./armor/vote/${from}.json`))  
+let fil = vote.map(v => v.participant)
+let id_vote = sender ? sender : '0@s.whatsapp.net'
+if(fil.includes(id_vote)) {
+return mentions('@'+sender.split('@')[0]+' não é possivel votar duas vezes', fil, true)
+} else {
+vote.push({
+participant: id_vote,
+voting: '✅'
+})
+fs.writeFileSync(`./armor/${from}.json`,JSON.stringify(vote))
+let _p = []
+let _vote = '*Vote* '+ '@'+ _votes[0].votes.split('@')[0] + `\n\n*para*: ${_votes[0].reason}\n*total Votos* : ${vote.length} Votos\n*Duração* : ${_votes[0].durasi} minutos\n\n` 
+for(let i = 0; i < vote.length; i++) {
+_vote +=  `@${vote[i].participant.split('@')[0]}\n*Vote* : ${vote[i].voting}\n\n`
+_p.push(vote[i].participant)
+        }  
+_p.push(_votes[0].votes)
+mentions(_vote,_p,true)   
+}
+} else if (budy.toLowerCase() === 'devoto'){
+const vote = JSON.parse(fs.readFileSync(`./armor/${from}.json`))
+let _votes = JSON.parse(fs.readFileSync(`./armor/vote/${from}.json`))  
+let fil = vote.map(v => v.participant)
+let id_vote = sender ? sender : '0@s.whatsapp.net'
+if(fil.includes(id_vote)) {
+return mentions('@'+sender.split('@')[0]+' não é possivel anular um voto', fil, true)
+} else {
+vote.push({
+participant: id_vote,
+voting: '❌'
+})
+fs.writeFileSync(`./armor/${from}.json`,JSON.stringify(vote))
+let _p = []
+let _vote = '*Vote* '+ '@'+ _votes[0].votes.split('@')[0] + `\n\n*para*: ${_votes[0].reason}\n*total Votos* : ${vote.length} Vote\n*duração* : ${_votes[0].durasi} minutos\n\n` 
+for(let i = 0; i < vote.length; i++) {
+_vote +=  `@${vote[i].participant.split('@')[0]}\n*Vote* : ${vote[i].voting}\n\n`
+_p.push(vote[i].participant)
+}  
+_p.push(_votes[0].votes)
+mentions(_vote,_p,true)   
+}
+}
+}	
+//======================================\\
+
+
+//_CONTAGEM DE COMANDOS
+if (isCmd) cmdadd()
+            
+if (isBanned) return
+BannedExpired(ban)
+
+if (isCmd && !SoDono && !isnit && !issupre && !ischyt) addFilter(sender)
+
+
+switch (figura) {
+  
+case 'PhBL0PtpQ7pESrESQNgLuXpPJfhblay8ykTUfOH3xpRXYw=':
+bla = fs.readFileSync('./audios/qviado.mp3')
+conn.sendMessage(from, {audio: bla, mimetype: 'audio/mp4', ptt:true}, {quoted:info})
+break
+}
+
+//INICIO DE COMANDO DE PREFIXO
+switch(command) {
+  
+
+//=========(-MENUS-DE-CMDS-)========\\
+
+case 'menuu':
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+ sections = [
+     {
+	title: "LISTA COM OS PRINCIPAIS COMANDOS",
+	rows: [
+	{title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}packs`,description: "𝐏𝐀𝐂𝐊𝐒+18🔞"},
+   
+   {title: "➪𝐄𝐃𝐓", rowId: `${prefix}say`,description: "𝑺𝑨𝒀 𝑪𝑨𝑻💫"},
+   
+      {title: "➪𝐅𝐎𝐓𝐎𝐒", rowId: `${prefix}hentai`,description: "𝐇𝐄𝐍𝐓𝐀𝐈💫"},
+   
+   {title: "➪𝐄𝐃𝐓", rowId: `${prefix}edt`,description: "𝐑𝐘𝐎𝐌𝐄𝐍 𝐒𝐔𝐊𝐔𝐍𝐀💥"},
+   
+	    {title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}menulogos`,description: "𝐋𝐎𝐆𝐎𝐒✴️"},
+ 
+   {title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}menuadms`,description: "𝐀𝐃𝐌𝐈𝐍🔜"},
+   
+   {title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}alteradores`,description: "𝐀𝐋𝐓𝐄𝐑𝐀𝐃𝐎𝐑𝐄𝐒🔜"},
+   
+   {title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}brincadeira9`,description: "𝐁𝐑𝐈𝐍𝐂𝐀𝐃𝐄𝐈𝐑𝐀𝐒🔜"},
+   
+   {title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}menudono`,description: "𝐃𝐎𝐍𝐎🔜"},
+   
+   {title: "➪𝐌𝐄𝐔", rowId: `${prefix}dono`,description: "𝐂𝐑𝐈𝐀𝐃𝐎𝐑👦"},
+   
+   {title: "➪𝐂𝐀𝐍𝐀𝐋", rowId: `${prefix}canal`,description: "𝐘𝐎𝐔-𝐓𝐔𝐁𝐄▶️"},
+   
+   {title: "𝐏𝐈𝐍𝐆🕐", rowId: `${prefix}ping`,description: "𝐕𝐄𝐋𝐎𝐂𝐈𝐃𝐀𝐃𝐄 𝐁𝐎𝐓"},
+   
+   {title: "➪𝐂𝐇𝐀𝐓", rowId: `${prefix} gpbot`,description: "𝐁𝐎𝐓🔜"},
+   
+   {title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}efeitosimg`,description: "𝐄𝐅𝐄𝐈𝐓𝐎𝐒🔜"},
+   
+   {title: "➪𝐌𝐄𝐍𝐔", rowId: `${prefix}menupremium`,description: "𝐏𝐑𝐄𝐌𝐈𝐔𝐌🔜"},]
+    },
+]
+listMessage = {
+ text: `𝑺𝑬𝑱𝑨 𝑩𝑬𝑴 𝑽𝑰𝑵𝑫𝑶`,
+ footer: `${pushname}\n\n 💢𝙴𝚂𝚂𝙰 𝙴 𝙰 𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙲𝙾𝙼𝙰𝙳𝙾𝚂 𝙿𝚁𝙸𝙽𝙲𝙸𝙿𝙰𝙸𝚂 𝙳𝙾 𝙱𝙾𝚃😉`,
+  buttonText: "💢𝐋𝐈𝐒𝐓𝐀 𝐃𝐄 𝐂𝐌𝐃𝐒💢",
+  sections
+}
+
+sendMsg = await conn.sendMessage(from, listMessage)
+break
+
+case 'menu':
+case 'help':
+tujuh = fs.readFileSync('./audios/menucmd.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+hora2 = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+sendBimgT(from, `${logo}`, menu(prefix, NomeDoBot,hora2,date,groupName,pushname), `🤖𝙾𝙻𝙰 ${pushname} 𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾シ︎ \n\n🕒𝚑𝚘𝚛𝚊➪ ${hora2}\n\n📆𝚍𝚊𝚝𝚊➪ ${date}\n\n💥𝚐𝚛𝚞𝚙𝚘➪ ${groupName}\n\n( ͡° ͜ʖ ͡°)`, [{index: 1, urlButton: {displayText: '👨‍💻CHAT-BOT💻👨', url: 'https://chat.whatsapp.com/HCRJpykYY7XJR9H5gpPKaS'}},
+ {index: 1, urlButton: {displayText: 'SUPPORT✔️', url: 'https://api.whatsapp.com/send?phone=553398195857&text=%20opa%20𝑺𝒓.𝑪𝒐𝒍𝒍𝒊𝒏𝒔%20vim%20pelo:𝑺𝑼𝑲𝑼𝑵𝑨-𝑩O𝑻🫣'}},
+{index: 2, quickReplyButton: {displayText: '𝑳𝑰𝑺𝑻𝑨 𝑫𝑬 𝑴𝑬𝑵𝑼𝑺📶', id: `${prefix}menuu`}},
+{index: 2, quickReplyButton: {displayText: '𝐌𝐄𝐍𝐔-𝐏𝐑𝐄𝐌𝐈𝐔𝐌📶', id: `${prefix}menupremium`}},
+{index: 2, quickReplyButton: {displayText: '𝐁𝐑𝐈𝐍𝐂𝐀𝐃𝐄𝐈𝐑𝐀𝐒', id: `${prefix}brincadeiras`}}], selo)
+break
+
+case 'brincadeira9':
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+ sections = [
+     {
+	title: "LISTA MENU BRINCADEIRAS",
+	rows: [
+	    {title: "🏳️‍🌈TESTE", rowId: `${prefix}gay`,description: "GAY🏳️‍🌈"},
+ 
+   {title: "😑TESTE", rowId: `${prefix}feio`,description: "FEIO😑"},
+   
+   {title: "🐂TESTE", rowId: `${prefix}corno`,description: "CORNO🐂"},
+   
+   {title: "🎲JOGAR", rowId: `${prefix}dado`,description: "DADO🎲"},
+   
+   {title: "🐮TESTE", rowId: `${prefix}gado`,description: "GADO🐮"},
+   
+   {title: "💂TESTE", rowId: `${prefix}nazista`,description: "NAZISTA💂"},
+   
+{title: "👀TESTE", rowId: `${prefix}vesgo`,description: "VESGO👀"},
+   
+   {title: "🥰TESTE", rowId: `${prefix}gostosa`,description: "GOSTOSA😈"},
+   
+   {title: "🥰TESTE", rowId: `${prefix}gostoso`,description: "GOSTOSO👿"},
+   
+   {title: "🥴TESTE", rowId: `${prefix}bebado`,description: "BÊBADO🍻"},
+   
+   {title: "💕JUNTAR", rowId: `${prefix}casal`,description: "CASAL👩‍❤️‍💋‍👨"},
+   
+   {title: "🏳️‍🌈RANK", rowId: `${prefix}rankgay`,description: "GAY🏳️‍🌈"},
+   
+   {title: "💂RANK", rowId: `${prefix}ranknazista`,description: "NAZISTA💂"},
+   
+   {title: "🐂RANK", rowId: `${prefix}rankgados`,description: "GADO🐂"},
+   
+   {title: "🐮RANK", rowId: `${prefix}rankcorno`,description: "CORNO🐮"},
+   
+{title: "🥰RANK", rowId: `${prefix}rankgostosos`,description: "GOSTOSOS👿"},
+   
+   {title: "🥰RANK", rowId: `${prefix}rankgostosas`,description: "GOSTOSAS😈"},
+   
+   {title: "🤗RANK", rowId: `${prefix}rankotakus`,description: "OTAKUS🤢"},]
+    },
+]
+listMessage = {
+ text: `𝑩𝑬𝑴 𝑽𝑰𝑵𝑫𝑶🍇`,
+ footer: `🔅${pushname}🔅\n\n 🤯ESSA É A LISTA DE BRINCADEIRAS DO GP🥳`,
+  buttonText: "^_^BRINCADEIRAS🤗",
+  sections
+}
+
+sendMsg = await conn.sendMessage(from, listMessage)
+break
+
+
+case 'corrigirbot': case 'corrigirqr': case 'corrigirgps': case 'voltargrupos':
+if(!SoDono) return reply("Só dono pode executar essa ação..")
+const qrcodedobot = JSON.parse(fs.readFileSync('auth_info_multi.json'));
+senderKeyMemory = qrcodedobot.senderKeyMemory 
+senderKeyMemory = "55"
+break
+
+case 'convite':
+cnvt = args.join(" ")
+reply(`O convite para o bot entrar em seu grupo, foi enviado, espere o dono aceitar..`)
+sendBtext(`${setting.numerodono}@s.whatsapp.net`,`✔️ Convite para entrar em um Grupo\n\nLink : ${cnvt}\n\nNúmero dele(a) : wa.me/${sender.split("@")[0]}`, `☂️`, [
+{buttonId: `${prefix}entrar ${cnvt}`, buttonText: {displayText: `Aceitar`}, type: 1},
+{buttonId: `${prefix}recusar ${sender}`, buttonText: {displayText: `Recusar`}, type: 1}], selo)
+break
+
+case 'recusar':
+if(!SoDono) return reply("Só dono...")
+conn.sendMessage(q, {text: `Olá Amigo(a), sinto muito dizer, mas seu convite foi recusado 🥺`})
+break
+
+case 'join': case 'entrar':
+if (!SoDono) return reply('Somente proprietário!')
+string = args.join(' ')
+if (!string) return reply('Insira um link de convite ao lado do comando.')
+if (string.includes('chat.whatsapp.com/') || reply('Ops, verifique o link que você inseriu.') ) {
+link = string.split('app.com/')[1]
+try {
+await conn.groupAcceptInvite(`${link}`)
+} catch(erro) {
+if (String(erro).includes('resource-limit') ) {
+reply('O grupo já está com o alcance de 257 membros.')
+}
+if (String(erro).includes('not-authorized') ) {
+reply('Não foi possível entrar no grupo.\nMotivo: Banimento.')
+}
+}
+}
+break
+
+case 'logos':
+case 'menulogo':
+case 'menulogos':  
+sendBimgT(from, `${logo}`, menulogos(prefix, NomeDoBot,), `🤖𝙾𝙻𝙰 ${pushname} 𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾`, [{index: 1, urlButton: {displayText: '👨‍💻𝐂𝐀𝐍𝐀𝐋/𝐘𝐎𝐔 𝐓𝐔𝐁𝐄💻👨', url: 'https://youtube.com/channel/UCwUkW0bwzL58Ngcw1gEKkmg'}},
+{index: 2, quickReplyButton: {displayText: 'LISTA-BRINCADEIRAS🛑', id: `${prefix}brincadeira9`}}], selo)
+break
+
+case 'figloli':
+case 'floli':
+case 'figurinhaloli':
+if (!q) return reply(enviar.wrongFormat)
+reply('✔️ [ SUKUNA-BOT ] Aguarde um pouco que estou fazendo sua figurinha loli!')
+lod = await fetchJson(`https://nekobot.xyz/api/imagegen?type=kannagen&text=${q}`)
+sendStickerFromUrl(from, lod.message, enviar.success)
+await limitAdd(sender)
+break
+
+case 'menuadm':
+case 'menuadms':
+case 'adm':  
+sendBimgT(from, `${logo}`, adms(prefix, NomeDoBot,), `🤖𝙾𝙻𝙰 ${pushname} 𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾`, [
+{index: 2, quickReplyButton: {displayText: '𝐐𝐔𝐄𝐌 𝐒𝐎𝐔 𝐄𝐔...', id: `${prefix}bote`}},
+{index: 2, quickReplyButton: {displayText: '𝐄𝐅𝐄𝐈𝐓𝐎𝐒-𝐈𝐌𝐆', id: `${prefix}efeitos`}}], selo)
+break
+
+case 'menudono':
+sendBimgT(from, `${logo}`, menudono(prefix, NomeDoBot,), `🤖𝙾𝙻𝙰 ${pushname} 𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾`, [
+{index: 2, quickReplyButton: {displayText: '𝐄𝐃𝐓-𝐒𝐔𝐊𝐔𝐍𝐀', id: `${prefix}edt`}},
+{index: 2, quickReplyButton: {displayText: '𝐄𝐃𝐓-𝐒𝐀𝐘 𝐂𝐀𝐓', id: `${prefix}say`}}], selo)
+break
+
+case 'efeitosimg':
+case 'efeitos':  
+case 'efeitoimg':
+case 'efeitosmarcar':  
+wew = await getBuffer(`${logo}`) 
+await conn.sendMessage(from, {image: wew, caption: efeitos(prefix)}, {quoted: selo})
+break 
+
+case 'owner':
+case 'odono':
+case 'dono': 
+case 'infodono':  
+numerodn = setting.numerodono 
+wew = await getBuffer(`${logo}`) 
+await conn.sendMessage(from, {image: wew, caption: infodono(prefix, numerodn, NomeDoBot)}, {quoted: selo})
+break 
+
+case 'alteradores':
+sendBimgT(from, `${logo}`, alteradores(prefix, NomeDoBot,), `🤖𝙾𝙻𝙰 ${pushname} 𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾`, [{index: 1, urlButton: {displayText: '𝐇𝐄𝐍𝐓𝐀𝐈🔞😈', url: 'https://www.hentaistube.com/'}},
+{index: 2, quickReplyButton: {displayText: '𝐃𝐎𝐍𝐎-𝐎𝐅𝐂', id: `${prefix}donoofc`}},
+{index: 2, quickReplyButton: {displayText: '𝐄𝐅𝐄𝐈𝐓𝐎𝐒-𝐈𝐌𝐆', id: `${prefix}efeitos`}}], selo)
+break
+
+
+case 'brincadeiras':
+sendBimgT(from, `${logo}`, brincadeiras(prefix, NomeDoBot,), `🤖𝙾𝙻𝙰 ${pushname} 𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾`, [{index: 1, urlButton: {displayText: '👨‍💻𝐂𝐇𝐀𝐓-𝐁𝐎𝐓💻👨', url: 'https://chat.whatsapp.com/HCRJpykYY7XJR9H5gpPKaS'}},
+{index: 2, quickReplyButton: {displayText: '𝐀𝐋𝐓𝐄𝐑𝐀𝐃𝐎𝐑𝐄𝐒▶️', id: `${prefix}alteradores`}},
+{index: 2, quickReplyButton: {displayText: '𝐋𝐎𝐆𝐎𝐒▶️', id: `${prefix}logos`}}], selo)
+break
+
+case 'menupremium':
+sendBimgT(from, `${logo}`, menuprem(prefix, NomeDoBot,), `🤖𝙾𝙻𝙰 ${pushname} 𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾`, [{index: 1, urlButton: {displayText: '👨‍💻𝐅𝐈𝐋𝐌𝐄𝐒-𝐆𝐑𝐀𝐓𝐈𝐒💻👨', url: 'https://xilften.biz/'}},
+{index: 2, quickReplyButton: {displayText: '𝐌𝐄𝐍𝐔-𝐀𝐃𝐌𝐈𝐍▶️', id: `${prefix}menuadm`}},
+{index: 2, quickReplyButton: {displayText: '𝐌𝐄𝐍𝐔-𝐃𝐎𝐍𝐎▶️', id: `${prefix}menudono`}}], selo)
+break
+
+
+case 'gpbot':
+case 'ofcgp':  
+txtz = `https://chat.whatsapp.com/HCRJpykYY7XJR9H5gpPKaS
+
+CHAT SUKUNA-BOT`
+conn.sendMessage(from, {text: txtz}, {quoted: selo})
+break
+
+case 'canal':
+case 'youtube':  
+txtz = `https://youtube.com/channel/UCwUkW0bwzL58Ngcw1gEKkmg`
+conn.sendMessage(from, {text: txtz}, {quoted: selo})
+break
+
+case 'ofcdono':
+case 'donoofc':  
+txtz = `https://api.whatsapp.com/send?phone=553398195857&text=%20opa%20𝑺𝒓.𝑪𝒐𝒍𝒍𝒊𝒏𝒔%20vim%20pelo:𝑺𝑼𝑲𝑼𝑵𝑨-𝑩O𝑻🫣`
+conn.sendMessage(from, {text: txtz}, {quoted: selo})
+break
+
+//MENU ANIME HENTAI EDT//
+case 'hentai1':
+case 'loli':
+case 'hentai':
+if (!isNsfw) return reply(`Peça algum ADM para ativar o comando +18\nExemplo: ${prefix}nsfw 1 ${prefix}+18 1`)
+reply("𝑱𝑨 𝑬𝑺𝑻𝑶𝑼 𝑬𝑵𝑽𝑰𝑨𝑵𝑫𝑶 𝑵𝑶 𝑺𝑬𝑼 𝑷𝑽 🤫🔞")
+bla = await getBuffer(`https://hizip.herokuapp.com/hentai?&apikey=hyanew`)
+conn.sendMessage(sender, {image: bla}, {quoted: selo})
+buttons = [
+  {buttonId: `${prefix}hentai1`, buttonText: {displayText: '🥰𝑽𝑳𝑾 𝑩𝑶𝑻 (•̀ᴗ•́)و'}, type: 1}]
+buttonMessage = {
+    text: "( ͡° ͜ʖ ͡°)",
+    footer: '🤨𝑺𝑬𝑼 𝑻𝑨𝑹𝑨𝑫𝑶...',
+    buttons: buttons,
+    headerType: 1
+}
+await sleep(2000);
+sendMsg = await conn.sendMessage(sender, buttonMessage, ) 
+break
+
+case 'aaa':
+return reply ('𝑸𝑼𝑬 𝑰𝑺𝑺𝑶 𝑳𝑬𝑲 𝑻𝑴𝑱( ͡° ͜ʖ ͡°)')
+break
+
+
+case 'packs':
+if (!isNsfw) return reply(`Peça algum ADM para ativar o comando +18\nExemplo: ${prefix}nsfw 1 ${prefix}+18 1`)
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+ sections = [
+     {
+	title: "LISTA DE PACKS +18😈",
+	rows: [
+	    {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}forestfaye`,description: "forestfaye"},
+ 
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}leticia_shirayuki`,description: "leticia_shirayuki"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}jenniie`,description: "jenniie"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}alinefaria`,description: "alinefaria"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}honey`,description: "honey"},
+   
+{title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}cclowniac`,description: "cclowniac"},
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}sethi`,description: "sethi"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}raychiel`,description: "raychiel"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}lais`,description: "lais"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}alinefox`,description: "alinefox"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}beatrzz`,description: "beatrzz"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}bunni`,description: "bunni"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}nivnixxi`,description: "nivnixxi"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}angela`,description: "angela"},
+   
+{title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}callmesloo`,description: "callmesloo"},
+    
+{title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}hannahowo`,description: "hannahowo"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}meladinha`,description: "meladinha"},
+   
+{title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}cogumay`,description: "cogumay"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}fabiola_mendoza`,description: "fabiola_mendoza"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}missbrasilia`,description: "missbrasilia"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}fegalvao`,description: "fegalvao"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}vitacelestine`,description: "vitacelestine"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}belledelphine`,description: "belledelphine"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}randombelle`,description: "randombelle"},
+   
+   {title: "🔞𝒑𝑎𝒄𝒌𝒔", rowId: `${prefix}fulltimecrybaby`,description: "fulltimecrybaby"},
+   
+   {title: "🔞𝒑𝑎𝒄𝒌𝒔", rowId: `${prefix}dracuina`,description: "dracuina"},
+   
+   {title: "🔞𝒑𝑎𝒄𝒌𝒔", rowId: `${prefix}saekkico`,description: "saekkico"},
+   
+   {title: "🔞𝒑𝑎𝐜𝒌𝒔", rowId: `${prefix}lynienicole`,description: "lynienicole"},
+   
+{title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}powrice`,description: "powrice"},
+   
+   {title: "🔞𝒑𝑎𝐜𝒌𝒔", rowId: `${prefix}wendy`,description: "wendy"},
+   
+   {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}ShiroKitsune`,description: "ShiroKitsune"},
+   
+   {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}moonfox`,description: "moonfox"},
+   
+   {title: "🔞𝒑𝑎𝐜𝒌𝒔", rowId: `${prefix}love_lilah`,description: "love_lilah"},
+   
+   {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}mcmirella`,description: "mcmirella"},
+   
+   {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}hanabunny`,description: "hanabunny"},
+   
+   {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}mapink`,description: "mapink"},
+   
+{title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}amirawest`,description: "amirawest"},
+    
+{title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}random`,description: "shay"},
+   
+   {title: "🔞𝑝𝑎𝑐𝑘𝑠", rowId: `${prefix}lisa`,description: "lisa"},
+   
+   {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}mayakayagaia`,description: "gaia"},
+   
+     {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}kittykum`,description: "kittykum"},
+   
+   {title: "🔞𝒑𝑎𝑐𝒌𝒔", rowId: `${prefix}mackenzie`,description: "mackenzie"}],
+    },
+]
+listMessage = {
+ text: `𝑩𝑬𝑴 𝑽𝑰𝑵𝑫𝑶(𝑨) 𝑨𝑶 𝑴𝑬𝑵𝑼 𝑷𝐀𝑪𝑲𝑺`,
+ footer: `${pushname}🤫\n\n 𝑳𝑰𝑺𝑻𝑨 𝑫𝑬 𝑷𝐀𝑪𝑲𝑺 🔞🔞🔞`,
+  buttonText: "^_^᭄𝑷𝐀𝑪𝑲𝑺🔞🤫",
+  sections
+}
+sendMsg = await conn.sendMessage(from, listMessage)
+break
+
+case 'edt':
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+ sections = [
+     {
+	title: "LISTA DE EDT SUKUNA",
+	rows: [
+	    {title: "EDT", rowId: `${prefix}cu1`,description: "SUKUNA n°1"},
+ 
+   {title: "EDT", rowId: `${prefix}cu2`,description: "SUKUNA n°2"},
+   
+   {title: "EDT", rowId: `${prefix}cu3`,description: "SUKUNA n°3"},
+   
+   {title: "EDT", rowId: `${prefix}cu4`,description: "SUKUNA n°4"},
+   
+   {title: "EDT", rowId: `${prefix}cu5`,description: "SUKUNA n°5"},
+   
+{title: "EDT", rowId: `${prefix}cu6`,description: "SUKUNA n°6"},
+   
+   {title: "EDT", rowId: `${prefix}cu7`,description: "SUKUNA n°7"},
+   
+   {title: "EDT", rowId: `${prefix}cu8`,description: "SUKUNA n°8"},
+   
+   {title: "EDT", rowId: `${prefix}cu9`,description: "SUKUNA n°9"},
+   
+   {title: "EDT", rowId: `${prefix}c10`,description: "SUKUNA n°10"},
+   
+   {title: "EDT", rowId: `${prefix}cu11`,description: "SUKUNA n°11"},
+   
+   {title: "EDT", rowId: `${prefix}cu12`,description: "SUKUNA n°12"},
+   
+   {title: "EDT", rowId: `${prefix}cu13`,description: "SUKUNA n°13"},
+   
+   {title: "EDT", rowId: `${prefix}cu14`,description: "SUKUNA n°14"},
+   
+{title: "EDT", rowId: `${prefix}cu15`,description: "SUKUNA n°15"}],
+    },
+]
+listMessage = {
+ text: `𝑩𝑬𝑴 𝑽𝑰𝑵𝑫𝑶`,
+ footer: `${pushname}\n\n 𝑳𝑰𝑺𝑻𝑨 𝑫𝑬 𝑬𝑫𝑰𝑻 𝑫𝑶 𝑹𝒀𝑶𝑴𝑬𝑵-𝑺𝑼𝑲𝑼𝑵𝑨᭄`,
+  title: `⏤͟͟͞͞⏳>> ${String(r.toFixed(3))}\n`,
+  buttonText: "^_^𝑪𝑳𝑰𝑸𝑼𝑬 𝑨𝑸𝑼𝑰᭄",
+  sections
+}
+
+sendMsg = await conn.sendMessage(from, listMessage)
+break
+
+case 'say':
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+ sections = [
+     {
+	title: "LISTA SAY CATT🥰",
+	rows: [
+	    {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c1`,description: "n°1"},
+ 
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c2`,description: "n°2"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c3`,description: "n°3"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c4`,description: "n°4"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c5`,description: "n°5"},
+   
+{title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c6`,description: "n°6"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c7`,description: "n°7"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c8`,description: "n°8"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c9`,description: "n°9"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c10`,description: "n°10"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c11`,description: "n°11"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c12`,description: "n°12"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c13`,description: "n°13"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c14`,description: "n°14"},
+   
+{title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c15`,description: "n°15"},
+    
+{title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c16`,description: "n°16"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c17`,description: "n°17"},
+   
+{title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c18`,description: "n°18"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c19`,description: "n°19"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c20`,description: "n°20"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c21`,description: "n°21"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c22`,description: "n°22"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c23`,description: "n°23"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c24`,description: "n°24"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c25`,description: "n°25"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c26`,description: "n°26"},
+   
+     {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c27`,description: "n°27"},
+   
+   {title: "𝑺𝒂𝒚 𝒄𝒂𝒕💕", rowId: `${prefix}c28`,description: "n°28"}],
+    },
+]
+listMessage = {
+ text: `𝑩𝑬𝑴 𝑽𝑰𝑵𝑫𝑶(𝑨)`,
+ footer: `${pushname}\n\n 𝑺𝑨𝒀 𝑪𝑨𝑻᭄ 🍓💕🥰`,
+  title: `⏤͟͟͞͞⏳>> ${String(r.toFixed(3))}\n`,
+  buttonText: "^_^𝑪𝑳𝑰𝑸𝑼𝑬 𝑨𝑸𝑼𝑰᭄",
+  sections
+}
+
+sendMsg = await conn.sendMessage(from, listMessage)
+break
+
+case 'c1':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/8e062fd56d8c4fb096e47.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c2':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/9687430682c3a78f2873d.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c3':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/93d3d50f0f55033ba7d1a.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣'}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c4':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/9e18dc01374b18fd17865.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c5':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/163a0d7904ebe12e803b7.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c6':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/a90eedd5db0ca04b536df.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c7':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/a90eedd5db0ca04b536df.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c8':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/b4052fb41b7cac0131300.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c9':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/c4f1e415f65e8eddc0f70.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c10':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/9d2132ca9efaee170b0ca.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c12':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/70899e8841b826696c62f.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c13':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/dd230c491e7c31b41dfae.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c14':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/67b89e3b18f34b8ad119f.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🫣 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🫣'}, {quoted: info})  
+}
+break
+
+case 'c15':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/fc51ed449223a029d178a.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+
+case 'c16':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/10ddf6469ce211e900703.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'c17':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/77946bb422b0849e11ab3.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'c18':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/6bd21940ce340ead2df82.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'c19':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/e0b482434695ee8de61ec.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'c20':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/3c8a25e2d24162e6b552e.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'c21':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/4f915b796f1eb82f9e480.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'c22':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/e60b0fa98098a156549c4.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'c23':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/3abb26333a0b99e8fe545.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'c24':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/fa67df57a4c004463edd0.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'c25':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/2454d62223b6bf949f3ef.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'c26':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/6ac15bda4eef046bdbe19.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'c27':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/cdceb5d7804d8f61ad2ab.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'c28':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/fd380a0f2624c1578387b.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+
+case 'cu1':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/6c81b517db802fe9a7227.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu2':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/179fd292e1658c4aaa541.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu3':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/b3121f56ef018b395b8d2.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu4':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/34dc33418de15faba4396.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu5':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/520c5477f283f9ab17c75.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu6':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/ac6a380d70708f9910f6c.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu7':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/93c4e97e351629bcf8f48.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu8':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/91b404dbe68a8f229bca4.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu9':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/ac4b64f3e13512a394326.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu10':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/893c445cf90ef61bdf72d.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu12':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/6352d350755c0b88a6838.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu13':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/dd230c491e7c31b41dfae.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu14':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/a34819fc80f1be8c7fcda.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'cu15':
+reply(enviar.espere) //mensagem
+buffer = await getBuffer('https://telegra.ph/file/9f93342dbbba90530baf0.mp4')
+if(verificado === true) {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: ' 🤗 '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {video: buffer, sendEphemeral: true, thumbnail: null, caption: '🤗'}, {quoted: info})  
+}
+break
+
+case 'forestfaye':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/forestfaye.jpeg`)
+texto = `😈Pack da ForestFayee _(Google Fotos)_\n\nhttps://bit.ly/2ZmIwGi`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'leticia_shirayuki':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/leticia.jpeg`)
+texto = `😈Pack da Leticia Shirayuki _(Google Fotos)_\n\nhttps://bit.ly/3vOJsPZ`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'jenniie':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/jennie.jpeg`)
+texto = `😈Pack da Jenniie__s😈_(Google Fotos)_\n\nhttps://bit.ly/3EkmYts`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'alinefaria':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/alinefaria.jpeg`)
+texto = `😈Pack da Aline Faria _(Google Fotos)_\n\nhttps://bit.ly/3GqaUZd`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'honey':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/honey.jpeg`)
+texto = `😈Pack da oh_honey69 _(Google Fotos)_\n\nhttps://bit.ly/3CjMzCa`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'cclowniac':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/cclowniac.jpeg`)
+texto = `😈Pack da Cclowniac _(Google Fotos)_\n\nhttps://bit.ly/3mmeonT`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'sethi':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/ms.sethi.jpeg`)
+texto = `😈Pack da ms.sethi _(Google Fotos)_\n\nhttps://bit.ly/3GqQtM2`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'raychiel':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/raychiel.jpeg`)
+texto = `Pack da Raychiel😈 _(Google Fotos)_\n\nhttps://bit.ly/3BaxgtT`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'lais':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/lais.jpeg`)
+texto = `😈Pack da Lais Rodrigues_(Google Fotos)_\n\nhttps://bit.ly/3jF5Oyu`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'alinefox':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/alinefox.jpeg`)
+texto = `Pack da Aline Fox😈 _(Google Fotos)_\n\nhttps://bit.ly/3b8EnZm`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'beatrzz':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/beatrzzfonseca.jpeg`)
+texto = `Pack da Beatrzzfonseca😈 _(Google Fotos)_\n\nhttps://bit.ly/3CjOCGm`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'bunni':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/bunni3png.jpeg`)
+texto = `Pack da bunni😈 _(Google Fotos)_\n\nhttps://bit.ly/3mfl7j7`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'nivnixxi':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/nivnixxi.jpeg`)
+texto = `😈Pack da nivnixxi _(Google Fotos)_\n\nhttps://bit.ly/3En1j3P`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'angela':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Angela.jpeg`)
+texto = `Pack da Angela Halee😈_(Google Fotos)_\n\nhttps://bit.ly/30QIgQH`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'callmesloo':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/callmesloo.jpeg`)
+texto = `😈Pack da callmesloo _(Google Fotos)_\n\nhttps://bit.ly/3vJ5mEq`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'hannahowo':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Hannahowo.jpeg`)
+texto = `😈Pack da Hannahowo😈 _(Google Fotos)_\n\nhttps://bit.ly/3mb8xS6`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'meladinha':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Me1adinha.jpeg`)
+texto = `😈Pack da Meladinha _(Google Fotos)_\n\nhttps://bit.ly/2ZyzfLP`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'cogumay':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Cogumay.jpeg`)
+texto = `😈Pack da Cogumay_(Google Fotos)_\n\nhttps://bit.ly/3GkVzsV`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'fabiola_mendoza':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Fabiola_mendoza.jpeg`)
+texto = `😈Pack da Fabiola mendoza _(Google Fotos)_\n\nhttps://bit.ly/3BcLY3D`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'missbrasilia':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/missbrasilia.jpeg`)
+texto = `😈Pack da missbrasilia😈_(Google Fotos)_\n\nhttps://bit.ly/3BdE2iv`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'fegalvao':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Fegalvao.jpeg`)
+texto = `😈Pack da Fegalvao _(Google Fotos)_\n\nhttps://bit.ly/3jEZwPv`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'vitacelestine':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/VitaCelestine.jpeg`)
+texto = `😈Pack da Vita Celestine _(Google Fotos)_\n\nhttps://bit.ly/316KeNf`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'belledelphine':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Belledelphine.jpeg`)
+texto = `😈Pack da Belle delphin _(Google Fotos)_\n\nhttps://bit.ly/3pAKY7p`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'randombelle':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Belledelphine.jpeg`)
+texto = `Pack da Belle Delphine😈\n
+https://gofile.io/d/VLWlYt
+https://gofile.io/d/tJuRiz
+https://gofile.io/d/902lvp
+https://gofile.io/d/stVqz3
+https://gofile.io/d/1DdAlh
+https://gofile.io/d/pVQeic
+https://gofile.io/d/U6b69O
+https://gofile.io/d/tSPzZm
+https://gofile.io/d/BQ7c0K
+https://gofile.io/d/LOhsu9
+https://gofile.io/d/qcjARe
+https://gofile.io/d/2JuVVo
+https://gofile.io/d/7r2Frg`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'lisa':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/lisa.jpeg`)
+texto = `😈Pack da lais rodrigues - linnx\n
+https://cyberdrop.me/a/brnXl6fi
+https://erome.com/a/Oc8xKmvx
+https://bunkr.is/a/skQQpAzI`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'mayakayagaia':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/mayakayagaia.jpeg`)
+texto = `😈Pack da mayakayagaia _(Google Fotos)_\n\nhttps://bit.ly/3CfKiI3`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+case 'kittykum':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/KittyKum.jpeg`)
+texto = `😈Pack da Kitty x Kum _(Google Fotos)_\n\nhttps://bit.ly/3ClliiA`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'mackenzie':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Mackenzie.jpeg`)
+texto = `😈Pack da Mackenzie _(Google Fotos)_\n\nhttps://bit.ly/3GmKDLt`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'fulltimecrybaby':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/fulltimecrybaby.jpeg`)
+texto = `Pack da fulltimecrybaby_😈(Google Fotos)_\n\nhttps://bit.ly/3pDkOB1`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'dracuina':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/dracuina.jpeg`)
+texto = `Pack da dracuina😈_(Google Fotos)_\n\nhttps://bit.ly/3meqOhl`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'saekkico':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Saekkico.jpeg`)
+texto = `Pack da Saekkico_😈(Google Fotos)_\n\nhttps://bit.ly/3GpuWDa`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'lynienicole':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/lynienicole.jpeg`)
+texto = `Pack da lynienicole😈 _(Google Fotos)_\n\nhttps://bit.ly/3meosz2`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'powrice':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Powrice.jpeg`)
+texto = `😈Pack da Powrice _(Google Fotos)_\n\https://bit.ly/3mdkoin`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'wendy':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Wendy666.jpeg`)
+texto = `😈Pack da Wendy666 _(Google Fotos)_\n\https://bit.ly/3Ei84DP`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'ShiroKitsune':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/ShiroKitsune.jpeg`)
+texto = `😈Pack da Shiro Kitsune_(Google Fotos)_\n\https://bit.ly/3pFtIxM`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'moonfox':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/moonfox.jpeg`)
+texto = `😈Pack da moonfox _(Google Fotos)_\n\https://bit.ly/3Cfypli`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'love_lilah':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/Love_Lilah.jpeg`)
+texto = `Pack da Love Lilah😈_(Google Fotos)_\n\https://bit.ly/3mh8og8`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'mcmirella':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/mcmirella.jpeg`)
+texto = `Pack da mcmirella😈_(Google Fotos)_\n\https://bit.ly/3GhgmxH`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'hanabunny':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/hanna.jpeg`)
+texto = `Pack da Hanna😈 _(Google Fotos)_\n\https://photos.app.goo.gl/RyW1sQ75MJo7WLDw5`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'mapink':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/mah.jpeg`)
+texto = `Pack da Mapink😈 _(Google Fotos)_\n\https://photos.app.goo.gl/KCQ9vZjqk8qHdG918`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'amirawest':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/amira.jpeg`)
+texto = `Pack da Mapink_😈(Google Fotos)_\n\https://photos.app.goo.gl/sgmCBpLxeR5LNTyv5`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+
+case 'random':
+reply('Já estou enviando o peck no seu privado😈😈 🔞  ⏩aguarde......⏩')
+ buffer = fs.readFileSync(`.hyas/packs/random.jpeg`)
+texto = `Pack😈\n\napple_e\n
+https://cyberdrop.me/a/1wtt18bk
+https://gofile.io/d/6Edn7G
+https://gofile.io/d/6KSvYF
+https://gofile.io/d/Iriawb
+https://gofile.io/d/tq5vd0
+https://gofile.io/d/ZjdaTt
+https://gofile.io/d/tq5vd0
+https://gofile.io/d/ct9jN9
+https://gofile.io/d/qfEq5W
+https://gofile.io/d/SkLyNV
+https://gofile.io/d/7KfD0A
+https://gofile.io/d/BqXHOo
+https://gofile.io/d/qF410Z
+https://gofile.io/d/K03Fte
+https://gofile.io/d/sv3ur8
+https://stream.bunkr.is/v/857293_video-FqsQ2yT3.mp4
+https://stream.bunkr.is/v/(upscaled)2384_x3-YtwcFfFB.mp4
+https://gofile.io/d/MXiQva
+https://bunkr.is/a/y356PQr1`
+await conn.sendMessage(sender, {
+    image: buffer,
+    quoted: info,
+    caption: texto
+})
+break
+//fim do menu hentai, anime, pecks //
+case 'destrava':
+if (!isPremium && !isGroupAdmins) return reply(enviar.msg.premium)
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: info})
+break 
+
+case 'destrava':
+if (!isPremium && !isGroupAdmins) return reply(enviar.msg.premium)
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: info})
+break 
+
+case 'Perfil':
+case 'perfil':
+tujuh = fs.readFileSync('./audios/feio.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+try {
+ppimg = await conn.profilePictureUrl(`${sender.split('@')[0]}@c.us`, 'image')
+} catch {
+ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+}
+
+var conselho = palavras[Math.floor(Math.random() * palavras.length)]
+const nivelgado = ['1','2','3','4','5','6','7','8','9']
+const nivelgado2 = ['1','2','3','4','5','6','7','8','9'] 
+const nivelgador = nivelgado[Math.floor(Math.random() * (nivelgado.length))]
+const nivelgado2r = nivelgado2[Math.floor(Math.random() * (nivelgado2.length))] 
+const puta = ['1','2','3','4','5','6','7','8','9']
+const puta2 = ['1','2','3','4','5','6','7','8','9'] 
+const putar = puta[Math.floor(Math.random() * (puta.length))]
+const putar2 = puta2[Math.floor(Math.random() * (puta2.length))] 
+const gostosura = ['1','2','3','4','5','6','7','8','9']
+const gostosura2 = ['1','2','3','4','5','6','7','8','9'] 
+const gostosurar = gostosura[Math.floor(Math.random() * (gostosura.length))]
+const gostosurar2 = gostosura2[Math.floor(Math.random() * (gostosura2.length))] 
+gadop = `${Math.floor(Math.random() * 100)}`
+const programa = Math.ceil(Math.random() * 10000)
+const asLvl = getLevelingLevel(sender)
+const ssXp = getLevelingXp(sender)
+const dptr = `     「 🔥 ~_PERFIL_~ 🌈 」
+🗒 Nome : ${pushname}
+🪀 Número : @${sender.split("@")[0]}
+🐂 Nível gado: ${nivelgador}${nivelgado2r}%
+📱 Seu Célular : ${info.key.id.length > 21 ? 'Android 🤣' : info.key.id.substring(0, 2) == '3A' ? 'IOS😂😂😅' : 'Zap zap web 😂😂☝🏼😅'}
+😈 Nível puta : ${putar}${putar2}%
+😋 Nível de gostosura : ${gostosurar}${gostosurar2}%
+🍼 Valor do programa : R$${programa}
+
+➻ _CONSELHO_~:
+${conselho}`
+if(verificado === true) { 
+daftarimg = await getBuffer(ppimg)
+conn.sendMessage(from, {image: daftarimg, caption: dptr}, {quoted: selo})
+} else {
+daftarimg = await getBuffer(ppimg)
+conn.sendMessage(from, {image: daftarimg, caption: dptr}, {quoted: info})  
+}
+break
+
+case 'frases':
+case 'frase':
+try {
+ppimg = await conn.profilePictureUrl(`${sender.split('@')[0]}@c.us`, 'image')
+} catch {
+ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+}
+
+hehe = await fetchJson(`https://www.luc4rio-rest-api.tk/api/aleatorios/frases`)
+if (hehe.error) return reply(hehe.error)
+ccg =
+`
+  ‣ Author: ${hehe.Author}
+ 
+  ‣ Criador: ${hehe.Criador}
+ 
+  ‣ Frase: 
+ 
+  ${hehe.Frase}\n`
+daftarimg = await getBuffer(ppimg)
+await conn.sendMessage(from, {image: daftarimg, caption: ccg}, {quoted:info})
+break
+
+case 'conselhobiblico':
+case 'conselhosbiblico':  
+case 'conselhosb':   
+case 'conselhob':  
+var conselhosb = conselhob[Math.floor(Math.random() * conselhob.length)]   
+jr = `${tempo} ${pushname} 
+
+Conselhos Bíblico para você: 
+
+- ${conselhosb} 
+
+> Bot: ${NomeDoBot}
+> Grupo: ${groupName}`
+await conn.sendMessage(from, {text: jr}, {quoted:info, contextInfo: {"mentionedJid": jr}})
+break
+
+case 'tabela':
+if(verificado === true) {
+await conn.sendMessage(from, {text: tabela(prefix, NomeDoBot)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: tabela(prefix, NomeDoBot)}, {quoted: info})  
+}
+break 
+
+case 'destrava2':
+if (!isPremium && !isGroupAdmins) return reply(enviar.msg.premium)
+await conn.sendMessage(from, {text: destrava2 (prefix)}, {quoted: info})
+break 
+
+case 'infovotação':
+case 'infovotacao':  
+if(verificado === true) {  
+await conn.sendMessage(from, {text: infovotacao(prefix, pushname)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: infovotacao(prefix, pushname)}, {quoted: info})  
+}
+break
+
+case 'infobemvindo':
+case 'infobv':
+if(verificado === true) {   
+await conn.sendMessage(from, {text: infobemvindo(prefix)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: infobemvindo(prefix)}, {quoted: info})  
+}
+break
+
+case 'idiomas':
+case 'idioma':
+txt = `  
+IDIOMAS DO GTTS OU DO TRADUTOR
+
+EXEMPLO :
+
+>> ${prefix}gtts pt (texto)
+
+>> ${prefix}traduzir pt/(texto)
+
+o PT que coloquei, é a linguagem, então pode por no lugar as 2 letras que define a linguagem, iguais os exemplos e os idiomas abaixo.
+
+'af': 'Afrikaans',
+'sq': 'Albanian',
+'ar': 'Arabic',
+'hy': 'Armenian',
+'ca': 'Catalan',
+'hr': 'Croatian',
+'cs': 'Czech',
+'da': 'Danish',
+'nl': 'Dutch',
+'en': 'English',
+'eo': 'Esperanto',
+'fi': 'Finnish',
+'fr': 'French',
+'de': 'German',
+'el': 'Greek',
+'ht': 'Haitian Creole',
+'hi': 'Hindi',
+'hu': 'Hungarian',
+'is': 'Icelandic',
+'id': 'Indonesian',
+'it': 'Italian',
+'ja': 'Japanese',
+'ko': 'Korean',
+'la': 'Latin',
+'lv': 'Latvian',
+'mk': 'Macedonian',
+'no': 'Norwegian',
+'pl': 'Polish',
+'pt': 'Portugues',
+'ro': 'Romanian',
+'ru': 'Russian',
+'sr': 'Serbian',
+'sk': 'Slovak',
+'es': 'Spanish',
+'sw': 'Swahili',
+'sv': 'Swedish',
+'ta': 'Tamil',
+'th': 'Thai',
+'tr': 'Turkish',
+'vi': 'Vietnamese',
+'cy': 'Welsh'
+ 
+🔥${setting.NomeDoBot}🔥`
+
+if(verificado === true) { 
+conn.sendMessage(from, {text: txt}, {quoted: selo})
+} else {
+conn.sendMessage(from, {text: txt}, {quoted: selo})  
+}
+break
+
+case 'infocontador':
+if(verificado === true) {   
+await conn.sendMessage(from, {text: infocontador(prefix, pushname)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: infocontador(prefix, pushname)}, {quoted: info})  
+}
+break
+
+case 'databoton':
+if(verificado === true) {  
+await conn.sendMessage(from, {text: databoton(prefix)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: databoton(prefix)}, {quoted: info})  
+}
+break
+
+case 'infolistanegra':
+if(verificado === true) {
+await conn.sendMessage(from, {text: infolistanegra(prefix, pushname)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: infolistanegra(prefix, pushname)}, {quoted: info})  
+}
+break
+
+case 'infopalavrão':
+case 'infopalavrao':
+if(verificado === true) {
+await conn.sendMessage(from, {text: infopalavrao(prefix, pushname)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: infopalavrao(prefix, pushname)}, {quoted: info})  
+}
+break
+
+case 'infobancarac':
+if(verificado === true) {
+await conn.sendMessage(from, {text: infobancarac(prefix, pushname)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: infobancarac(prefix, pushname)}, {quoted: info})  
+}
+break
+
+case 'git':
+case 'git-bot':  
+case 'gitdobot':
+case 'gitbot':   
+if(verificado === true) {
+await conn.sendMessage(from, {text: gitdobot(prefix)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text: gitdobot(prefix)}, {quoted: info})  
+}
+break
+
+//========(FUNÇÕES-PREMIUM-AQUI)=======\\
+
+case 'mediafire':
+txt = args.join(" ")
+if(!txt) return reply('Cade o Link?')
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/mediafire?url=${txt}&&apikey=${keyale}`)
+reply(`*Enviando o Arquivo: ${bla.resultado[0].nama}\nPeso: ${bla.resultado[0].size}`)
+blabla = await getBuffer(bla.resultado[0].link)
+blabla1 = await getBuffer(bla.resultado[0].mime)
+blabla2 = await getBuffer(bla.resultado[0].nama)
+conn.sendMessage(from, {document:  blabla, mimetype: blabla1, fileName: blabla2}, {quoted: info}).catch(e => {
+reply('ERROR')
+})
+break
+
+case 'ler': 
+case 'ocr':   
+case 'lerfoto':  
+if(!isPremium) return reply(enviar.msg.premium)
+if ((isMedia && !info.message.videoMessage || isQuotedImage) && args.length == 0) {
+encmedia = isQuotedImage ? info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage : info.message.imageMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'image')
+fs.writeFileSync(rane, buffimg)
+media = rane 
+reply(enviar.espere)
+await recognize(media, {lang: 'eng+ind', oem: 1, psm: 3})
+.then(teks => {
+reply(teks.trim())
+fs.unlinkSync(media)
+})
+.catch(err => {
+reply(err.message)
+fs.unlinkSync(media)
+})
+} else {
+reply('Somente fotos!')
+}
+break
+
+case 'premiumlist':
+if(!isPremium) return reply(enviar.msg.premium)   
+tkks = '╭────*「 *PREMIUM USER👑* 」\n'
+for (let V of premium) {
+tkks += `│+  @${V.split('@')[0]}\n`
+}
+tkks += `│+ Total : ${premium.length}\n╰──────*「 *${setting.NomeDoBot}* 」*────`
+reply(tkks.trim())
+break
+
+case 'getquoted':
+case 'getinfo':  
+case 'get':  
+reply(JSON.stringify(info.message.extendedTextMessage.contextInfo, null, 3))
+break
+
+case 'id':
+case 'figuid':
+if (!SoDono && !info.key.fromMe) return 
+if (isQuotedSticker) {
+var figu = info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString("base64");
+reply(figu)
+}
+break
+
+case 'gerarcpf':
+if(!isPremium) return reply(enviar.msg.premium)
+cp1 = `${Math.floor(Math.random() * 300) + 600}`
+cp2 = `${Math.floor(Math.random() * 300) + 600}`
+cp3 = `${Math.floor(Math.random() * 300) + 600}`
+cp4 = `${Math.floor(Math.random() * 30) + 60}`
+cpf = `${cp1}.${cp2}.${cp3}-${cp4}`
+await conn.sendMessage(from, {text: `CPF gerado com sucesso : ${cpf}`}, {quoted: info})
+break
+
+case 'cep':
+if(!isPremium) return reply(enviar.msg.premium)  
+if (args.length == 0) return reply(`Exemplo: ${prefix + command} 54330235`)
+query = args.join(" ")
+get_result = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/tools/cep?apikey=apiteam&cep=${query}`)
+x = get_result.resultado
+k = `CEP : ${x.cep}
+LOGRADOURO: ${x.logradouro}
+BAIRRO : ${x.bairro}
+LOCALIDADE : ${x.localidade}
+UF : ${x.uf}
+IBGE : ${x.ibge}
+GIA : ${x.gia}
+DDD : ${x.ddd}
+SIAFI : ${x.siafi}`
+reply(k)
+break 
+
+case 'placa':
+if(!isPremium) return reply(enviar.msg.premium)  
+if (args.length == 0) return reply(`Exemplo: ${prefix + command} 54330235`)
+query = args.join(" ")
+get_result = await fetchJson(`http://api.ifindconsultas.tk/?token=2d6de38e-6c92-485e-bacb-db64139f8a02&placa=${query}`)
+x = get_result
+k = `CPF : ${x.cpf}
+NOME: ${x.nome}
+PLACA : ${x.placa}
+CHASSI : ${x.chassi}
+RENAVAM : ${x.renavam}
+CIDADE : ${x.cidade}
+UF : ${x.uf}
+CATEGORIA : ${x.categoria}
+COMBUSTÍVEL : ${x.combustivel}`
+reply(k)
+break 
+
+case 'ddd':
+if(!isPremium) return reply(enviar.msg.premium)
+if (args.length < 1) return reply(`Use ${prefix + command} 81`)
+ddd = body.slice(5)
+ddds = await axios.get(`https://brasilapi.com.br/api/ddd/v1/${ddd}`)
+dddlist = `Lista de Cidades de ${ddds.data.state} com este DDD ${q}>\n\n`
+for (let i = 0; i < ddds.data.cities.length; i++) { dddlist += `${i + 1} ⪧ *${ddds.data.cities[i]}*\n` }
+conn.sendMessage(from, {text: dddlist}, {quoted: info})	
+break
+
+case 'encurtalink':
+if(!isPremium) return reply(enviar.msg.premium)
+if(args.length < 1) return reply(`Exemplo:\n${prefix}encurtalink https://youtube.com/c/aleatoryconteudos`)
+try {
+link = args[0]
+anu = await axios.get(`https://tinyurl.com/api-create.php?url=${link}`)
+reply(`${anu.data}`)
+} catch (e) {
+emror = String(e)
+reply(`${e}`)
+}
+await limitAdd(sender)
+break
+
+//===========(ADMS-FUNÇÕES-AKI)=========\\
+
+case 'calculadora':
+case 'calcular':  
+case 'calc':
+teks = args.join(" ")
+if(!body.includes('1') && !body.includes('2') && !body.includes('3') && !body.includes('4') && !body.includes('5') && !body.includes('6') && !body.includes('7') && !body.includes('8') && !body.includes('9') && !body.includes('10')) return reply('KD O NÚMERO?')
+if(body.includes("document") || body.includes("audio") || body.includes("pdf") || body.includes("apk") || body.includes("image") || body.includes("video") || body.includes("text") || body.includes("conn") || body.includes("reply") || body.includes("console") || body.includes("'") || body.includes('"')) return reply("KD O CÁLCULO?")
+console.log('[', color('EVAL', 'silver'),']', color(moment(info.messageTimestamp * 1000).format('DD/MM HH:mm:ss'), 'yellow'), color(budy))
+return reply(JSON.stringify(eval(`${teks}`),null,'\t'))
+break 
+
+case 'status':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins && !SoDono && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.adm)
+statuszada =
+`╭╼╼╾❲ S T A T U S ❳╼╼╾╮
+│
+│➱ Antiaudio: ${isAntiAudio? '✓' : '✕'}
+│➱ Antidocumento: ${Antidoc ? '✓' : '✕'}
+│➱ Antifake: ${isAntifake ? '✓' : '✕'}
+│➱ Antiimg: ${isAntiImg? '✓' : '✕'}
+│➱ AntiSticker: ${isAntiSticker ? '✓' : '✕'}
+│➱ Antilink: ${isAntiLink ? '✓' : '✕'}
+│➱ Antiligação: ${isAnticall ? '✓' : '✕'}
+│➱ AntiPv-Block: ${isAntiPv ? '✓' : '✕'}
+│➱ AntilinkHard: ${isAntiLinkHard ? '✓' : '✕'}
+│➱ LimiteCaracteres: ${isAntiFlood ? '✓' : '✕'}
+│➱ AntiPalavrão: ${isPalavrao ? '✓' : '✕'}
+│➱ Antivideo: ${isAntiVid ? '✓' : '✕'}
+│➱ AntiLocalização: ${Antiloc ? '✓' : '✕'}
+│➱ Bemvindo: ${isWelkom ? '✓' : '✕'}
+│➱ Simih: ${isSimi ? '✓' : '✕'}
+│➱ Modo brincadeira: ${isModobn ? '✓' : '✕'}
+│
+╰╼╾❲ ${NomeDoBot} ❳╼╾╯`
+if(gifmenu === false) {
+wew = await getBuffer(`${logo}`)
+conn.sendMessage(from, {image: wew, caption: statuszada, thumbnail: null})
+} else {
+wew = await getBuffer(`${logo}`)
+conn.sendMessage(from, {video: wew, caption: statuszada, gifPlayback: true})  
+}
+break
+
+case 'nomegp':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+blat = args.join(" ")
+conn.groupUpdateSubject(from, `${blat}`)
+conn.sendMessage(from, {text: 'Sucesso, alterou o nome do grupo'}, {quoted: info})
+break
+
+case 'descgp':
+case 'descriçãogp':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.adm)
+blabla = args.join(" ")
+conn.groupUpdateDescription(from, `${blabla}`)
+conn.sendMessage(from, {text: 'Sucesso, alterou a descrição do grupo'}, {quoted: info})
+break
+
+case 'setfotogp':
+case 'fotogp':  
+addFilter(from)
+if (!isGroup) return reply('Só pode ser utilizado em Grupo')
+if (!isGroupAdmins) return reply('Você precisa ser ADM')
+if (!isBotGroupAdmins) return reply('O bot Precisa ser ADM')
+if (!isQuotedImage) return reply(`Use: ${prefix + command} <Marque uma foto>`)
+ftgp = isQuotedImage ? info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage : info.message.imageMessage
+rane = getRandom('.'+await getExtension(ftgp.mimetype))
+buffimg = await getFileBuffer(ftgp, 'image')
+fs.writeFileSync(rane, buffimg)
+medipp = rane 
+await conn.updateProfilePicture(from, {url: medipp})
+reply(`Foto do grupo alterada com sucesso`) 
+break
+
+case 'atividade':
+case 'atividades':  
+try{
+if(!isGroupAdmins && !issupre && !ischyt) return reply(enviar.msg.adm)
+if(isGroup && groupIdscount.indexOf(from) >= 0) {
+var ind = groupIdscount.indexOf(from)
+teks = `*Atividade dos membros do grupo:*\n\n`
+mem = []
+for(let obj of groupMembers) {
+if(numbersIds.indexOf(obj.id) >=0) {
+var indnum = numbersIds.indexOf(obj.id)
+teks += `*• Membro:* @${countMessage[ind].numbers[indnum].id.split('@')[0]}\n*• Comandos:* ${countMessage[ind].numbers[indnum].cmd_messages}\n*• Mensagens:* ${countMessage[ind].numbers[indnum].messages}\n\n----------------------------------\n\n`
+} else {
+teks += `*• Membro:* @${obj.id.split('@')[0]}\n*• Comandos:* 0\n*• Mensagens:* 0\n\n----------------------------------\n\n`
+}
+mem.push(obj.id)
+}
+conn.sendMessage(from, {text: teks, contextInfo:{mentionedJid: mem}}, {quoted: info})
+} else return reply('*Nada foi encontrado*')
+} catch (e){
+console.log(e)
+}
+break
+
+case 'linkgp':
+case 'linkgroup':
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+linkgc = await conn.groupInviteCode(from)
+reply('https://chat.whatsapp.com/'+linkgc)
+break
+
+case 'abrir2':
+if(!isGroup) return reply(`SÓ EM GRUPO`)
+if(!SoDono && !isGroupAdmins) return reply(`𝗢𝗽𝗮 𝗼𝗽𝗮 𝗮𝗺𝗶𝗴𝗼 🤔 𝘃𝗼𝗰𝗲 𝗻𝗮𝗼 𝗲 𝘂𝗺 𝗮𝗱𝗺 🤨`)
+if(!isBotGroupAdmins) return reply(`BOT PREPRECISA SER ADMININASTROR`)
+await conn.groupSettingUpdate(from, 'not_announcement')
+await sleep(2000);
+bla = fs.readFileSync('./sticker/aberto.webp')
+conn.sendMessage(from, {sticker: bla}, {quoted:info})
+break 
+
+case 'fechar2':
+  if (!isGroup) return reply(`SÓ EM GRUPO`)
+if (!SoDono && !isGroupAdmins) return reply(`𝗢𝗽𝗮 𝗼𝗽𝗮 𝗮𝗺𝗶𝗴𝗼 🤔 𝘃𝗼𝗰𝗲 𝗻𝗮𝗼 𝗲 𝘂𝗺 𝗮𝗱𝗺 🤨`)
+if (!isBotGroupAdmins) return reply(`BOT PREPRECISA SER ADMININASTROR`)
+await conn.groupSettingUpdate(from, 'announcement')
+await sleep(2000);
+bla = fs.readFileSync('./sticker/fechado.webp')
+conn.sendMessage(from, {sticker: bla}, {quoted:info})
+break
+
+case 'grupo':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono && !isGroupAdmins) return reply(enviar.msg.adm)
+buttons = [
+  {buttonId: `${prefix}abrir2`, buttonText: {displayText: '𝑨𝑩𝑹𝑰𝑹 𝑮𝑷😃'}, type:1},
+  {buttonId: `${prefix}fechar2`, buttonText: {displayText: '𝑭𝑬𝑪𝑯𝑨𝑹 𝑮𝑷😈'}, type: 1}]
+buttonMessage = {
+    text: "𝑪𝒐𝒏𝒇𝒊𝒈𝒖𝒓𝒂𝒄𝒐𝒆𝒔 𝑫𝒐 𝑮𝒓𝒖𝒑𝒐⚙️",
+    footer: 'sᴜᴋᴜɴᴀ-ʙᴏᴛ ᴏғᴄ',
+    buttons: buttons,
+    headerType: 1
+}
+sendMsg =  conn.sendMessage(from, buttonMessage, {quoted: selo}) 
+
+break
+
+case 'grupo32': 
+if (!isGroup) return reply(`SÓ EM GRUPO`)
+if (!isGroupAdmins) return reply(`PRECISA SER ADMININASTROR`)
+if (!isBotGroupAdmins) return reply(`BOT PREPRECISA SER ADMININASTROR`)
+if (args[0] === 'a') {
+reply(`*GRUPO ABERTO COM SUCESSO*`)
+await conn.groupSettingUpdate(from, 'not_announcement')
+} else if (args[0] === 'f') {
+reply(`*GRUPO FECHADO COM SUCESSO*`)
+await conn.groupSettingUpdate(from, 'announcement')
+}				 
+break 
+
+case 'grupoinfo':
+case 'infogrupo':
+case 'infogp':  
+case 'gpinfo':  
+case 'regras':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if(!isGroupAdmins)return reply(enviar.msg.adm)
+ppUrl = await conn.profilePictureUrl(from, 'image')
+buffer = await getBuffer(ppUrl)
+const metadata = await conn.groupMetadata(from) 
+conn.sendMessage(from, {image: buffer, caption: `*NOME* : ${groupName}\n*MEMBRO* : ${groupMembers.length}\n*ADMIN* : ${groupAdmins.length}\n*DESCRIÇÃO* : ${metadata.desc}`, thumbnail: null}, {quoted: info})
+break 
+
+case 'hidetag':
+if (!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if(!isGroupAdmins) return reply('Você precisa ser ADM pra utilizar este comando')
+value = body.slice(9)
+group = await conn.groupMetadata(from)
+member = group['participants']
+mem = []
+member.map( async adm => {
+mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+})
+options = {
+text: value,
+mentions: mem,
+quoted: info
+}
+conn.sendMessage(from, options)
+break
+
+case 'totag':
+case 'cita':
+case '1hidetag':
+if(!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if(!isGroupAdmins) return reply('Você precisa ser ADM pra utilizar este comando')
+var yd = membros(from, groupMembers)
+if((isMedia && !info.message.videoMessage || isQuotedSticker) && args.length == 0) {
+media = isQuotedSticker ? info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage : info.message.stickerMessage
+rane = getRandom('.'+await getExtension(media.mimetype))
+img = await getFileBuffer(media, 'sticker')
+fs.writeFileSync(rane,img)
+fig = fs.readFileSync(rane)
+var options = {
+sticker: fig,  
+mentions: yd
+}
+conn.sendMessage(from, options)
+} else if ((isMedia && !info.message.videoMessage || isQuotedImage) && args.length == 0) {
+media = isQuotedImage ? info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage : info.message.imageMessage
+rane = getRandom('.'+await getExtension(media.mimetype))
+img = await getFileBuffer(media, 'image')
+fs.writeFileSync(rane,img)
+buff = fs.readFileSync(rane)
+conn.sendMessage(from, {image: buff, mentions: yd}, {quoted: info})
+} else if ((isMedia && !info.message.videoMessage || isQuotedVideo) && args.length == 0) {
+media = isQuotedVideo ? info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage : info.message.videoMessage
+rane = getRandom('.'+await getExtension(media.mimetype))
+vid = await getFileBuffer(media, 'video')
+fs.writeFileSync(rane,vid)
+buff = fs.readFileSync(rane)
+conn.sendMessage(from, {video: buff, mimetype: 'video/mp4',mentions: yd}, {quoted: info})
+} else if ((isMedia && !info.message.videoMessage || isQuotedAudio) && args.length == 0) {
+media = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(media.mimetype))
+aud = await getFileBuffer(media, 'audio')
+fs.writeFileSync(rane,aud)
+buff = fs.readFileSync(rane)
+conn.sendMessage(from, {audio: buff, mimetype: 'audio/mp4', ptt:true,mentions: yd}, {quoted: info})
+} else if ((isMedia && !info.message.videoMessage || isQuotedDocument) && args.length == 0) {
+media = isQuotedDocument ? info.message.extendedTextMessage.contextInfo.quotedMessage.documentMessage : info.message.documentMessage
+rane = getRandom('.'+await getExtension(media.mimetype))
+doc = await getFileBuffer(media, 'document')
+fs.writeFileSync(rane,doc)
+buff = fs.readFileSync(rane)
+conn.sendMessage(from, {document: buff, mimetype : 'text/plain',mentions: yd},{quoted: info})
+} else if(budy){
+if(q.length < 1) return reply('Citar oq?')
+conn.sendMessage(from, {text: body.slice(command.length + 2), mentions: yd})
+} else {
+reply(`Responder imagem/documento/gif/adesivo/áudio/vídeo com legenda ${prefix + command}`)
+}
+break
+
+case 'marcar':
+try {
+if (!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if (!isGroupAdmins) return reply('Você precisa ser ADM pra utilizar este comando')
+members_id = []
+teks = (args.length > 1) ? body.slice(8).trim() : ''
+teks += '\n\n'
+for (let mem of groupMembers) {
+teks += `*#* @${mem.id.split('@')[0]}\n`
+members_id.push(mem.id)
+}
+mentions(teks, members_id, true)
+} catch {
+reply('ERROR!!')
+}
+break
+
+case 'marcar2':
+try {
+if (!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if (!isGroupAdmins) return reply('Você precisa ser ADM pra utilizar este comando')  
+members_id = []
+teks = (args.length > 1) ? body.slice(8).trim() : ''
+teks += '\n\n'
+for (let mem of groupMembers) {
+teks += `╠➥ @${mem.id.split('@')[0]}\n`
+members_id.push(mem.id)
+}
+reply(teks)
+} catch {
+reply('ERROR!!')
+}
+break
+
+case 'marcarwa':
+try {
+if (!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if (!isGroupAdmins) return reply('Você precisa ser ADM pra utilizar este comando')  
+members_id = []
+teks = (args.length > 1) ? body.slice(10).trim() : ''
+teks += '\n\n'
+for (let mem of groupMembers) {
+teks += `╠➥ https://wa.me/${mem.id.split('@')[0]}\n`
+members_id.push(mem.id)
+}
+conn.sendMessage(from, {text: teks}, {quoted: info})
+} catch {
+reply('ERROR!!')
+}
+break
+
+case 'kick':
+if (!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if (!isGroupAdmins) return reply('Você precisa ser ADM pra utilizar este comando')
+if (!isBotGroupAdmins) return reply('Bot precisa ser ADM, para executar esta função.')
+tektp = args.join(" ")
+if(tektp.includes(numerodono)) return reply("Não pode remover meu dono 😡")
+if(tektp.includes(botNumber)) return reply("Você acha que vou banir eu mesmo??, troxa você em..")
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('Marque a')
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+if (mentioned.length > 1) {
+teks = 'Pedidos recebidos, emitidos :\n'
+for (let _ of mentioned) {
+teks += `@${_.split('@')[0]}\n`
+}
+mentions(teks, mentioned, true)
+conn.groupParticipantsUpdate(from, mentioned, 'remove')
+} else {
+mentions(`Pedidos recebidos, emitidos : @${mentioned[0].split('@')[0]}`, mentioned, true)
+conn.groupParticipantsUpdate(from, mentioned, 'remove')
+}
+break
+
+case 'reviver':
+if (!isGroup) return reply('Esse comando so funciona em grupo, sinto muito')
+if(!isGroupAdmins) return reply('❌ VOCÊ NÃO É ADM PRA UTILIZAR ESTE COMANDO, DESCULPE, QUEM SABE UM DIA 😂')
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('Marque uma mensagem do alvo!')
+add = info.message.extendedTextMessage.contextInfo.participant
+sleep(5000)
+const response2 = await conn.groupParticipantsUpdate(from, [add], "add" )
+reply('Usuario Adicionado de volta ao grupo.')
+break
+
+case 'add':
+if(!SoDono) return reply('Comando Desativado por questões de segurança, estava ocasionandoo Ban do número do bot.')
+if(!isGroupAdmins) return reply('❌ VOCÊ NÃO É ADM PRA UTILIZAR ESTE COMANDO, DESCULPE, QUEM SABE UM DIA 😂')  
+if(q.length < 1) return reply('Quer adicionar uma alma?')  
+try {
+tdt = args[0]
+if(tdt.length < 1) return reply(`Digita o número que deseja add, exemplo: ${prefix}add 558198923680`)
+if (info.message.extendedTextMessage === null || info.message.extendedTextMessage === undefined) {
+adduser = q.replace(new RegExp("[()+-/ +/]", "gi"), "") + `@s.whatsapp.net`
+if(groupMetadata.participants.includes(adduser)) return reply('Esse membro já está no grupo, como você vai adicionar??? ')
+reply('Irei adicionar ele(a) em 5 segundos...')  
+setTimeout(async() => {
+responser = await conn.groupParticipantsUpdate(from, [adduser], "add")
+}, 5000)
+o = responser.participants[0]
+let inv = (Object.values(o))
+if(inv[0].code == 409) return reply('O alvo já está no grupo!')
+if(inv[0].code == 403) return reply('Erro, conta privada do usuário')
+if(inv[0].code == 408) return reply('Erro, usuário acabou de sair')
+if(inv[0].code == 401) return reply('Erro, porque o bot está bloqueado pelo alvo ')
+} else {
+if(groupMetadata.participants.includes(adduser)) return reply('Esse membro já está no grupo, como você vai adicionar??? ')  
+reply('Irei adicionar ele(a) em 5 segundos...')  
+adduser = info.message.extendedTextMessage.contextInfo.participant
+setTimeout(async() => {
+responser =  await conn.groupParticipantsUpdate(from, [adduser], "add")
+}, 5000)
+o = responser.participants[0]
+let inv = (Object.values(o))
+if(inv[0].code == 409) return reply('O alvo já está no grupo! ')
+if(inv[0].code == 403) return reply('Falhou, porque em privado ')
+if(inv[0].code == 408) return reply('Falha, porque o alvo acabou de sair ')
+if(inv[0].code == 401) return reply('Falha, porque o bot está bloqueado pelo alvo ')
+}
+} catch {
+reply('Izi, se não for adicionado provavelmente ele privou só para contatos adicionar ele em grupo.')
+}
+break
+
+case 'ban':
+if (!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if (!isGroupAdmins) return reply('Você precisa ser ADM pra utilizar este comando')
+if (!isBotGroupAdmins) return reply('Bot precisa ser ADM, para executar esta função.')
+if (info.message.extendedTextMessage != undefined || info.message.extendedTextMessage != null) {
+num = info.message.extendedTextMessage.contextInfo.participant
+if(botNumber.includes(num)) return reply('Não sou beste de remover eu mesmo né 🙁, mas estou decepcionado com você')
+if(numerodono.includes(num)) return reply('Não posso remover meu dono 🤧')
+conn.sendMessage(from, {text: `Adeus ${num.split('@')[0]}`, mentions: [num]}, {quoted: info})
+conn.groupParticipantsUpdate(from, [num], 'remove')
+} else { 
+reply('Responda a mensagem da pessoa')
+}
+break
+
+
+//======≠(INFOS/EXECUÇÃO/DONO)≠=========\\
+
+case 'apresentar':
+case 'apr':  
+inff = `Bem vindo(a) ao grupo : ${groupName}
+
+
+👾 •𝑬𝑵𝑻𝑹𝑶𝑼 𝑺𝑬 𝑨𝑷𝑹𝑬𝑺𝑬𝑵𝑻𝑨•
+📸 •F𝜣T𝜣
+👻 •N𝜣ME
+📌 •CID∆DE
+🗓️ •ID∆DE
+⚠️ •LEI∆ ∆S REGR∆S D𝜣 GRUP𝜣
+
+*APROVEITE O GRUPO!*`
+conn.sendMessage(from, {text: inff}, {quoted: selo})
+break
+
+case 'papof':
+case 'regraspp':  
+if(!isGroupAdmins) return reply('Qual foi membro comum?')
+txtz = `【᯽𒋨📷:𝑆𝑒 𝑎𝑝𝑟𝑒𝑠𝑒𝑛𝑡𝑒𝑚 𝑙𝑖𝑥𝑜𝑠🌚»°】
+𒋨·࣭࣪̇🔥ɴᴏᴍᴇ:
+𒋨·࣭࣪̇🔥ɪᴅᴀᴅᴇ:
+𒋨·࣭࣪̇🔥ʀᴀʙᴀ:
+*Aᴘʀᴇsᴇɴᴛᴇ-sᴇ sᴇ ǫᴜɪsᴇʀ.*
+𝙏𝘼𝙂𝙎➭᜔ׂ࠭ ⁸₈⁸|𝟖𝟖𝟖|𝟠𝟠𝟠| ེི⁸⁸⁸
+ ──╌╌╌┈⊰★⊱┈╌╌╌┈─
+❌ ENTROU NO 
+GRUPO INTERAJA, NÃO PRECISAMOS DE ENFEITES,INATIVOS SERAO REMOVIDOS ❌* 
+
+/﹋<,︻╦╤─ ҉ - -----💥 
+/﹋ 🅴 🅱🅴🅼 🆅🅸🅽🅳🅾 🆂🅴🆄🆂 🅵🅸🅻🅷🅾🆂 🅳🅰 🅿🆄🆃🅰`
+conn.sendMessage(from, {text: txtz}, {quoted: selo})
+break
+
+case 'digt':
+bla = `🔥↯𝐉𝐀 𝐄𝐍𝐓𝐑𝐀 𝐃𝐈𝐆𝐈𝐓𝐀𝐍𝐃𝐎 𝚽𝐈 ↯°🌚💕
+           ི⋮ ྀ🌴⏝ ི⋮ ྀ🚸 ི⋮ ྀ⏝🌴 ི⋮ ྀ 
+
+🐼🍧↯𝖠𝖰𝖴𝖨 𝖵𝖮𝖢𝖤̂ 𝖯𝖮𝖣𝖤 𝖲𝖤𝖱↯🍧🐻
+ㅤㅤㅤㅤ  ◍۫❀⃘࣭࣭࣭࣭ٜꔷ⃔໑࣭࣭ٜ⟅◌ٜ🛸◌⟆࣭࣭ٜ໑⃕ꔷ⃘࣭࣭࣭࣭ٜ❀۫◍ི࣭࣭࣭࣭ ུ
+    【✔】ᴘʀᴇᴛᴀ👩🏾‍🦱 【✔】ʙʀᴀɴᴄᴀ👩🏼
+    【✔】ᴍᴀɢʀᴀ🍧【✔】ɢᴏʀᴅᴀ🍿
+    【✔】ᴘᴏʙʀᴇ🪙 【✔】ʀɪᴄᴀ💳
+    【✔】ʙᴀɪᴀɴᴀ💌【✔】ᴍᴀᴄᴏɴʜᴇɪʀᴀ🍁
+    【✔】ᴏᴛᴀᴋᴜ🧧【✔】ᴇ-ɢɪʀʟ🦄
+    【✔】ʟᴏʟɪ🍭    【✔】ɢᴀᴅᴏ🐃
+    【✔】ɢᴀʏ🏳️‍🌈     【✔】ʟᴇsʙɪᴄᴀ✂️
+    【✔】ᴠᴀᴅɪᴀ💄  【✔】ᴛʀᴀᴠᴇᴄᴏ🍌
+                【✔】ɴɪɴɢᴜᴇᴍ ʟɪɢᴀ📵
+. ☪︎ • ☁︎. . •.
+【 𝐕𝐄𝐌 𝐆𝐀𝐋𝐄𝐑𝐀, 𝐒𝐄 𝐃𝐈𝐕𝐄𝐑𝐓𝐈𝐑 𝐄 𝐅𝐀𝐙𝐄𝐑 𝐏𝐀𝐑𝐓𝐄 𝐃𝐀 𝐅𝐀𝐌𝐈𝐋𝐈𝐀.】🥂`
+conn.sendMessage(from, {text: bla}, {quoted: selo})
+break
+
+case 'autoban':
+if (!isGroup) return reply(enviar.msg.adm)
+if (!isGroupAdmins && !SoDono) return reply('Precisa ser Dono')
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+var ind = dbids.indexOf(from)
+if(isAdeusCara) {
+adeuscara[ind].actived = true
+} else {
+adeuscara.push({
+groupId: from,
+actived: true,
+number: []
+})
+}
+fs.writeFileSync('./datab/grupos/adeuscara.json', JSON.stringify(adeuscara, null, 2) + '\n')
+reply(`Ativou com sucesso o recurso de autoban neste grupo✔️`)
+} else if (Number(args[0]) === 0) {
+var ind = dbids.indexOf(from)						
+if(isAdeusCara) {
+adeuscara[ind].actived = false
+} else {
+adeuscara.push({
+groupId: from,
+actived: false,
+number: []
+})
+}
+fs.writeFileSync('./datab/grupos/adeuscara.json', JSON.stringify(adeuscara, null, 2) + '\n')
+reply(`Desativou com sucesso o recurso de autoban neste grupo✔️`)
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'listban':
+if (!isGroup) return reply(enviar.msg.adm)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+var ind = dbids.indexOf(from)
+if(!isAdeusCara) return reply('*Nenhum Número não foi adicionado*')
+teks = '*Números que vou moer na porrada se voltar 😡:*\n'
+for(i=0;i<adeuscara[ind].number.length;++i) {
+teks += `➤ *${adeuscara[ind].number[i]}*\n`
+}
+teks += '*Esses ai vou descer meu martelo do ban 🥵*'
+reply(teks)
+break  
+
+case 'listagp': //case by: Bielzinho-Bot
+if (!SoDono && !isnit && !info.key.fromMe) return reply('```SOMENTE MEU DONO LINDÃO```')
+tdufg = await store.chats.all()
+ingfoo = await getGroup(tdufg)
+teks1 = `*L I S T A  D E  G R U P O S*\n*Total de Grupos* : ${ingfoo.length}\n\n`
+for (let i = 0; i < ingfoo.length; i++){
+teks1 += `• *Nome do Grupo* : ${ingfoo[i].subject}\n• *Id do Grupo* : ${ingfoo[i].id}\n• *Criado* : ${moment(`${ingfoo[i].creation}` * 1000).tz('America/Sao_Paulo').format('DD/MM/YYYY HH:mm:ss')}\n• *Total de Membros* : ${ingfoo[i].participants.length}\n\n`
+}
+reply(teks1)
+break
+
+case 'addautorm':
+case 'addautoban':
+case 'listanegra':  
+if (!isGroup) return reply(enviar.msg.adm)
+if (!isGroupAdmins && !SoDono) return reply('Precisa ser Dono')
+if (args.length < 1) return reply('Cade o número?')
+var ind = dbids.indexOf(from)
+if(isAdeusCara) {
+listng = q.replace(new RegExp("[()+-/ +/]", "gi"), "")  
+var numind = adeuscara[ind].number.indexOf(listng)
+if(numind >= 0) return reply('*Esse Número ja esta incluso*')
+adeuscara[ind].number.push(listng)
+} else {
+listng = q.replace(new RegExp("[()+-/ +/]", "gi"), "")    
+adeuscara.push({
+groupId: from,
+actived: false,
+number: [listng]
+})
+}
+fs.writeFileSync('./datab/grupos/adeuscara.json', JSON.stringify(adeuscara, null, 2) + '\n')
+reply(`*Número adicionado a lista de autoban*`)
+break
+
+case 'delremover':
+case 'delautorm':  
+case 'delautoban': 
+case 'tirardalista':  
+if (!isGroup) return reply(enviar.msg.adm)
+if (!isGroupAdmins && !SoDono) return reply('Precisa ser Dono')
+if (args.length < 1) return reply('Diga o numero sem espaço, + ou traço')
+if (isNaN(args[0])) return reply('Diga o numero sem espaço, + ou traço')
+var ind = dbids.indexOf(from)
+if(!isAdeusCara) return reply('*Nenhum Número não foi adicionado*')
+var numind = adeuscara[ind].number.indexOf(args[0])
+if(numind < 0) return reply('*Esse número não está incluso*')
+adeuscara[ind].number.splice(numind, 1)
+fs.writeFileSync('./datab/grupos/adeuscara.json', JSON.stringify(adeuscara, null, 2) + '\n')
+reply(`*Número removido a lista de autoban*`)
+break
+
+case 'banghost':
+case 'banghosts':  
+if(!SoDono && !isnit) return reply("COMANDO DESATIVADO POR QUESTÕES DE SEGURANÇA, PODE CAUSAR BANIMENTO NO NÚMERO DO BOT.")
+if(!isGroup) return reply(enviar.msg.grupo)
+if(groupIdscount.indexOf(from) >= 0) {
+for(let obj of groupMembers) {
+if(numbersIds.indexOf(obj.id) >=0) { 
+var indnum = numbersIds.indexOf(obj.id)
+if(countMessage[ind].numbers[indnum].messages <= args[0]) {
+if(groupAdmins.includes(obj.id)) {
+mentions(`@${obj.id} ta liberado da inspeção por ser admin`, [obj.id], true)
+} else {
+conn.groupParticipantsUpdate(from, [obj.id], 'remove')
+}
+}
+} else {
+if(groupAdmins.includes(obj.id)) {
+mentions(`@${obj.id} ta liberado da inspeção por ser admin`, [obj.id], true)
+} else {
+conn.groupParticipantsUpdate(from, [obj.id], 'remove')
+}
+}
+}
+}
+break
+
+case 'correio':
+txt = body.slice(10)
+txtt = args.join(" ")
+txt1 = txt.split("/")[0];
+txt2 = txtt.split("/")[1];
+if(!txt) return reply('Cade o número da pessoa?')
+if(!txtt) return reply('Cade a mensagem do correio??')
+if(txt.includes("-")) return reply('Tem que ser o número junto sem +, e não pode tá separado da /')
+if(txtt.includes("+")) return reply('Tem que ser o número junto sem +, e não pode tá separado da /')
+if(!txtt.includes("/")) return reply(`Exemplo: ${prefix}correio 558198923680/Oi Amor, sdds`)
+bla = 
+`╭┄━┄━┄━┄━┄━╮
+┞┧ ⸙. ͎۪۫          💌  ː͡₊ꞋꞌꞋꞌ
+┞┧Correio anônimo. 
+┞┧Msg: ${txt2}
+┞┧
+╰┄━┄━┄━┄━┄━╮`
+conn.sendMessage(`${txt1}@s.whatsapp.net`, {text: bla})
+break
+
+case 'nome-bot':
+if (!SoDono  && !isnit && !info.key.fromMe) return reply(enviar.msg.donosmt)  
+setting.NickDono = args.join(" ") 
+fs.writeFileSync('./dono/settings.json', JSON.stringify(setting, null, '\t'))
+reply(`O nome do seu bot foi alterado com sucesso para : ${setting.NomeDoBot}`)
+break
+
+case 'nick-dono':
+if (!SoDono  && !isnit && !info.key.fromMe) return reply(enviar.msg.donosmt)  
+setting.NickDono = args.join(" ")
+fs.writeFileSync('./dono/settings.json', JSON.stringify(setting, null, '\t'))
+reply(`O Nick Do Dono foi configurado para : ${setting.NickDono}`)
+break
+
+case 'numero-dono':
+if (!SoDono && !isnit && !info.key.fromMe) return reply(enviar.msg.donosmt)  
+setting.numerodono = args[0]
+fs.writeFileSync('./dono/settings.json', JSON.stringify(setting, null, '\t'))
+reply(`O número dono foi configurado com sucesso para : ${setting.numerodono}`)
+break
+
+case 'prefixo-bot':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !info.key.fromMe) return reply(enviar.msg.donosmt)
+setting.prefix = args[0]
+fs.writeFileSync('./dono/settings.json', JSON.stringify(setting, null, '\t'))
+reply(`O prefixo foi alterado com sucesso para: ${setting.prefix}`)
+break
+
+case 'setprefix':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !info.key.fromMe) return reply(enviar.msg.donosmt)
+setting.prefix = args[0]
+fs.writeFileSync('./dono/settings.json', JSON.stringify(setting, null, '\t'))
+reply(`O prefixo foi alterado com sucesso para: ${setting.prefix}`)
+break
+
+case 'fotomenu':
+case 'fundomenu':
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if(!isQuotedImage) return reply("Marque uma imagem")
+reply('Você deve marcar uma imagem 2 vez com esse comando..')
+if ((isMedia && !info.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
+boij = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+imagem = await downloadContentFromMessage(boij, 'image')
+owgi = Buffer.from([])
+for await(const send of imagem) { owgi = Buffer.concat( [ owgi, send ] ) }
+res = await upload(owgi)
+logoslink.logo = logo
+logo = res
+fs.writeFileSync('./logos/logos.json', JSON.stringify(logoslink, null, '\t'))
+reply(`A foto do menu foi alterada com sucesso para: ${logo}`)
+} else {
+reply(`Mande uma imagem/vídeo com a legenda ${prefix + command}`)
+}
+break
+
+case 'setprefixs':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+prefix = args[0]
+setting.prefix = prefix
+fs.writeFileSync('./dono/settings.json', JSON.stringify(setting, null, '\t'))
+reply(`O prefixo foi alterado com sucesso para: ${prefix}`)
+break
+
+case 'nomegp':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+await conn.groupUpdateSubject(from, `${body.slice(9)}`)
+await conn.sendMessage(from, {text: 'Sucesso, alterou o nome do grupo'}, {quoted: info})
+break
+
+case 'fotobot':
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if (!isQuotedImage) return reply(`Envie fotos com legendas ${prefix}fotobot ou tags de imagem que já foram enviadas`)
+buff = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage, 'image')
+await conn.updateProfilePicture(botNumber, buff)
+reply('Obrigado pelo novo perfil😗')
+break
+
+case 'clonar':
+if (!SoDono  && !isnit && !issupre && !ischyt) return reply('Você quem é o proprietário?')
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (args.length < 1) return reply('Marque a pessoa que você quer clonar\n\n*EXEMPLO:* clone @')
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('Tag cvk')
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid[0]
+let { jid, id, notify } = groupMembers.find(x => x.id === mentioned)
+try {
+pp = await conn.profilePictureUrl(id)
+buffer = await getBuffer(pp)
+conn.updateProfilePicture(botNumber, buffer)
+mentions(`Foto do perfil atualizada com sucesso, usando a foto do perfil @${id.split('@')[0]}`, [id], true)
+} catch (e) {
+reply('Putz, deu erro, a pessoa deve estar sem foto 😔')
+}
+break
+
+case 'leveling':
+if (!isGroup) return reply('Só em Grupo')
+if (!isGroupAdmins) return reply('Você precisa ser adm')
+if (args.length < 1) return reply('Ative pressione 1, Desativar pressione 0')
+if (Number(args[0]) === 1) {
+if (isLevelingOn) return reply('*O recurso de nível já estava ativo antes*')
+_leveling.push(from)
+fs.writeFileSync('./datab/usuarios/leveling.json', JSON.stringify(_leveling))
+reply(enviar.levelon) 
+} else if (Number(args[0]) === 0) {
+if (!isLevelingOn) return reply(`O recurso de level já está Desativado neste grupo.`)
+_leveling.splice(from, 1)
+fs.writeFileSync('./datab/usuarios/leveling.json', JSON.stringify(_leveling))
+reply(enviar.leveloff)
+} else {
+reply('「* Adicionar parâmetro 1 ou 0 ')
+}
+break
+
+case 'ganharlevel':
+if(!SoDono) return reply("Você não é dono para utilizar este comando...")
+addLevelingLevel(sender, 10)
+reply("Olá chefe, foi adicionado 10 Level para você 🙂")
+break
+
+case 'ganharxp':
+if(!SoDono) return reply("Você não é dono para utilizar este comando...")  
+addLevelingXp(sender, 5000)
+reply("Foi adicionado 5000 mil de XP para você 🙂")
+break
+
+case 'level':
+if (!isLevelingOn) return reply(`*O recurso de level está Desativado, para ativar consulte algum adm e mande ele digitar : ${prefix}leveling 1`)
+if (!isGroup) return reply(enviar.msg.grupo)
+const userLevel = getLevelingLevel(sender)
+const userXp = getLevelingXp(sender)
+if (userLevel === undefined && userXp === undefined) return reply(enviar.levelnol)
+sem = sender.replace('@s.whatsapp.net','')
+                resul = `     
+            ◪ *REGISTRO* ◪                                                                  
+            
+  ├─ ❏ *NICK* : ${pushname}
+  ├─ ❏ *NÚMERO* : ${sender.split("@")[0]}
+  ├─ ❏ *PATENTE* : ${patt}               
+  ├─ ❏ *XP* : ${userXp}
+  └─ ❏ *LEVEL* : ${userLevel}`
+await conn.sendMessage(from, {text: resul}, {quoted: info})
+.catch(async (err) => {
+console.error(err)
+await reply(`Error!\n${err}`)
+})
+break
+
+case 'bcgp':
+case 'bcgc':  
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (args.length < 1) return reply('.......')
+fgp = await groupMembers
+var nomor = info.participant
+if (isMedia && !info.message.videoMessage || isQuotedImage) {
+encmedia = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage, 'image')
+for (let _ of fgp) {
+conn.sendMessage(_.id, {image: buff}, {caption: `*「 TRANSMISSÃO 」*\n\nGrupo: ${groupName}\n Número: wa.me/${(sender.split('@')[0])}\nMensagem : ${body.slice(6)}`})
+}
+reply('')
+} else {
+for (let _ of fgp) {
+sendMess(_.id, `*「 TRANSMISSÃO 」*\n\nGrupo : ${groupName}\n Número : wa.me/${(sender.split('@')[0])}\nMensagem : ${body.slice(6)}`)
+}
+reply('Grupo de transmissão bem-sucedido')
+} 
+break
+
+case 'dono1':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+dono1 = body.slice(8)
+nescessario.dono1 = dono1
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`Agora contem um segundo dono(a) alterado com sucesso para: ${dono1}`)
+break
+
+case 'dono2':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+dono2 = body.slice(8)
+nescessario.dono2 = dono2
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`Agora contem um segundo dono(a) alterado com sucesso para: ${dono2}`)
+break
+
+case 'dono3':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+dono3 = body.slice(8)
+nescessario.dono3 = dono3
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`Agora contem um terceiro dono(a) alterado com sucesso para: ${dono3}`)
+break
+
+case 'dono4':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+dono4 = body.slice(8)
+nescessario.dono4 = dono4
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`Agora contem um quarto dono(a) alterado com sucesso para: ${dono4}`)
+break
+
+case 'dono5':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+dono5 = body.slice(8)
+nescessario.dono5 = dono5
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`Agora contem um quinto dono(a) alterado com sucesso para: ${dono5}`)
+break
+
+case 'dono6':
+if (args.length < 1) return
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+dono6 = body.slice(8)
+nescessario.dono6 = dono6
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`Agora contem um quinto dono(a) alterado com sucesso para: ${dono6}`)
+break
+
+case 'getquoted':
+reply(JSON.stringify(info.message.extendedTextMessage.contextInfo, null, 3))
+break
+
+case 'donos':
+p = `[ Lista de donos do bot ${setting.NomeDoBot} ] 
+
+Dono Oficial do bot: ${setting.numerodono}
+
+- [ 1 ] ${nescessario.dono1}\n- [ 2 ] ${nescessario.dono2}\n- [ 3 ] ${nescessario.dono3}\n- [ 4 ] ${nescessario.dono4}\n- [ 5 ] ${nescessario.dono5}\n- [ 6 ] ${nescessario.dono6} `
+reply(p)
+break
+
+case 'online':   
+case 'onlines':  //case by: ᬊ͜͡𝑩𝑰𝑬𝑳𝒁𝑰𝑵𝑯𝑶.𝑬𝑿𝑬ᵒᶠᶜ
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono && !isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+let ido = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : from
+let online = [...Object.keys(store.presences[ido]), conn.user.id]
+conn.sendMessage(from, {text: 'Pessoas online do gp:\n\n' + online.map(v => '• @' + v.replace(/@.+/, '')).join`\n`}, {quoted: info})
+break
+
+case 'admins':
+case 'listadmins':  
+case 'listaadmins':   
+if (!isGroup) return reply(enviar.msg.grupo)
+ytb = `Lista de admins do grupo *${groupMetadata.subject}*\nTotal : ${groupAdmins.length}\n\n`
+no = 0
+for (let admon of groupAdmins) {
+no += 1
+ytb += `[${no.toString()}] @${admon.split('@')[0]}\n`
+}
+mentions(ytb, groupAdmins, true)
+break
+
+case 'criartabela': case 'criartbl': case 'criartab':
+if(!isGroupAdmins || !SoDono) return 
+msgz = args.join(" ")
+
+msgtmpol = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+
+datinhaofc = moment.tz('America/Sao_Paulo').format('DD/MM/YY');
+
+var blarpty = {
+Horario: msgtmpol, 
+Data: datinhaofc, 
+Tabela: msgz
+}
+
+if(!fs.existsSync(`./func/tabela/tabela-${from}.json`)) {
+fs.writeFileSync(`./func/tabela/tabela-${from}.json`,
+JSON.stringify(blarpty, null, 2));
+} else {
+if (fs.existsSync("./func/tabela/tabela-" + from + ".json")) {
+fs.unlinkSync("./func/tabela/tabela-" + from + ".json");
+fs.writeFileSync(`./func/tabela/tabela-${from}.json`,
+JSON.stringify(blarpty, null, 2));
+}
+}
+reply(`Tabela do grupo foi criada com sucesso..`)
+break
+
+case 'tabelagp': case 'tabeladogp': case 'tabelinha': 
+if(!fs.existsSync(`./func/tabela/tabela-${from}.json`)) {
+reply(`Cade a tabela, cria ela com o comando\nExemplo : ${prefix}criartabela lindas do grupo : e etc ..`)
+}
+const tabelagpofc = JSON.parse(fs.readFileSync(`./func/tabela/tabela-${from}.json`)); 
+
+blity = `- ⏰ Horário que criou a Tabela : ${tabelagpofc.Horario}\n\n- 🗓️ Data que criou a Tabela : ${tabelagpofc.Data}\n\n - Tabela : ${tabelagpofc.Tabela}`
+
+conn.sendMessage(from, {text: blity}, {quoted: info})
+break
+
+case 'ausente': case 'off': case 'afk':
+if(!SoDono) return reply("So o meu criador pode usar esse comando amg")
+msgtmp = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+nmrdnofc = setting.numerodono.replace(new RegExp("[()+-/ +/]", "gi"), "")
+msgz = args.join(" ")
+
+var catmsgaus = {
+Ausente_Desde: msgtmp, 
+Motivo_Da_Ausência: msgz
+}
+
+if(!fs.existsSync(`./func/afk/afk-@${nmrdnofc}.json`)) {
+fs.writeFileSync(`./func/afk/afk-@${nmrdnofc}.json`,
+JSON.stringify(catmsgaus, null, 2));
+} else {
+if (fs.existsSync("./func/afk/afk-@" + nmrdnofc + ".json")) {
+fs.unlinkSync("./func/afk/afk-@" + nmrdnofc + ".json");
+fs.writeFileSync(`./func/afk/afk-@${nmrdnofc}.json`,
+JSON.stringify(catmsgaus, null, 2));
+}
+}
+reply(`Mensagem de ausência criada com sucesso...`)
+break
+
+case 'ativo': case 'on': case 'voltei':
+if(!SoDono) return reply("Comando especial para o dono.")
+nmrdnofc = setting.numerodono.replace(new RegExp("[()+-/ +/]", "gi"), "")
+if (fs.existsSync("./func/afk/afk-@" + nmrdnofc + ".json")) {  
+fs.unlinkSync("./func/afk/afk-@" + nmrdnofc + ".json");
+reply("Bem vindo de volta, agora você está online 🙂")
+} else {
+reply("Você não registrou nenhuma mensagem de ausência...")
+}
+break
+
+case 'serpremium':
+case 'serprem':  
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+premium.push(`${setting.numerodono}@s.whatsapp.net`)
+fs.writeFileSync('./datab/usuarios/premium.json', JSON.stringify(premium))
+reply(`Pronto ${setting.numerodono} você foi adicionado na lista premium.`)
+break
+
+case 'addpremium':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return 
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+premium.push(`${mentioned}`)
+fs.writeFileSync('./datab/usuarios/premium.json', JSON.stringify(premium))
+susp = `👑@${mentioned[0].split('@')[0]} foi adicionado à lista de usuários premium com sucesso👑`
+mentions(`${susp}`, mentioned, true)   
+break 
+
+case 'delpremium':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return  reply(enviar.msg.donosmt)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return 
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+let position = false
+Object.keys(premium).forEach((i) => {
+if (premium[i] === mentioned) {
+position = i
+}
+})
+if (position !== false) {
+premium.splice(position, 1)
+fs.writeFileSync('./datab/usuarios/premium.json', JSON.stringify(premium))
+}
+susp = `✖@${mentioned[0].split('@')[0]} foi removido da lista de usuários premium✖`
+mentions(`${susp}`, mentioned, true)   
+break 
+
+case 'limpar':
+if(!isGroup) return reply(enviar.msg.grupo)
+if(!isGroupAdmins) return reply(enviar.msg.adm)
+clear = `🗑️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🗑️\n❲❗❳ *Lɪᴍᴘᴇᴢᴀ ᴅᴇ Cʜᴀᴛ Cᴏɴᴄʟᴜɪ́ᴅᴀ* ✅`
+if(verificado === true) {
+conn.sendMessage(from, {text: clear}, {quoted: selo, contextInfo : { forwardingScore: 500, isForwarded:true}})
+} else {
+conn.sendMessage(from, {text: clear}, {quoted: info, contextInfo : { forwardingScore: 500, isForwarded:true}})  
+}
+break
+case 'clearchat':
+case 'limparchat':  
+case 'limparmsg':  
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+await conn.chatModify({ clear: { message: { id: String, fromMe: true } } }, from, [])
+reply("Chat limpo")
+break
+
+case 'addpalavra':
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if (args.length < 1) return reply( `Use assim : ${prefix + command} [palavrão]. exemplo ${prefix + command} puta`)
+const bw = body.slice(12)
+palavra.push(bw)
+fs.writeFileSync('./datab/grupos/palavras.json', JSON.stringify(palavra))
+reply('Palavrão adicionado com sucesso!')
+await limitAdd(sender)
+break
+
+case 'delpalavra':
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if (args.length < 1) return reply( `Use assim : ${prefix + command} [palavrão]. exemplo ${prefix + command} puta`)
+let dbw = body.slice(12)
+palavra.splice(dbw)
+fs.writeFileSync('./datab/grupos/palavras.json', JSON.stringify(palavra))
+reply('Palavrão removido da lista com sucesso!')
+await limitAdd(sender)
+break
+
+case 'listapalavrão': case 'listapalavra':
+case 'listpalavra':
+let lbw = `Esta é a lista de palavrão\nTotal : ${palavra.length}\n`
+for (let i of palavra) {
+lbw += `➸ ${i.replace(palavra)}\n`
+}
+await reply(lbw)
+await limitAdd(sender)
+break 
+
+case 'legendabv':  
+if(!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if(!isGroupAdmins) return reply(`Só ADM pode utilizar este comando.`)
+if(args.length < 1) return reply('*Escreva a mensagem de boas-vindas*')
+teks = body.slice(11)
+if(isWelcomed) {
+var ind = groupIdWelcomed.indexOf(from)
+welcome_group[ind].msg = teks
+fs.writeFileSync('./datab/grupos/welcomegp.json', JSON.stringify(welcome_group, null, 2) + '\n')
+reply('Mensagem de boas vindas alteradas com sucesso!')
+} else {
+var json = {
+id: from,
+msg: teks
+}
+welcome_group.push(json)
+fs.writeFileSync('./datab/grupos/welcomegp.json', JSON.stringify(welcome_group, null, 2) + '\n')
+reply('*Mensagem de boas vindas criada com sucesso!*')
+}
+break
+
+case 'legendasaiu':
+if(!isGroup) return reply(`Só em grupo pode utilizar este comando.`)
+if(!isGroupAdmins) return reply(`Só ADM pode utilizar este tipo de Comando.`)
+if(args.length < 1) return reply('*Escreva a mensagem de saída*')
+teks = body.slice(13)
+if(isByed) {
+var ind = groupIdBye.indexOf(from)
+bye_group[ind].msg = teks
+fs.writeFileSync('./datab/grupos/byegp.json', JSON.stringify(bye_group, null, 2) + '\n')
+reply('mensagem de saída alteradas com sucesso!')
+} else {
+var json = {
+id: from,
+msg: teks
+}
+bye_group.push(json)
+fs.writeFileSync('./datab/grupos/byegp.json', JSON.stringify(bye_group, null, 2) + '\n')
+reply('Mensagem de saída criada com sucesso!')
+}
+break
+
+case 'legendabv2':  
+if(!isGroup) return reply('Este comando só deve ser utilizado em Grupo.')
+if(!isGroupAdmins) return reply(`Só ADM pode utilizar este comando.`)
+if(args.length < 1) return reply('*Escreva a mensagem de boas-vindas*')
+teks = body.slice(12)
+if(isWelcomed2) {
+var ind = groupIdWelcomed2.indexOf(from)
+welcome_group2[ind].msg = teks
+fs.writeFileSync('./datab/grupos/welcomegp2.json', JSON.stringify(welcome_group2, null, 2) + '\n')
+reply('*Mensagem de boas vindas2 alteradas com sucesso!*')
+} else {
+var json = {
+id: from,
+msg: teks
+}
+welcome_group2.push(json)
+fs.writeFileSync('./datab/grupos/welcomegp2.json', JSON.stringify(welcome_group2, null, 2) + '\n')
+reply('*Mensagem de boas vindas2 criada com sucesso!*')
+}
+break
+
+case 'legendasaiu2':
+if(!isGroup) return reply(`Só em grupo pode utilizar este comando.`)
+if(!isGroupAdmins) return reply(`Só ADM pode utilizar este tipo de Comando.`)
+if(args.length < 1) return reply('*Escreva a mensagem de saída*')
+teks = body.slice(14)
+if(isByed) {
+var ind = groupIdBye.indexOf(from)
+bye_group2[ind].msg = teks
+fs.writeFileSync('./datab/grupos/byegp2.json', JSON.stringify(bye_group2, null, 2) + '\n')
+reply('*Mensagem de saída2 alteradas com sucesso!*')
+} else {
+var json = {
+id: from,
+msg: teks
+}
+bye_group2.push(json)
+fs.writeFileSync('./datab/grupos/byegp2.json', JSON.stringify(bye_group2, null, 2) + '\n')
+reply('*Mensagem de saída2 criada com sucesso!*')
+}
+break
+
+case 'deletar':  case 'apagar':  case 'delete':   case 'del':  case 'd':
+if (!isGroup)return reply(enviar.msg.grupo)
+if (!SoDono && !isGroupAdmins && !isPremium) return reply(enviar.msg.adm)
+conn.sendMessage(from, { delete: { remoteJid: from, fromMe: true, id: info.message.extendedTextMessage.contextInfo.stanzaId, participant: sender }})
+.catch((err) => { 
+console.log(err)
+reply('A mensagem não foi enviado pelo bot...')
+})
+break
+
+case 'fundobemvindo':
+case 'fundobv':  
+if (!SoDono  && !isnit && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if(!isQuotedImage) return reply("Marque uma imagem")
+reply('Você deve marcar uma imagem com esse comando, se não for de primeira, tente novamente, ok? ')
+if ((isMedia && !info.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
+boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+owgi = await getFileBuffer(boij, 'image')
+res = await upload(owgi)
+fundo1 = res
+nescessario.fundo1 = fundo1
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`A imagem de bem vindo foi alterado com sucesso para: ${fundo1}`)
+}
+break
+
+case 'fundosaiu':
+if (!SoDono  && !isnit && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if(!isQuotedImage) return reply("Marque uma imagem")
+reply('Você deve marcar uma imagem com esse comando, se não for de primeira, tente novamente, ok? ')
+if ((isMedia && !info.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
+boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+owgi = await getFileBuffer(boij, 'image')
+res = await upload(owgi)
+fundo2 = res
+nescessario.fundo2 = fundo2
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+reply(`A imagem de saiu foi alterado com sucesso para: ${fundo2}`)
+}
+break
+
+case 'antiligar':
+case 'antiligacao':  
+case 'antiligação':  
+try {
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isAnticall) return reply('Ja esta ativo')
+anticall.push('Ativado')
+fs.writeFileSync('./datab/usuarios/anticall.json', JSON.stringify(anticall))
+reply('Ativou com sucesso o recurso de antiligação no bot✔️')
+} else if (Number(args[0]) === 0) {
+if (!isAnticall) return reply('Ja esta Desativado')  
+fs.writeFileSync('./datab/usuarios/anticall.json', JSON.stringify([]))
+reply('Desativou com sucesso o recurso de antiligação no bot✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+} catch {
+reply('Falha ao ativar')
+}
+break
+
+case 'antipvon':
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe ) return await reply('Apenas Meu Dono')
+if (banChats) return await reply('já está ativo o modo antipv')
+banChats = true
+nescessario.banChats = banChats
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+await conn.sendMessage(from, {text: "*Sucesso alterado para modo antipv, pv não poderá ser utilizado"})
+break
+
+case 'antipvoff':
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return await reply('Apenas meu dono o owner')
+if (!banChats) return await reply('Nao estava ativado ainda')
+banChats = false
+nescessario.banChats = banChats
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+await conn.sendMessage(from, {text: "*Sucesso modo antipv desligado, pv liberado."})
+break
+
+case 'verificadoon':
+case 'vron':  
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe ) return await reply('Apenas Meu Dono')
+if (verificado === true) return await reply('Ja esta com verificado ativado em tudo.')
+verificado = true
+nescessario.verificado = verificado
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+await conn.sendMessage(from, {text: "*VERIFICADO ATIVADO EM TODOS MENUS, INCLUINDO ALGUNS COMANDOS.*"})
+break
+
+case 'verificadooff':
+case 'vroff':  
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return await reply('Apenas meu dono o owner')
+if (verificado === false) return await reply('Ja esta com verificado Desativado em tudo.')
+verificado = false
+nescessario.verificado = verificado
+fs.writeFileSync('./dono/nescessario.json', JSON.stringify(nescessario, null, '\t'))
+await conn.sendMessage(from, {text: "*VERIFICADO DESATIVADO EM TODOS MENUS, INCLUINDO ALGUNS COMANDOS.*"})
+break
+
+case 'antipv':
+if (!SoDono) return reply(`Apenas dono pode ativar/desativar essa função..`)
+if (args.length < 1) return reply('1 pra ligar / 0 pra desligar')
+if (Number(args[0]) === 1) {
+if (isAntiPv) return reply('Ja esta ativo')
+antipv.push('Ativado')
+fs.writeFileSync('./datab/usuarios/antipv.json', JSON.stringify(antipv))
+reply('🌀 Ativou com sucesso o recurso de Anti Privado 📝')
+} else if (Number(args[0]) === 0) {
+if (!isAntiPv) return reply('Ja esta Desativado')
+pesquisar = 'Ativado'
+processo = antipv.indexOf(pesquisar)
+while(processo >= 0){
+antipv.splice(processo, 1)
+processo = antipv.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/usuarios/antipv.json', JSON.stringify(welkom))
+reply('‼️ Desativou com sucesso o recurso De ANTIPV✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'block':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return  reply(enviar.msg.donosmt)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return 
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+ban.push(`${mentioned}`)
+fs.writeFileSync('./datab/usuarios/banned.json', JSON.stringify(ban))
+susp = `🚫@${mentioned[0].split('@')[0]} foi banido e não poderá mais usar os comandos do bot🚫`
+mentions(`${susp}`, mentioned, true)   
+break
+
+case 'unblock':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return  reply(enviar.msg.donosmt)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return 
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+ban.splice(`${mentioned}`)
+fs.writeFileSync('./datab/usuarios/banned.json', JSON.stringify(ban))
+susp = `❎@${mentioned[0].split('@')[0]} foi desbanido e poderá novamente usar os comandos do bot❎`
+mentions(`${susp}`, mentioned, true)   
+break
+
+case 'blocklist':
+jrc = 'ESTA É A LISTA DE NÚMEROS BLOQUEADOS :\n'
+for (let benn of ban) {
+jrc += `~> @${benn.split('@')[0]}\n`
+}
+jrc += `Total : ${ban.length}`
+conn.sendMessage(from, jrc.trim(), extendedText, {quoted: info, contextInfo: {"mentionedJid": ban}})
+break
+
+case 'acess':
+if (!SoDono && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+teks = body.slice(7)
+exec(teks, (err, stdout) => {
+if (err) return conn.sendMessage(from, {text: `root@SUKUNA-BOT:~ ${err}`}, {quoted: info})
+if (stdout) {
+conn.sendMessage(from, {text: stdout})
+}
+})
+break
+
+case 'bangp':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+if (isBanchat) return reply(`Este grupo ja está banido`)
+bancht.push(from)
+fs.writeFileSync('./datab/grupos/banchat.json', JSON.stringify(bancht))
+reply(`Grupo banido com sucesso`)
+break
+
+case 'unbangp':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe) return reply(enviar.msg.donosmt)
+let cur = bancht.indexOf(from)
+bancht.splice(cur, 1)
+fs.writeFileSync('./datab/grupos/banchat.json', JSON.stringify(bancht))
+reply(`Grupo desbanido...`)
+break
+
+case 'limitec':
+if(!SoDono  && !isnit && !ischyt) return reply(enviar.msg.donosmt)
+if (args.length < 1) return
+if (!setTimeout && !info.key.fromMe) return reply(enviar.msg.donosmt)
+limitefl = args.join(" ")
+limitefll.limitefl = limitefl
+fs.writeFileSync('./datab/usuarios/flood.json', JSON.stringify(limitefll, null, '\t'))
+reply(`${limitefl} foi adicionado como limite de antiflood `)
+break
+
+case 'speed':
+case 'ping':
+if (!SoDono && !isGroupAdmins) return reply('somente adms e dono pode usar')
+const varping = speed();
+const ping = speed() - varping
+uptime = process.uptime()
+buttons = [
+  {buttonId: `${prefix} help`, buttonText: {displayText: '𝐌𝐄𝐍𝐔/𝐁𝐎𝐓'}, type: 1}]
+buttonMessage = {
+    image: {url: `https://rafinha043-api.herokuapp.com/api/maker/texto?ping=${ping.toFixed(4)}&apikey=key-ale666`},
+    caption: ` Tempo Ativo: ${kyun(uptime)}\n\nGrupo: ${groupName}\n\ndmins :${groupAdmins.length}\n\nMembros :${groupMembers.length}\n\nSolicitado por : ${pushname}\n\nNumero : ${sender.split("@")[0]}`,
+    footerText: 'Hello World',
+    buttons: buttons,
+    headerType: 4
+}
+sendMsg = await conn.sendMessage(from, buttonMessage)
+break
+
+case 'speed1':
+case 'ping1':
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+hora1 = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+
+bla = `
+┌─────────────────
+│ 
+│ Velocidade Do Bot + Informações 
+│ 
+┌─────────────────┐
+│ 
+│ Velocidade : ${String(r.toFixed(3))}
+│ 
+┌─────────────┐
+│ Tempo Ativo : 
+│ [ ${kyun(uptime)} ] 
+└───────────
+│ 
+│ Data : ${date} 
+│ 
+│ Plataforma Ativa : Heroku
+│ 
+│ Grupo : ${groupName} 
+│ 
+│ Solicitou Comando : ${pushname}
+│ 
+└───────────〔 ${hora1} 〕
+`
+
+await conn.sendMessage(from, {text: bla}, {quoted: selo})
+break
+
+
+case 'gtts':
+if (args.length < 1) return conn.sendMessage(from,{text: `Cade o texto?, digite algo Exemplo:\n${prefix}gtts PT Oi`}, {quoted: info})
+const gtts = require('./armor/gtts')(args[0])
+if (args.length < 2) return conn.sendMessage(from, {text: 'Falta colocar o código do idioma!'}, {quoted: info})
+dtt = body.slice(8)
+ranm = getRandom('.mp3')
+rano = getRandom('.ogg')
+if(dtt.length > 200) return reply('Para reduzir spam o máximo de letras permitidas são 200!')
+gtts.save(ranm, dtt, function() {
+exec(`ffmpeg -i ${ranm} -ar 48000 -vn -c:a libopus ${rano}`, (err) => {
+fs.unlinkSync(ranm)
+buffer = fs.readFileSync(rano)
+conn.sendMessage(from, {audio: buffer, ptt:true}, {quoted: info})
+fs.unlinkSync(rano)
+})
+})
+break
+
+case 'tagme':
+members_id = []  
+const tagme = `@${sender.split("@")[0]} ✔️`
+members_id.push(sender.split("@s.whatsapp.net"))
+await mentions(tagme, members_id, true)
+break
+
+case 'blockcmd':
+if(!SoDono  && !isnit) return reply(enviar.msg.donosmt)
+tp = args.join(" ")
+if(tp.includes("blockcmd blockcmd") || (tp.includes("blockcmd  blockcmd"))) return reply(`Tá louco maluco?, Quer banir o comando de bloquear comando?`)
+if(getComandoBlock(from).includes(args[0]))return reply('Este comando já está blockeado')
+addComandos(from, args[0])
+reply(`O comando ${args[0]} Foi blockeado`)
+break
+
+case 'unblockcmd':
+if(!SoDono  && !isnit) return reply(enviar.msg.donosmt)
+tp = args.join(" ")
+if(tp.includes("blockcmd unblockcmd") || (tp.includes("blockcmd  unblockcmd"))) return reply(`Tá louco maluco?, Quer banir o comando de desbloquear comando?`)  
+if(!getComandoBlock(from).includes(args[0]))return reply('Este comando já está  desbloqueado')
+deleteComandos(from, args[0])
+reply(`O comando ${args[0]} Foi desblockeado`)
+break
+
+case 'listacomandos':
+tkks = '╭─*「 *COMANDOS BLOCK* 」\n'
+for (let V of getComandoBlock(from)) {
+tkks += `│+  ${V}\n`
+}
+tkks += `│+ Total : ${getComandoBlock(from).length}\n╰──────*「 *${NomeDoBot}* 」*────`
+await conn.sendMessage(from, tkks.trim(), extendedText, {quoted: info})
+break
+
+case 'avalie':
+const avalie = body.slice(8)
+if (args.length <= 1) return reply(`Exemplo: ${prefix}avalie "Bot muito bom, parabéns. "`)
+if (args.length >= 400) return conn.sendMessage(from, {text: 'Máximo 400 caracteres'}, {quoted: info})
+var nomor = info.participant
+tdptls = `[ Avaliação ]\nDe: wa.me/${sender.split("@s.whatsapp.net")[0]}\n: ${avalie}`
+var options = {
+text: tdptls,
+contextInfo: {
+mentionedJid: [sender]
+},
+}
+await conn.sendMessage(`${setting.numerodono}@s.whatsapp.net`, {text: options}, {quoted: info})
+reply("mensagem enviada ao meu dono, obrigado pela avaliação, iremos melhorar a cada dia.")
+break
+
+case 'bug':
+const bug = body.slice(5)
+if (args.length <= 1) return reply(`Exemplo: ${prefix}bug "ocorreu um erro no comando sticker"`)
+if (args.length >= 800) return conn.sendMessage(from, {text: 'Máximo 800 caracteres'}, {quoted: info})
+var nomor = info.participant
+teks1 = `[ Problema ]\nDe: wa.me/${sender.split("@s.whatsapp.net")[0]}\nErro ou bug: ${bug}`
+var options = {
+text: teks1,
+contextInfo: {
+mentionedJid: [sender]
+},
+}
+await conn.sendMessage(`${setting.numerodono}@s.whatsapp.net`, {text: options}, {quoted: info})
+reply("mensagem enviada ao meu dono, se enviar muitas mensagens repetida por zoueiras, você sera banido de utilizar os comandos do bot.")
+break
+
+case 'sugestão':
+case 'sugestao':
+const sugestao = body.slice(10)
+if (args.length <= 1) return reply(`Exemplo: ${prefix}sugestao "Opa, crie um comando tal, que ele funcione de tal maneira, isso será muito bom, não só pra mim, mas pra vários fazer isso.."`)
+if (args.length >= 800) return conn.sendMessage(from, {text: 'Máximo 800 caracteres'}, {quoted: info})
+var nomor = info.participant
+sug = `[ Sugestões ]\nDe: wa.me/${sender.split("@s.whatsapp.net")[0]}\n: ${sugestao}`
+await conn.sendMessage(`${setting.numerodono}@s.whatsapp.net`, {text: sug}, {quoted: info})
+reply("mensagem enviada ao meu dono, obrigado pela sugestão, tentar ouvir o máximo possível de sugestões.")
+break
+
+//==========(BAIXAR/PESQUISAS)==========\\
+case 'pinterest': 
+if(!q) return reply(`Digite o nome da imagem que vc quer buscar\nExemplo: ${prefix + command} cat`)
+reply(enviar.espere)
+blap = await getBuffer(`http://aleatoryapi.herokuapp.com/api/pinterest?text=${q}&apikey=${keyale}`)
+await conn.sendMessage(from, {image: blap, thumbnail: null}, {quoted: info}).catch(e => {
+reply('ERROR!!')
+})
+break
+
+case 'gerarlink':  
+case 'imgpralink':    
+try {
+if (isQuotedImage) {
+reply(enviar.espere)
+boij = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+owgi = await getFileBuffer(boij, 'image')
+res = await upload(owgi)
+reply(res)
+} else {
+reply(`Mande uma imagem com a legenda ${prefix + command}`)
+}
+} catch {
+reply('Ocorreu algum Error, desculpe 😔')
+}
+break
+
+case 'videourl':
+case 'videopralink':
+try {
+if ((isQuotedVideo) && args.length == 0) {
+reply(enviar.espere)
+boij = isQuotedVideo ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.videoMessage : info
+owgi = await getFileBuffer(boij, 'video')
+res = await upload(owgi)
+reply(res)
+} else {
+reply(`Mande vídeo com a legenda ${prefix + command}`)
+}
+} catch {
+reply('Ocorreu algum Error, desculpe 😔/ O limite do tamanho de vídeo que gero o link, é 30 segundos.')
+}
+break
+
+case 'printsite':
+case 'print':
+txt = args.join(" ")
+if(txt.length < 8) return reply(`Digite qual site você deseja tirar o print, por Exemplo: ${prefix}printsite Google.com`)
+reply(enviar.espere)
+printp = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ssweb?url=${txt}&apikey=${keyale}`)
+printimg = await getBuffer(printp.link)
+conn.sendMessage(from, {image: printimg}, {quoted: info}).catch(e => {
+reply('ERROR')
+})
+break
+
+case 'ytsearch':
+try {
+psq = args.join(' ')
+if(psq.length < 2) return reply(`O que você deseja encontrar?, diga o nome do vídeo ou da música, e irei informar os links que correspondem.`)
+blar = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ytsrc?q=${psq}&apikey=${keyale}`)
+pla = '==============\n\n'
+for (let x of blar.resultado) {
+pla += `Titulo: ${x.title}\n`
+pla += `Link: ${x.url}`
+pla += '\n\n=============\n\n'
+}
+reply(pla.trim())
+} catch {
+reply('Error!!')
+}
+break
+
+case 'igdl':
+case 'instadw': 
+try {  
+link = args.join(' ')
+if (!link) return reply('Ops, insira o link de um video/foto do instagram.')
+post = await fetchJson(`https://aleatoryapi.herokuapp.com/api/instagram?url=${link}&apikey=${keyale}`)
+s_video = await getBuffer(post.resultado[0].downloadUrl)
+conn.sendMessage(from, {video: s_video}, {quoted: info})
+} catch {
+reply('O vídeo deve ser privado, ou é imagem, só pode video.')
+}
+break
+
+case 'twitter':
+link = args.join(' ')
+if (!link) return reply('Ops, insira o link de um video do twitter')
+reply(enviar.espere)
+post = await fetchJson(`https://aleatoryapi.herokuapp.com/api/twitter?link=${link}&apikey=${keyale}`)
+descc = post.resultado.desc
+video_hd = await getBuffer(post.resultado.HD)
+conn.sendMessage(from, {video: video_hd, caption: descc}, {quoted: info}).catch(e => {
+reply('Error!!')
+})
+break
+
+case 'facebook':
+case 'facemp4':  
+case 'fb':
+teks = args[0]
+reply(enviar.espere)
+res = await fbDown(teks).catch(e => {
+reply(`${e}`)
+})
+a = res[0]
+result = `「 *Facebook Downloader* 」
+• *Título:* ${a.judul}
+• *Fonte :* ${a.source}
+• *Tamanho :* ${a.size}
+• *Qualidade :* ${a.quality}
+• *Modelo :* ${a.type}
+• *Nome do arquivo :* ${a.judul}.${a.type}`
+sendFileFromUrl({image: a.thumb, caption: result}, {quoted: info})
+sendFileFromUrl({video: a.link, mimetype: 'video/mp4'}, {quoted: info})
+await limitAdd(sender)
+break
+
+case 'ytmp4':
+qd = args.join(" ")
+if(qd.length < 7) return reply('Você deve pegar o link do YouTube gerado pelo ytsearch ou do próprio YouTube mesmo, e usar com esse comando, e ele enviará seu video / música de video')
+reply(enviar.espere)
+res = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ytsrc?q=${qd}&apikey=${keyale}`)
+
+blaimg = await getBuffer(res.resultado[0].image)
+
+bla = `Titulo: ${res.resultado[0].title}\nVisualizações: ${res.resultado[0].views}\nTempo: ${res.resultado[0].duration.timestamp}\nCanal: ${res.resultado[0].author.name}\n`
+
+conn.sendMessage(from, {image: blaimg, caption: bla}, {quoted: info})
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ytmp4-2?q=${q}&apikey=${keyale}`)
+blabla = await getBuffer(bla[0].link)
+conn.sendMessage(from, {video: blabla, mimetype: 'video/mp4'}, {quoted: info}).catch(e => {
+reply('ERROR')
+})
+break
+
+case 'ytmp3':
+qd = args.join(" ")
+if(qd.length < 7) return reply('Você deve pegar o link do YouTube gerado pelo ytsearch ou do próprio YouTube mesmo, e usar com esse comando, e ele enviará seu áudio / música')
+reply(enviar.espere)
+res = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ytsrc?q=${qd}&apikey=${keyale}`)
+
+blaimg = await getBuffer(res.resultado[0].image)
+
+bla = `Titulo: ${res.resultado[0].title}\nVisualizações: ${res.resultado[0].views}\nTempo: ${res.resultado[0].duration.timestamp}\nCanal: ${res.resultado[0].author.name}\n`
+
+conn.sendMessage(from, {image: blaimg, caption: bla}, {quoted: info})
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ytmp3-2?q=${q}&apikey=${keyale}`)
+audbla = await getBuffer(bla[0].link)
+conn.sendMessage(from, {audio: audbla, mimetype: 'audio/mp4'}, {quoted: info}).catch(e => {
+reply('ERROR!!')
+})
+break
+case 'testando1':
+bla = await fetchJson(`http://aleatoryapi.herokuapp.com/api/youtubedl?url=https://youtu.be/ffaYsbjmaMs&apikey=key-expr`)
+blabla = await getBuffer(bla.medias[0].url) 
+conn.sendMessage(from, {audio: blabla, mimetype: 'audio/mp4'}).catch(e => {
+reply('ERROR!!')
+})
+break
+
+case 'tiktok':
+link = args.join(" ")
+if (!link) return reply('Ops, insira o link de um video do tiktok.')
+reply(enviar.espere)
+blap = await fetchJson(`http://aleatoryapi.herokuapp.com/api/tiktok?url=${link}&apikey=${keyale}`)
+blavideo = await getBuffer(blap.resultado.nowm)
+conn.sendMessage(from, {video: blavideo, mimetype: 'video/mp4'}, {quoted: info}).catch(e => {
+reply('ERROR!!')
+})
+break
+
+case 'tiktok2':
+qp = args.join(" ")
+if (!qp) return reply('Ops, insira o link.')
+sendBtext(from, "✔️ Download De Vídeo / Audio [ TIKTOK ]\nEscolha uma opção que deseja.", `☂️`, [
+{buttonId: `${prefix}tiktokvideo ${qp}`, buttonText: {displayText: `🎥 Video`}, type: 1},
+{buttonId: `${prefix}tiktokaudio ${qp}`, buttonText: {displayText: `🎵 Audio`}, type: 1}], selo)
+break 
+
+case 'tiktokvideo': 
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/tiktok-2?url=${q}&apikey=${keyale}`)
+blabla = await getBuffer(bla.resultado.server1.video)
+conn.sendMessage(from, {video: blabla, mimetype: 'video/mp4'}, {quoted: info}).catch(e => {
+reply('ERROR!!')
+})
+break
+
+case 'tiktokaudio': 
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/tiktok-2?url=${q}&apikey=${keyale}`)
+blabla = await getBuffer(bla.resultado.server1.music)
+conn.sendMessage(from, {audio: blabla, mimetype: 'audio/mp4'}, {quoted: info}).catch(e => { 
+reply('ERROR')
+})
+break
+
+case 'playstore':
+if(!q) return reply('Digite um nome de um app que deseja pesquisar.')
+let play = await hx.playstore(q);
+let stor = "❉─────────────────────❉\n"
+for (let i of play) {
+stor += `\n*「 _PLAY STORE_ 」*\n
+- 📄 *Nome* : ${i.name}
+- 🌀 *Link* : ${i.link}\n
+- 🤵🏻 *desenvolvedor* : ${i.developer}
+- 📤 *Desenvolvedor link* : ${i.link_dev}\n❉─────────────────────❉`
+}
+reply(stor)
+break
+
+case 'igstalk':
+if(args.length < 1) return reply('Cadê o nome?')
+usur = args.join(" ")
+teste = await fetchJson(`https://pencarikode.xyz/stalk/instagram?username=${usur}&apikey=pais`)
+teste = teste.result.user
+corno = `Nome : ${teste.username}\n`
+corno += `PK : ${teste.pk}\n`
+testebf = await getBuffer(`${teste.profile_pic_url}`)
+await conn.sendMessage(from, {image: testebf, caption: `${corno}`}, {quoted:info})
+break
+
+case 'celular':
+if (!q) return reply(`Qual celular você está procurando?`)
+teks = args.join(' ')
+anu = await fetchJson(`https://api-yogipw.herokuapp.com/api/search/gsmarena?query=${q}`)
+const busca_celular = 
+`
+📝 Titulo: ${anu.judul}
+❗Última atualização: ${anu.rilis}
+📱 Tamanho do celular: ${anu.ukuran}
+⚡ Tipo: ${anu.type}
+🗃️ Armazenamento: ${anu.storage}
+📴 Tela: ${anu.display}
+📳 Polegada: ${anu.inchi}
+🔰 Resolução da câmera: ${anu.pixel}
+📲 Resolução do video: ${anu.videoPixel}
+💭 Ram do celular: ${anu.ram}
+👤 Hardware do celular: ${anu.chipset}
+⚠️ Bateria: ${anu.batrai}
+🔋 Tipo da bateria: ${anu.merek_batre}`
+ wew = fs.readFileSync('./logos/logo2.jpg')
+await conn.sendMessage(from, {image: wew, thumbnail:null, caption: `${busca_celular}`}, {quoted: info})
+break
+
+case 'correio':
+txtt = args.join(" ")
+txt1 = txt.split("/")[0];
+txt2 = txtt.split("/")[1];
+if(!txt) return reply('Cade o número da pessoa?')
+if(!txtt) return reply('Cade a mensagem do correio??')
+if(txt.includes("-")) return reply('Tem que ser o número junto sem +, e não pode tá separado da /')
+if(txtt.includes("+")) return reply('Tem que ser o número junto sem +, e não pode tá separado da /')
+if(!txtt.includes("/")) return reply(`Exemplo: ${prefix}correio 5517991134416/Oi Amor, sdds`)
+bla = 
+`╭┄━┄━┄━┄━┄━╮
+┞┧ ⸙. ͎۪۫          💌  ː͡₊ꞋꞌꞋꞌ
+┞┧Correio anônimo. 
+┞┧Msg: ${txt2}
+┞┧
+╰┄━┄━┄━┄━┄━╮`
+conn.sendMessage(`${txt1}@s.whatsapp.net`, {text: bla})
+break
+
+case 'play':
+qp = args.join(" ")
+res = await yts(qp)
+reply(enviar.espere)
+blaimg = await getBuffer(res.all[0].image)
+
+bla = `🎶Titulo da música>:${res.all[0].title}\n\n👥Visualizações>: ${res.all[0].views}\n\n⏳Tempo:> ${res.all[0].timestamp}\n\n🔆Canal>: ${res.all[0].author.name}\n\n\n⚙️𝚂𝚎 𝚟𝚘𝚌𝚎 𝚗𝚊𝚘 𝚌𝚘𝚗𝚜𝚎𝚐𝚞𝚒𝚛 𝚟𝚒𝚜𝚞𝚊𝚕𝚒𝚣𝚊𝚛 𝚘𝚜 𝚋𝚘𝚝𝚘𝚎𝚜, 𝚎𝚡𝚎𝚌𝚞𝚝𝚎 𝚘 𝚙𝚕𝚊𝚢𝟸 𝚌𝚘𝚖𝚘 𝚜𝚎𝚐𝚞𝚗𝚍𝚊 𝚘𝚙𝚌𝚊𝚘`
+sendBimg(from, `${res.all[0].image}`, bla, NomeDoBot, [
+{buttonId: `${prefix}audioplay ${qp}`, buttonText: {displayText: `🎵ツ𝑨𝑼𝑫𝑰𝑶/𝑴𝑷3`}, type: 1},
+{buttonId: `${prefix}documento ${qp}`, buttonText: {displayText: `📄ツ𝑫𝑶𝑪𝑼𝑴𝑬𝑵𝑻𝑶 `}, type: 1},
+{buttonId: `${prefix}videoplay ${qp}`, buttonText: {displayText: `🎥ツ𝑽𝑰𝑫𝑬𝑶/𝑴𝑷4`}, type: 1}], info)
+break 
+
+case 'documento':
+reply(enviar.espere)  
+reply('Enviando, vai demorar um pouco, ok? 😁')  
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/playmp4?q=${q}&apikey=${keyale}`) 
+audbla = await getBuffer(bla.resultado.url)
+conn.sendMessage(from, {document: audbla, mimetype: 'document/mp4'}, {quoted: info}).catch(e => {
+reply(`desculpe mas não achei o que você quer / Ou / A api caiu, em breve volta.`)
+})
+break
+
+case 'videoplay':
+reply(enviar.espere)  
+reply('Enviando, vai demorar um pouco, ok? 😁')  
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/playmp4?q=${q}&apikey=${keyale}`) 
+audbla = await getBuffer(bla.resultado.url)
+conn.sendMessage(from, {video: audbla, mimetype: 'video/mp4'}, {quoted: info}).catch(e => {
+reply(`desculpe mas não achei o que você quer / Ou / A api caiu, em breve volta.`)
+})
+break
+
+case 'audioplay':
+reply(enviar.espere)
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/playmp4?q=${q}&apikey=${keyale}`) 
+audbla = await getBuffer(bla.resultado.url)
+conn.sendMessage(from, {audio: audbla, mimetype: 'audio/mp4'}, {quoted: info}).catch(async (e) => { 
+bli = yts(q)
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ytmp3_2?url=${bli.all[0].url}&apikey=${keyale}`)
+conn.sendMessage(from, {audio: bla, mimetype: 'audio/mp4'})
+}).catch(async (e) => {
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/playv1?q=${q}&apikey=${keyale}`) 
+audbla = await getBuffer(bla.resultado)
+conn.sendMessage(from, {audio: audbla, mimetype: 'audio/mp4'}, {quoted: info})
+}).catch(e => {
+reply("Error, não consigo baixar essa música, não sei pq 😔")  
+})
+break
+
+case 'play2':
+playzin = args.join(" ") 
+if(!playzin) return reply('Cade o nome da música?')
+reply(enviar.espere)
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/playmp4?q=${q}&apikey=${keyale}`) 
+bla = bla.resultado
+pla = `Titulo: ${bla.titulo}\n`
+pla += `Visualizações: ${bla.visu}\n`
+pla += `Publicado : ${bla.publicado}\n\n`
+pla += `Enviando o áudio, vai demorar pra caramba, OK?`
+img = await getBuffer(bla.thumb)
+conn.sendMessage(from, {image: img, caption: `${pla}`}, {quoted: info})
+audbla = await getBuffer(bla.url)
+conn.sendMessage(from, {audio: audbla, mimetype: 'audio/mp4'}, {quoted: info}).catch(e => {
+reply(`desculpe mas não achei o que você quer.`)
+})
+break
+
+case 'play3':
+qp = args.join(" ")
+if(!qp) return reply(`Cade o nome da música?`)
+reply(enviar.espere)
+res = await yts(qp)
+
+blaimg = await getBuffer(res.all[0].image)
+
+bla = `Titulo: ${res.all[0].title}\nVisualizações: ${res.all[0].views}\nTempo: ${res.all[0].duration.timestamp}\nCanal: ${res.all[0].author.name}\n`
+
+conn.sendMessage(from, {image: blaimg, caption: bla}, {quoted: info})
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/ytmp3-2?q=${res.all[0].url}&apikey=${keyale}`)
+blabla = await getBuffer(bla[0].link)
+conn.sendMessage(from, {audio: blabla, mimetype: 'audio/mp4'}, {quoted: info}).catch(e => {
+reply('Error')
+})
+break
+
+case 'desbanir':
+case 'desban':
+if(!isPremium) return reply("Só para usuários Premium novinha 😪")
+if(!budy.includes("/")) return reply(`Exemplo: ${prefix}desbanir Número banido injustamente/Meu número +55 81 xxx-xxxx foi banido injustamente desbana por favor`)
+var [qsp, qsp2] = q.split("/")
+await fetchJson(`https://rafinha043.herokuapp.com/enviar/email?titulo=${qsp}&texto=${qsp2}&apikey=key-ale666`)
+reply(`Olá : ${pushname} A mensagem foi enviada para o suporte com sucesso BB...`) 
+break
+
+case 'playmp4':
+qp = args.join(" ")
+if(!qp) return reply(`Cade o nome da música?/Video?`)
+reply(enviar.espere)
+res = await yts(qp)
+
+blaimg = await getBuffer(res.all[0].image)
+
+bla = `Titulo: ${res.all[0].title}\nVisualizações: ${res.all[0].views}\nTempo: ${res.all[0].duration.timestamp}\nCanal: ${res.all[0].author.name}\n`
+
+conn.sendMessage(from, {image: blaimg, caption: bla}, {quoted: info})
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/playmp4?q=${q}&apikey=${keyale}`) 
+audbla = await getBuffer(bla.resultado.url)
+conn.sendMessage(from, {video: audbla, mimetype: 'video/mp4'}, {quoted: info}).catch(e => {
+reply('ERROR!')
+})
+break
+
+//============(CASE-BEM-VINDO/E ETC..)=========\\
+case 'bemvindo':
+qp = args.join(" ")
+sendBtext(from, "『BEMVINDO \n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isWelkom ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../bemvindo 1 ou /bemvindo 0`, [
+{buttonId: `${prefix}bemvindo_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}bemvindo_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'bemvindo_':
+case 'welcome_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('1 pra ligar / 0 pra desligar')
+if (Number(args[0]) === 1) {
+if (isWelkom) return reply('Ja esta ativo')
+welkom.push(from)
+fs.writeFileSync('./datab/grupos/welkom.json', JSON.stringify(welkom))
+reply('Ativou com sucesso o recurso de bem vindo neste grupo')
+} else if (Number(args[0]) === 0) {
+if (!isWelkom) return reply('Ja esta Desativado')
+pesquisar = from
+processo = welkom.indexOf(pesquisar)
+while(processo >= 0){
+welkom.splice(processo, 1)
+processo = welkom.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/grupos/welkom.json', JSON.stringify(welkom))
+reply('‼️ Desativou com sucesso o recurso de bemvindo neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+//=====================================\\
+
+
+
+//=================(ANTS)=================\\
+
+case 'antictt_':
+case 'anticontato_':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply(' ✅pra ligar ❌ pra desligar')
+if (Number(args[0]) === 1) {
+if (isAntiCtt) return reply('Ja esta ativo')
+antictt.push(from)
+fs.writeFileSync('./datab/ants/antictt.json', JSON.stringify(antictt))
+reply('Ativou com sucesso o recurso de anticontato neste grupo')
+} else if (Number(args[0]) === 0) {
+if (!isAntiCtt) return reply('Ja esta Desativado')
+pesquisar = from
+processo = antictt.indexOf(pesquisar)
+while(processo >= 0){
+antictt.splice(processo, 1)
+processo = antictt.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/ants/antictt.json', JSON.stringify(antictt))
+reply('‼️ Desativou com sucesso o recurso de anticontato neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'anticontato':
+case 'antictt':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-CONTATO\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntiCtt ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antictt 1 ou /antictt 0`, [
+{buttonId: `${prefix}antictt_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antictt_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'anticatalago_':
+case 'anticatalg_':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply(' pra ligar / 0 pra desligar')
+if (Number(args[0]) === 1) {
+if (isAnticatalogo) return reply('Ja esta ativo')
+anticatalogo.push(from)
+fs.writeFileSync('./datab/ants/anticatalogo.json', JSON.stringify(anticatalogo))
+reply('Ativou com sucesso o recurso de anticatalogo neste grupo')
+} else if (Number(args[0]) === 0) {
+if (!isAnticatalogo) return reply('Ja esta Desativado')
+pesquisar = from
+processo = anticatalogo.indexOf(pesquisar)
+while(processo >= 0){
+anticatalogo.splice(processo, 1)
+processo = anticatalogo.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/ants/anticatalogo.json', JSON.stringify(anticatalogo))
+reply('‼️ Desativou com sucesso o recurso de anticatalogo neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'anticatalago':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-CATALAGO\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAnticatalogo ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../anticatalago1 ou /anticatalago 0`, [
+{buttonId: `${prefix}anticatalago_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}anticatalago_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+
+case 'antifake_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('pra ligar ✅ pra desligar❌')
+if (Number(args[0]) === 1) {
+if (isAntifake) return reply('Ja esta ativo')
+antifake.push(from)
+fs.writeFileSync('./datab/ants/antifake.json', JSON.stringify(antifake))
+reply('Ativou com sucesso o recurso de antifake neste grupo')
+} else if (Number(args[0]) === 0) {
+if (!isAntifake) return reply('Ja esta Desativado')
+pesquisar = from
+processo = antifake.indexOf(pesquisar)
+while(processo >= 0){
+antifake.splice(processo, 1)
+processo = antifake.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/ants/antifake.json', JSON.stringify(antifake))
+reply('‼️ Desativou com sucesso o recurso de antifake neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'antifake':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-FAKE\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntifake ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antifake 1 ou /antifake 0`, [
+{buttonId: `${prefix}antifake_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antifake_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'antiloc':
+if (!isGroup) return reply(` SOMENTE EM GRUPOS`)
+if (!isGroupAdmins) return reply(`PRECISA SER ADMIN`)
+if (!isBotGroupAdmins) return reply(` O BOT PRECISA SER ADMIN`)
+try {														 
+if (args.length < 1) return reply('✅ pra ativar, ❌ pra desligar')
+if (Number(args[0]) === 1) {
+if(Antiloc) return reply('Já está Ativo.')
+antiloc.push(from)
+fs.writeFileSync('./datab/ants/antiloc.json', JSON.stringify(antiloc))
+reply('Ativou com sucesso o recurso de anti loc neste grupo✔️')
+} else if (Number(args[0]) === 0) {
+if(!Antiloc) return reply('Já está Desativado.')
+antiloc.splice(from, 1)
+fs.writeFileSync('./datab/ants/antiloc.json', JSON.stringify(antiloc))
+reply('Desativou com sucesso o recurso de anti loc neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+} catch {
+reply('Deu erro, tente novamente :/')
+}
+break
+
+case 'antidocumento_':
+if (!isGroup) return reply(` SOMENTE EM GRUPOS`)
+if (!isGroupAdmins) return reply(`PRECISA SER ADMIN`)
+if (!isBotGroupAdmins) return reply(` O BOT PRECISA SER ADMIN`)
+try {														 
+if (args.length < 1) return reply('✅pra ativar, ❌ pra desligar')
+if (Number(args[0]) === 1) {
+antidoc.push(from)
+fs.writeFileSync('./datab/ants/antidoc.json', JSON.stringify(antidoc))
+reply('Ativou com sucesso o recurso de anti documento neste grupo✔️')
+} else if (Number(args[0]) === 0) {
+antidoc.splice(from, 1)
+fs.writeFileSync('./datab/ants/antidoc.json', JSON.stringify(antidoc))
+reply('Desativou com sucesso o recurso de antidocumento neste grupo✔️')
+ } else {
+reply('1 para ativar, 0 para desativar')
+}
+} catch {
+reply('Deu erro, tente novamente :/')
+}
+break
+
+case 'antidocumento':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-DOCUMENTO\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${Antidoc ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antidocumento 1 ou /antidocumento 0`, [
+{buttonId: `${prefix}antifake_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antifake_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'antiimg_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isAntiImg) return reply('Já Esta ativo')
+antiimg.push(from)
+fs.writeFileSync('./datab/ants/antiimg.json', JSON.stringify(antiimg))
+reply('Ativou com sucesso o recurso de anti imagem neste grupo✔️')
+} else if (Number(args[0]) === 0) {
+if (!isAntiImg) return reply('Ja esta Desativado.')
+antiimg.splice(from, 1)
+fs.writeFileSync('./datab/ants/antiimg.json', JSON.stringify(antiimg))
+reply('Desativou com sucesso o recurso de anti imagem neste grupo✔️')
+} else {
+reply('✅ para ativar, ❌ para desativar')
+}
+break
+
+case 'antiimg':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-IMG\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntiImg ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antiimg 1 ou /antiimg 0`, [
+{buttonId: `${prefix}antiimg_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antiimg_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+
+case 'antisticker_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isAntiSticker) return reply('Já Esta ativo')
+antisticker.push(from)
+fs.writeFileSync('./datab/ants/antisticker.json', JSON.stringify(antisticker))
+reply('Ativou com sucesso o recurso de anti sticker neste grupo✔️')
+} else if (Number(args[0]) === 0) {
+if (!isAntiSticker) return reply('Ja esta Desativado.')
+antisticker.splice(from, 1)
+fs.writeFileSync('./datab/ants/antisticker.json', JSON.stringify(antisticker))
+reply('Desativou com sucesso o recurso de anti sticker neste grupo✔️')
+} else {
+reply('✅ para ativar, ❌ para desativar')
+}
+break
+
+case 'antisticker':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-STICKER\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntiSticker ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antisticker 1 ou /antisticker 0`, [
+{buttonId: `${prefix}AntiSticker_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}AntiSticker_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'antinotas_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isAntiNotas) return reply('Já Esta ativo')
+antinotas.push(from)
+fs.writeFileSync('./datab/ants/antinotas.json', JSON.stringify(antinotas))
+reply('Ativou com sucesso o recurso de anti notas neste grupo✔️')
+} else if (Number(args[0]) === 0) {
+if (!isAntiNotas) return reply('Ja esta Desativado.')
+antinotas.splice(from, 1)
+fs.writeFileSync('./datab/ants/antinotas.json', JSON.stringify(antinotas))
+reply('Desativou com sucesso o recurso de anti notas neste grupo✔️')
+} else {
+reply('✅ para ativar,  ❌para desativar')
+}
+break
+
+case 'antinotas':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-NOTAS\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntiNotas ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antinotas 1 ou /antinotas 0`, [
+{buttonId: `${prefix}antinotas_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antinotas_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'antivideo_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isAntiVid) return reply('Ja esta ativo')
+antivid.push(from)
+fs.writeFileSync('./datab/ants/antivideo.json', JSON.stringify(antivid))
+reply('Ativou com sucesso o recurso de anti video neste grupo✔️')
+} else if (Number(args[0]) === 0) {
+if (!isAntiVid) return reply('Ja esta Desativado')
+antivid.splice(from, 1)
+fs.writeFileSync('./datab/ants/antivideo.json', JSON.stringify(antivid))
+reply('Desativou com sucesso o recurso de anti video neste grupo✔️')
+} else {
+reply('✅ para ativar,  ❌ para desativar')
+}
+break
+
+case 'antiaudio':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-AUDIO\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${ isAntiAudio ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antiaudio 1 ou /antiaudio 0`, [
+{buttonId: `${prefix}antiaudio_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antiaudio_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'antivideo':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-VIDEO\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntiVid ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antiaudio 1 ou /antivideo 0`, [
+{buttonId: `${prefix}antivideo_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antivideo_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+
+case 'antiaudio_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isAntiAudio) return reply('Ja esta ativo')
+antiaudio.push(from)
+fs.writeFileSync('./datab/ants/antiaudio.json', JSON.stringify(antiaudio))
+reply('Ativou com sucesso o recurso de anti audio neste grupo✔️')
+} else if (Number(args[0]) === 0) {
+if (!isAntiAudio) return reply('Ja esta Desativado')  
+antiaudio.splice(from, 1)
+fs.writeFileSync('./datab/ants/antiaudio.json', JSON.stringify(antiaudio))
+reply('Desativou com sucesso o recurso de anti audio neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'limitecaracteres_':
+case 'antiflood_':  
+if (!isGroup) return reply(enviar.msg.adm)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar. info.Badmin)
+if (args.length < 1) return reply(`Digite ${prefix + command} 1 para ativar`)
+if (Number(args[0]) === 1) {
+if (isAntiFlood) return reply(`O recurso limite de caracteres até ${limitefl} já está ativo no grupo`)
+antiflood.push(from)
+fs.writeFileSync('./datab/usuarios/antiflood.json', JSON.stringify(antiflood))
+reply(`✔️ O recurso limite de caracteres ${limitefl} foi ativado nesse grupo📝`)
+} else if (Number(args[0]) === 0) {
+ if (!isAntiFlood) return reply('✔️ O recurso limite de caracteres não está ativado no grupo 📝')
+let position = false
+Object.keys(antiflood).forEach((i) => {
+if (antiflood[i] === from) {
+position = i
+}
+})
+if (position !== false) {
+antiflood.splice(position, 1)
+fs.writeFileSync('./datab/usuarios/antiflood.json', JSON.stringify(antiflood))
+}
+reply('O recurso limite de caracteres foi desativado nesse grupo ✔️')
+} else {
+reply(`Digite ${prefix + command} 1 para ativar, 0 para desativar o recurso`)
+}
+break
+
+case 'limitecaracteres':
+case 'antiflood':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-CARACTERES\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntiFlood ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../anticaracteres 1 ou /anticaracteres 0`, [
+{buttonId: `${prefix}antiflood_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antiflood_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+
+case 'resetarttt':
+case 'rvttt':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+daily.splice([])
+fs.writeFileSync('./datab/usuarios/diario.json', JSON.stringify(daily))
+reply('‼️O jogo da velha TTT foi resetado com sucesso..✔️')
+reply(`${prefix}reiniciar`)
+break
+
+case 'reiniciar':
+if(!SoDono) return
+rp = (Date.now() / 1000) - info.messageTimestamp
+blar = process.uptime()
+startAle()
+reply(`Reiniciei em ${String(rp.toFixed(3))}m\n\nTempo Ativo : ${kyun(blar)}`)
+break
+ 
+case 'antilink_':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('1 pra ligar / 0 pra desligar')
+if (Number(args[0]) === 1) {
+if (isAntiLink) return reply('Ja esta ativo')
+antilink.push(from)
+fs.writeFileSync('./datab/ants/antilink.json', JSON.stringify(antilink))
+reply(' Ativou com sucesso o recurso de antilink neste grupo')
+} else if (Number(args[0]) === 0) {
+if (!isAntiLink) return reply('Ja esta Desativado')
+pesquisar = from
+processo = antilink.indexOf(pesquisar)
+while(processo >= 0){
+antilink.splice(processo, 1)
+processo = antilink.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/ants/antilink.json', JSON.stringify(antilink))
+reply('‼️ Desativou com sucesso o recurso de antilink neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'antilink':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-LINK\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isAntiLink ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antilink 1 ou /antilink 0`, [
+{buttonId: `${prefix}antilink_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antilink_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+case 'antipalavrão_':
+case 'antipalavrao_':  
+if (!isGroup) return reply(`[❗] SOMENTE EM GRUPOS`)
+if (!isGroupAdmins) return reply(`[❗] O PRECISA SER ADMIN`)
+if (!isBotGroupAdmins) return reply(`[❗] O BOT PRECISA SER ADMIN`)
+if (args.length < 1) return reply(`[❗] 1 / 0, Exemplo ${prefix + command} 1`)
+if (Number(args[0]) === 1) {
+if (isPalavrao) return reply('*Já esta ativado...*')
+palavrao.push(from)
+fs.writeFileSync('./datab/grupos/palavrao.json', JSON.stringify(palavrao))
+reply(`[❗] anti palavrão ativado`)
+} else if (Number(args[0]) === 0) {
+if (!isPalavrao) return reply('*Já esta Desativado...*')  
+palavrao.splice(from, 1)
+fs.writeFileSync('./datab/grupos/palavrao.json', JSON.stringify(palavrao))
+reply(`[❗] anti palavrão desativado...`)
+} else {
+reply(`[❗] 1 / 0, Exemplo ${prefix + command} 0`)
+}
+await limitAdd(sender)
+break
+
+case 'antipalavrao':
+qp = args.join(" ")
+sendBtext(from, "『ANTI-PALAVRAO\n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isPalavrao ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../antipalavrao 1 ou /antipalavrao 0`, [
+{buttonId: `${prefix}antipalavrao_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}antipalavrao_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+
+case 'antilinkhard':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('1 pra ligar / 0 pra desligar')
+if (Number(args[0]) === 1) {
+if (isAntiLinkHard) return reply('Ja esta ativo')
+antilinkhard.push(from)
+fs.writeFileSync('./datab/ants/antilinkhard.json', JSON.stringify(antilinkhard))
+reply('🌀 Ativou com sucesso o recurso de antilink hardcore neste grupo 📝')
+} else if (Number(args[0]) === 0) {
+if (!isAntiLinkHard) return reply('Ja esta Desativado')
+pesquisar = from
+processo = antilinkhard.indexOf(pesquisar)
+while(processo >= 0){
+antilinkhard.splice(processo, 1)
+processo = antilinkhard.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/ants/antilinkhard.json', JSON.stringify(antilinkhard))
+reply('‼️ Desativou com sucesso o recurso de antilink harcore neste grupo✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'antilinkgp':
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (!isBotGroupAdmins) return reply(enviar.msg.Badmin)
+if (args.length < 1) return reply('1 pra ligar / 0 pra desligar')
+if (Number(args[0]) === 1) {
+if (isAntilinkgp) return reply('Ja esta ativo')
+antilinkgp.push(from)
+fs.writeFileSync('./datab/ants/antilinkgp.json', JSON.stringify(antilinkgp))
+reply('Ativou com sucesso o recurso de antilinkgp ')
+} else if (Number(args[0]) === 0) {
+if (!isAntilinkgp) return reply('Ja esta Desativado')
+pesquisar = from
+processo = antilinkgp.indexOf(pesquisar)
+while(processo >= 0){
+antilinkgp.splice(processo, 1)
+processo = antilinkgp.indexOf(pesquisar)
+}
+fs.writeFileSync('./datab/ants/antilinkgp.json', JSON.stringify(antilinkgp))
+reply('‼️ Desativou com sucesso o recurso de antilink de grupo ✔️')
+} else {
+reply('1 para ativar, 0 para desativar')
+}
+break
+
+case 'bemvindo2':
+qp = args.join(" ")
+sendBtext(from, "『BEMVINDO2 \n\n𝙰𝚃𝙸𝚅𝙰 ✅ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 ❎",  `𝚂𝚃𝙰𝚃𝚄𝚂 ${isWelkom ? '𝐀𝐓𝐈𝐕𝐀𝐃𝐎✅' : '𝐃𝐄𝐒𝐀𝐓𝐈𝐕𝐀𝐃𝐎 ❌'}\n\n𝙲𝙰𝚂𝙾 𝙳𝙴 𝙴𝚁𝚁𝙾 𝚄𝚂𝙴../bemvindo2 1 ou /bemvindo2 0`, [
+{buttonId: `${prefix}bemvindo2_ 1`, buttonText: {displayText: `✅`}, type: 1},
+{buttonId: `${prefix}bemvindo2_ 0`, buttonText: {displayText: ` ❌`},type: 1}], selo)
+break
+
+
+case 'bemvindo2_':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix + command} 1 para ativar `)
+if (Number(args[0]) === 1) {
+reply(`Devo Lembrar que você deve determinar a legenda desse grupo, após ativar essa função, a legenda funciona por grupo, se deseja saber mais informações sobre, digite ${prefix}infobemvindo`)  
+if (isWelkom2) return reply('❎O recurso já está ativado no grupo❎')
+welkom2.push(from)
+fs.writeFileSync('./datab/usuarios/vacilo.json', JSON.stringify(welkom2))
+reply('✅O recurso foi ativado✅')
+} else if (Number(args[0]) === 0) {
+if (!isWelkom2) return reply('❎O recurso não está ativado no grupo❎')
+let position = false
+Object.keys(welkom2).forEach((i) => {
+if (welkom2[i] === from) {
+position = i
+}
+})
+if (position !== false) {
+welkom2.splice(position, 1)
+fs.writeFileSync('./datab/usuarios/vacilo.json', JSON.stringify(welkom2))
+}
+reply('❌O recurso foi desativado❌')
+} else {
+reply(`Digite da forma correta:\nComando: ${prefix + command} 1, para ativar e 0 para desativar`)
+}
+break
+
+//==========(Sticker-Stickers)===========\\
+
+case 'emoji':
+case 'semoji':
+if(!q) return reply(`Exemplo: ${prefix}emoji ☹️/whatsapp`)
+emot = q.split('/')[0]
+jemot = q.split('/')[1]
+if(jemot == 'apple'){
+idemot = 0
+}
+else if(jemot == 'google'){
+idemot = 1
+}
+else if(jemot == 'samsung'){
+idemot = 2
+}
+else if(jemot == 'microsoft'){
+idemot = 3
+}
+else if(jemot == 'whatsapp'){
+idemot = 4
+}
+else if(jemot == 'twitter'){
+idemot = 5
+}
+else if(jemot == 'facebook'){
+idemot = 6
+}
+else if(jemot == 'joypixels'){
+idemot = 7
+}
+else if(jemot == 'openmoji'){
+idemot = 8
+}
+else if(jemot == 'emojidex'){
+idemot = 9
+}
+else if(jemot == 'lg'){
+idemot = 10
+}
+else if(jemot == 'htc'){
+idemot = 11
+}
+else if(!jemot){
+idemot = 4
+}
+else{
+return reply(`Exemplo: ${prefix}emoji ☹️/whatsapp`)
+}
+reply(enviar.espere)
+if(idemot == undefined) return
+emoji.get(emot)
+.then(emoji => {
+console.log(emoji.images[idemot]);
+sendStickerFromUrl(from, emoji.images[idemot].url, info)
+}).catch(e => {
+reply("EMOJI NÃO ENCONTRADO, TENTE OUTRO EMOJI..")
+})
+break
+
+case 'sc':
+case 'c':  
+case 'csticker':  
+case 'cstiker':  
+case 'stcirculo':
+case 'circlesticker':  
+if ((isMedia && info.message.imageMessage || isQuotedImage) && args.length == 0) {
+const encmedia = isQuotedImage ? info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage : info.message.imageMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'image')
+fs.writeFileSync(rane, buffimg)
+media = rane
+getpunt = getRandom('.png')
+inpunt = getRandom('.webp')
+exec(`convert ${media} -resize 512x512^ -gravity center -extent 512x512 ${getpunt} && magick ${getpunt} -quality 50 -define webp:lossless=true ${inpunt}`, async (error) => {
+fs.unlinkSync(getpunt)
+fs.unlinkSync(media)
+if (error) return reply("Error!")
+await conn.sendMessage(from, {sticker: fs.readFileSync(inpunt)}, {quoted: info})
+fs.unlinkSync(inpunt)
+})
+} else {
+reply("Apenas image!")
+}
+break
+
+case 'fstiker': 
+case 'fsticker':
+case 'f':
+await limitAdd(sender)
+if ((isMedia && !info.message.videoMessage || isQuotedImage) && args.length == 0) {
+const encmedia = isQuotedImage ? info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage : info.message.imageMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'image')
+fs.writeFileSync(rane, buffimg)
+const media = rane
+ran = getRandom('.webp')
+await ffmpeg(`./${media}`)
+.input(media)
+.on('start', function (cmd) {
+console.log(`Started : ${cmd}`)
+})
+.on('error', function (err) {
+console.log(`Error : ${err}`)
+fs.unlinkSync(media)
+reply(enviar.stikga)
+})
+.on('end', function () {
+console.log('Finish')
+buffer = fs.readFileSync(ran)
+conn.sendMessage(from, {sticker: buffer}, {quoted: info})
+fs.unlinkSync(media)
+fs.unlinkSync(ran)
+})
+.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+.toFormat('webp')
+.save(ran)
+} else if ((isMedia && info.message.videoMessage.seconds < 10 || isQuotedVideo && info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 10) && args.length == 0) {
+const encmedia = isQuotedVideo ? info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage : info.message.videoMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'video')
+fs.writeFileSync(rane, buffimg)
+const media = rane
+ran = getRandom('.webp')
+reply(enviar.espere) 
+await ffmpeg(`./${media}`)
+.inputFormat(media.split('.')[1])
+.on('start', function (cmd) {
+console.log(`Started : ${cmd}`)
+})
+.on('error', function (err) {
+console.log(`Error : ${err}`)
+fs.unlinkSync(media)
+tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+reply(enviar.stikga)
+})
+.on('end', function () {
+console.log('Finish')
+buffer = fs.readFileSync(ran)
+conn.sendMessage(from, {sticker: buffer}, {quoted: info})
+fs.unlinkSync(media)
+fs.unlinkSync(ran)
+})
+.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+.toFormat('webp')
+.save(ran)
+} else {
+reply(`Enviar imagem / vídeo / gif com legenda \n${prefix}sticker (duração do adesivo de vídeo de 1 a 9 segundos)`)
+}
+break 
+
+case 'emoji-mix':
+case 'emojimix':
+try {
+textoo = args.join(' ')
+textoo1 = textoo.split('+')[0]
+textoo2 = textoo.split('+')[1]
+bau = require('./armor/emoji.js')
+sitee = bau.Semoji(textoo1, textoo2)
+bala = await getBuffer(sitee)
+fs.writeFileSync('./imagem.webp', bala)
+site = fs.readFileSync('./imagem.webp')
+bass64 = `data:image/jpeg;base64,${site.toString('base64')}`
+mantap = await convertSticker(bass64, `SUKUNA-BOT V-3`, `By: Sr.Collins😀🥵`)
+imageBuffer = new Buffer.from(mantap, 'base64');
+conn.sendMessage(from, {sticker: imageBuffer}, {quoted: info})
+fs.unlinkSync('./imagem.webp')
+} catch {
+reply('Não consigo juntar esses emojis,tente novamente utilizando outros emojis °-°')
+}
+break
+
+case 'teste':
+anu = await getBuffer('https://telegra.ph/file/4d911df29d338fdd474cb.mp4')
+conn.sendMessage(from, {video: anu, mimetype: 'video/mp4'}, {quoted: info})
+break
+
+case 'cpf':
+cpf = body.slice(command.length + 2)
+if(!cpf) return reply('Cadê o cpf..')
+img = await getBuffer(`https://telegra.ph/file/313582f06d2b93fdd3720.jpg`)
+axios.get(encodeURI(`https://rafinha043-api.herokuapp.com/api/consulta/cpfull?cpf=${cpf}&apikey=key-ale666`)).then(post => {
+data = JSON.parse(JSON.stringify(post.data.resultado))
+rafa = `
+CPF: ${data.cpf}\n
+NOME: ${data.nome}\n
+NOME_DA_MÃE: ${data.nome_da_mae}\n
+NASCIMENTO: ${data.nascimento.split('T')[0]}\n
+SEXO: ${data.sexo}\n
+BAIRRO: ${data.bairro}\n
+RUA: ${data.rua}\n
+NÚMERO: ${data.numero}\n
+MUNICÍPIO: ${data.município}\n
+CEP: ${data.cep}\n
+SIGLA: ${data.sigla}`
+conn.sendMessage(from, {image: img, caption: `${rafa}`}, {quoted: info})
+}).catch(e => {
+return reply(`CPF NÃO ENCONTRADO...`)
+});
+break
+
+case 'figfundo':
+case 'figvideo':
+case 'figusemfundo': 
+case 'sfundo':  
+if(!isQuotedImage) return reply(`Marque uma imagem`)
+if ((isMedia && !info.message.videoMessage || isQuotedImage) && args.length == 0) {
+rafa = isQuotedImage ? info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage : info.message.imageMessage
+reply(enviar.espere)
+buff = await getFileBuffer(rafa, 'image')
+bas64 = `data:image/jpeg;base64,${buff.toString('base64')}`
+anu = args.join(' ').split('|')
+satu = anu[0] !== '' ? anu[0] : `${pushname}`
+sd = `📍Criado por↓        ${NomeDoBot}`
+dua = typeof anu[1] !== 'undefined' ? anu[1] : `${sd}`
+var mantap = await convertSticker(bas64, `${dua}`, `${satu}`)
+var sti = new Buffer.from(mantap, 'base64');
+conn.sendMessage(from, {sticker: sti}, {quoted: info})
+} else {
+return reply(`So imagem mn -_-`)
+}
+break
+
+case 'st':
+case 'st':
+case 'sticker':
+case 's':
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage) && args.length == 0) {
+const encmedia = isQuotedImage ? info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage : info.message.imageMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'image')
+fs.writeFileSync(rane, buffimg)
+const media = rane
+rano = getRandom('.webp')
+reply(enviar.espere)
+await ffmpeg(`./${media}`)
+.input(media)
+.on('start', function (cmd) {
+console.log(`Started : ${cmd}`)
+})
+.on('error', function (err) {
+console.log(`Error : ${err}`)
+exec(`webpmux -set exif ${addMetadata('bot','ale')} ${rano} -o ${rano}`, async (error) => {
+fs.unlinkSync(media)
+reply(enviar.stick)
+})
+})
+exec(`ffmpeg -i ${media} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 800:800 ${rano}`, (err) => {
+fs.unlinkSync(media)
+buffer = fs.readFileSync(rano)
+conn.sendMessage(from, {sticker: buffer}, {quoted: info})
+fs.unlinkSync(rano)
+})
+} else if ((isMedia && info.message.videoMessage.seconds < 11 || isQuotedVideo && info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
+const encmedia = isQuotedVideo ? info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage : info.message.videoMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'video')
+fs.writeFileSync(rane, buffimg)
+const media = rane
+rano = getRandom('.webp')
+await ffmpeg(`./${media}`)
+.inputFormat(media.split('.')[1])
+.on('start', function (cmd) {
+console.log(`Started : ${cmd}`)
+})
+.on('error', function (err) {
+console.log(`Error : ${err}`)
+exec(`webpmux -set exif ${addMetadata('bot', 'ale')} ${rano} -o ${rano}`, async (error) => {
+fs.unlinkSync(media)
+tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+reply(`Falha na conversão de ${tipe} para sticker`)
+})
+})
+exec(`ffmpeg -i ${media} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 200:200 ${rano}`, (err) => {
+fs.unlinkSync(media)
+buffer = fs.readFileSync(rano)
+conn.sendMessage(from, {sticker: buffer}, {quoted: info})
+fs.unlinkSync(rano)
+})
+} else {
+reply(`Você precisa enviar ou marcar uma imagem ou vídeo com no máximo 10 segundos`)
+}
+} catch {
+reply('Ocorreu algum Error, desculpe 😔')
+}
+break
+
+case 'toimg':
+if (!isQuotedSticker) return reply('❌ adesivo de resposta um ❌')
+reply(enviar.espere)
+buff = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage, 'sticker')
+conn.sendMessage(from, {image: buff}, {quoted: info}).catch(e => {
+console.log(e);
+reply('ERROR!!')
+})
+break
+
+//=============(LOGOS)=============\\
+
+
+
+//==========(PLAQUINHAS-LOGOS)===========\\
+
+case 'plaq': //by zanga 
+if (!isNsfw) return reply(`É necessário que o comando seja ativado por um adm\nExemplo: ${prefix}nsfw 1`)
+if (args.length < 1) return reply(`${prefix}plaq e digite o seu nome`)
+teks = body.slice(6)
+if (teks.length > 15) return reply('O texto é longo, até 15 caracteres') //maximo de caracteres
+reply(enviar.espere) //mensagem
+buffer = await getBuffer(`https://raptibef.sirv.com/images%20(3).jpeg?text.0.text=${teks}&text.0.position.gravity=center&text.0.position.x=19%25&text.0.size=45&text.0.color=000000&text.0.opacity=55&text.0.font.family=Crimson%20Text&text.0.font.weight=300&text.0.font.style=italic&text.0.outline.opacity=21`)
+if(verificado === true) {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓ '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓ '}, {quoted: info})  
+}
+break
+
+case 'plaq2': //by zanga 
+if (!isNsfw) return reply(`É necessário que o comando seja ativado por um adm\nExemplo: ${prefix}nsfw 1`)
+if (args.length < 1) return reply(`${prefix}plaq2 e digite o seu nome`)
+teks = body.slice(7)
+if (teks.length > 15) return reply('O texto é longo, até 15 caracteres') //maximo de caracteres
+reply(enviar.espere) //mensagem
+buffer = await getBuffer(`https://raptibef.sirv.com/images%20(1).jpeg?profile=Zanga%202.0&text.0.text=${teks}`)
+if(verificado === true) {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓ '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓ '}, {quoted: info}) 
+}
+break
+
+case 'plaq3': //by zanga
+if (!isNsfw) return reply(`É necessário que o comando seja ativado por um adm\nExemplo: ${prefix}nsfw 1`)
+if (args.length < 1) return reply(`${prefix}plaq3 e digite o seu nome`)
+teks = body.slice(7)
+if (teks.length > 15) return reply('O texto é longo, até 15 caracteres') //maximo de caracteres
+reply(enviar.espere) //mensagem
+buffer = await getBuffer(`https://raptibef.sirv.com/images.jpeg?profile=Zanga%203.0&text.0.text=${teks}&text.0.outline.blur=63`)
+if(verificado === true) {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓'}, {quoted: selo})
+} else {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓ '}, {quoted: info}) 
+}
+break
+
+case 'plaq4':
+if (!isNsfw) return reply(`É necessário que o comando seja ativado por um adm\nExemplo: ${prefix}nsfw 1`) 
+if (args.length < 1) return reply(`${prefix}plaq7 e digite o seu nome`)
+teks = body.slice(7)
+if (teks.length > 10) return reply('O texto é longo, até 10 caracteres') //maximo de caracteres
+reply(enviar.espere) //mensagem
+buffer = await getBuffer(`https://umethroo.sirv.com/Torcedora-da-sele%C3%A7%C3%A3o-brasileira-nua-mostrando-a-bunda-236x300.jpg?text.0.text=${teks}&text.0.position.x=-64%25&text.0.position.y=-39%25&text.0.size=25&text.0.color=1b1a1a&text.0.font.family=Architects%20Daughter`) //api
+plaq = ` Plaquinha feita ✓ `
+if(verificado === true) {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓ '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓ '}, {quoted: info}) 
+}
+break
+
+case 'plaq5':
+if (!isNsfw) return reply(`É necessário que o comando seja ativado por um adm\nExemplo: ${prefix}nsfw 1`)
+if (args.length < 1) return reply(`${prefix}plaq10 e digite o seu nome`)
+teks = body.slice(7)
+if (teks.length > 15) return reply('O texto é longo, até 15 caracteres') //maximo de caracteres
+reply(enviar.espere) //mensagem
+buffer = await getBuffer(`https://umethroo.sirv.com/peito1.jpg?text.0.text=${teks}&text.0.position.x=-4%25&text.0.position.y=-6%25&text.0.size=14&text.0.color=000000&text.0.font.family=Shadows%20Into%20Light&text.0.font.weight=700`)
+if(verificado === true) {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' Plaquinha feita ✓'}, {quoted: selo})
+} else {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' *Plaquinha feita ✓* '}, {quoted: info}) 
+}
+break
+case 'plaq4off': //by zanga
+if (!isNsfw) return reply(`É necessário que o comando seja ativado por um adm\nExemplo: ${prefix}nsfw 1`)
+if (args.length < 1) return reply(`${prefix}plaq4 e digite o seu nome`)
+teks = body.slice(7)
+if (teks.length > 15) return reply('O texto é longo, até 15 caracteres') //maximo de caracteres
+reply(enviar.espere) //mensagem
+buffer = await getBuffer(`https://raptibef.sirv.com/images%20(2).jpeg?profile=Zanga%204.0&text.0.text=${teks}`)
+if(verificado === true) {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' *Plaquinha feita ✓* '}, {quoted: selo})
+} else {
+conn.sendMessage(from, {image: buffer, sendEphemeral: true, thumbnail: null, caption: ' *Plaquinha feita ✓* '}, {quoted: info}) 
+}
+break
+
+case 'placaloli':
+if (!q) return reply(enviar.wrongFormat)
+reply('Aguarde..')
+lod = await fetchJson(`https://nekobot.xyz/api/imagegen?type=kannagen&text=${q}`)
+sendStickerFromUrl(from, lod.message, enviar.success)
+await limitAdd(sender)
+break 
+
+//=======================================\\
+
+
+// LOGOS 
+
+case 'shadow':
+case 'angelwing':
+case 'efeitoneon':
+case 'cemiterio':
+case 'metalgold':
+case 'narutologo':
+case 'fire':
+case 'romantic':
+case 'smoke':  
+case 'papel':
+case 'lovemsg':
+case 'lovemsg2':
+case 'lovemsg3':
+case 'coffecup':
+case 'coffecup2':  
+case 'cup':
+case 'florwooden':
+case 'madeira':
+case 'neon2':
+case 'lobometal':
+case 'harryp':
+case 'txtborboleta':
+case 'blackpink':
+case 'girlmascote': 
+case 'logogame':
+case 'equipemascote':
+case 'fpsmascote':
+case 'hackneon':
+case 'ffavatar':
+case 'mascotegame':
+case 'wingeffect':
+case 'angelglx':
+case 'gizquadro':
+case 'txtquadrinhos':
+textin = args.join(" ")
+if(!textin) return reply("Cade o texto?")
+reply(enviar.espere)
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/${command}?texto=${textin}&apikey=${keyale}`)
+blabla = await getBuffer(bla.resultado.imageUrl)
+conn.sendMessage(from, {image: blabla}, {quoted: info}).catch(rs =>{
+reply("ERROR!!")  
+})
+break  
+
+case 'gameplay':
+case 'ffbanner':
+case 'mascoteavatar':  
+textin = args.join(" ")
+txt1 = textin.split("/")[0];
+txt2 = textin.split("/")[1];
+if(!textin) return reply("Cade o texto?")
+if(!textin.includes("/")) return reply(`Cade a / precisa dela para a separação..\nExemplo: ${prefix + command} Game/Play`)
+reply(enviar.espere)
+bla = await fetchJson(`https://aleatoryapi.herokuapp.com/api/${command}?texto=${txt1}&texto2=${txt2}&apikey=${keyale}`)
+blabla = await getBuffer(bla.resultado.imageUrl)
+conn.sendMessage(from, {image: blabla}, {quoted: info}).catch(rs =>{
+reply("ERROR!!")  
+})
+break
+
+case 'googlesg':
+textin = args.join(" ")
+txt1 = textin.split("/")[0];
+txt2 = textin.split("/")[1];
+txt3 = textin.split("/")[2];
+if(!textin) return reply("Cade o texto?")
+if(!textin.includes("/")) return reply(`Cade a / precisa dela para a separação..\nExemplo: ${prefix + command} Game/Play/Sad`)
+reply(enviar.espere)
+bla = await fetchJson(`http://aleatoryapi.herokuapp.com/api/${command}?texto=${txt1}&texto2=${txt2}&texto3=${txt3}&apikey=${keyale}`)
+blabla = await getBuffer(bla.resultado.imageUrl)
+conn.sendMessage(from, {image: blabla}, {quoted: info}).catch(rs =>{
+reply("ERROR!!")  
+})
+break  
+
+case 'marvel': 
+case 'glitch':   
+case 'stone':   
+case 'space':
+case 'pornhub':
+case 'america':   
+case 'steel':  
+case 'grafity':  
+case 'glitch3':  
+try {
+texto = args.join(' ')
+texto1 = texto.split('/')[0] || 'Indefinido'
+texto2 = texto.split('/')[1] || 'Indefinido'
+if(!texto.includes("/")) return reply(`Cade a /\nExemplo: ${prefix + command} sad/sad`)
+reply(enviar.espere)
+bla = await fetchJson(`http://aleatoryapi.herokuapp.com/api/${command}?texto=${texto1}&texto2=${texto2}&apikey=${keyale}`)
+blabla = await getBuffer(bla.resultado)
+conn.sendMessage(from, {image: blabla}, {quoted: info})
+} catch {
+reply('ERROR!!')
+}
+break
+
+case 'lava':
+case 'toxic':  
+case 'thunder': 
+case 'thunderv2':  
+case 'neongreen':	
+case 'neon':  
+case 'neon1':  
+case 'neon3d':  
+case 'demongreen':   
+case 'metalfire':  
+case 'rainbow':	  
+case 'gelo':
+case 'halloween':  
+case 'lapis':  
+case 'glitch':  
+case 'glitch2':   
+case '3dgold': 
+case 'neon3d':   
+case 'transformer':  
+case '3dstone':
+case 'fiction':
+case 'cattxt':
+case 'neondevil':
+case 'demonfire':
+case 'colaq':
+case 'luxury':
+case 'berry':
+case 'matrix':
+case 'horror':
+case 'nuvem':
+case 'neon3':
+case 'neve':
+case 'areia':
+case 'vidro':
+case 'style':
+case 'blood':
+case 'pink':
+case 'carbon':
+case 'metalblue': 
+case 'jeans':  
+case 'jokerlogo':   
+case 'natal': 
+case 'ossos':  
+case 'asfalto':	
+case 'break':  
+try {
+reply(enviar.espere)
+texto = args.join(" ") || 'Indefinido'
+if(!texto) return reply('Cade o texto?')
+bla = await fetchJson(`http://aleatoryapi.herokuapp.com/api/${command}?texto=${texto}&apikey=${keyale}`)
+blabla = await getBuffer(bla.resultado)
+conn.sendMessage(from, {image: blabla}, {quoted: info})
+} catch {
+reply('ERROR')
+}
+break
+
+//========(SORTEIO-VOTAR-CASES)=========\\
+
+case 'delvote':
+case 'delvoto':  
+if(!info.key.remoteJid) return
+delVote(from)
+reply('votação deletada com sucesso')
+break
+
+case 'votar':
+case 'votacao': 
+case 'votação': 
+if(!isGroup) return reply(enviar.msg.grupo)
+if(!budy.includes("/")) return reply(`Cade a /, exemplo ${prefix}votação @marca/Ele é total gay/ 1`)
+if(!q) return reply('*Votação*\n\n'+ prefix+ 'votar @tag marcar / pergunta  / 1 (1 = 1 Minuto)')
+if (info.message.extendedTextMessage.contextInfo.mentionedJid.length > 0 || info.message.extendedTextMessage.contextInfo == null) {
+let id = info.message.extendedTextMessage.contextInfo.mentionedJid[0]
+split = args.join(' ').replace('@', '').split('/')
+if(!Number(split[2])) return reply('cade os minutos eim?\n\n1 = 1 Minuto')
+await mentions('Vote ' +'@'+ id.split('@')[0]+' para' +'\n\n' + `voto = ✅\ndevoto = ❌\n\npergunta: ${split[1]}`,[id],true)
+addVote(from,split[1],split[0],split[2],reply)
+}
+break
+
+case 'infosorteio':
+case 'helpsorteio':  
+if(verificado === true) {
+await conn.sendMessage(from, {text:  infosorteio(prefix, pushname)}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {text:  infosorteio(prefix, pushname)}, {quoted: info})  
+}
+break
+
+case 'promover': 
+if(!isGroupAdmins) return reply('Só ADM pode utilizar este comando.')
+if(!isBotGroupAdmins) return reply('O Bot Precisa ser ADM pra executar essa ação.')
+teks = body.slice(11)
+if(teks.length > 15) return reply('Só pode promover uma pessoa por vez..')
+await sleep(2000)
+reply(`@${teks} Foi promovido(a) para adm com sucesso.`)
+conn.groupParticipantsUpdate(from, [`${teks}@s.whatsapp.net`], "promote")
+break
+
+case 'rebaixar': 
+if(!isGroupAdmins) return reply('Só ADM pode utilizar este comando.')
+if(!isBotGroupAdmins) return reply('O Bot Precisa ser ADM pra executar essa ação.')
+teks = body.slice(11)
+if(teks.length > 15) return reply('Só pode rebaixar uma pessoa por vez..')
+await sleep(2000)
+reply(`@${teks} Foi Rebaixado(a) para membro comum com sucesso...`)
+conn.groupParticipantsUpdate(from, [`${teks}@s.whatsapp.net`], "demote")
+break
+
+case 'sorteio':
+if(!isGroupAdmins) return reply('Só ADM pode utilizar este comando.')
+try{
+if(!isGroup) return reply(enviar.msg.grupo)
+if(!q) return reply(`Coloque algo, após o comando sorteio, por exemplo, ${prefix}sorteio de 100 R$`)
+d = []
+teks = `🎉Parabéns, por ganhar o sorteio ${q}:\n\n`
+for(i = 0; i < 1; i++) {
+r = Math.floor(Math.random() * groupMetadata.participants.length + 0)
+teks += `🔥፝⃟  ➣ @${groupMembers[r].id.split('@')[0]}\n`
+d.push(groupMembers[r].id)
+}
+mentions(teks, d, true)
+} catch (e) {
+console.log(e)
+reply('Deu erro, tente novamente :/')
+}
+break
+
+case 'sorteionumero':
+case 'sorteionumeros':  
+if(!isGroupAdmins) return reply('Só ADM pode utilizar este comando.')  
+try{
+if(!isGroup) return reply(enviar.msg.grupo)
+if(!q) return reply(`Coloque algo, após o comando sorteio, por exemplo, ${prefix}sorteionumero de 100 R$`)
+var numerossrt = sortear[Math.floor(Math.random() * sortear.length)] 
+d = []
+teks =  `🎉Parabéns ao número do sortudo, por ganhar o sorteio ${q}:\n\n`
+for(i = 0; i < 1; i++) {
+teks += `🔥፝⃟  ➣ ${numerossrt}\n`
+d.push(numerossrt)
+}
+mentions(teks, d, true)
+} catch (e) {
+console.log(e)
+reply('Deu erro, tente novamente :/')
+}
+break
+//======================================\\
+case 'dado':
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+ sections = [
+     {
+	title: "ESCOLHA SEU NÚMERO",
+	rows: [
+	    {title: "𝐉𝐎𝐆𝐀𝐑", rowId: `${prefix}dadoo`,description: "➪5"},
+ 
+   {title: "𝐉𝐎𝐆𝐀𝐑", rowId: `${prefix}dadoo`,description: "➪2"},
+   
+   {title: "𝐉𝐎𝐆𝐀𝐑", rowId: `${prefix}dadoo`,description: "➪3"},
+   
+   {title: "𝐉𝐎𝐆𝐀𝐑", rowId: `${prefix}dadoo`,description: "➪4"},
+   
+   {title: "𝐉𝐎𝐆𝐀𝐑", rowId: `${prefix}dadoo`,description: "➪1"},
+   
+   
+{title: "𝐉𝐎𝐆𝐀𝐑", rowId: `${prefix}dadoo`,description: "➪6"}],
+    },
+]
+listMessage = {
+ text: `𝐎𝐋𝐀➪  ${pushname}\n\n𝐄𝐒𝐂𝐎𝐋𝐇𝐀 𝐎 𝐍𝐔𝐌𝐄𝐑𝐎 𝐄 𝐁𝐎𝐀 𝐒𝐎𝐑𝐓𝐄🎲`,
+  buttonText: "^_^🎲🎲🎲",
+  sections
+}
+
+sendMsg = await conn.sendMessage(from, listMessage)
+break
+
+case 'dadoo':
+bla = await getBuffer(`https://supra-api.herokuapp.com/api/dadu?apikey=supraz`)
+conn.sendMessage(from, {sticker: bla}, {quoted: info})
+buttons = [
+  {buttonId: `${prefix}ganhei`, buttonText: {displayText: '🎲「𝐆𝐀𝐍𝐇𝐄𝐈😀」🎲'}, type: 1},
+  {buttonId: `${prefix}perdi`, buttonText: {displayText: '🎲「𝐏𝐄𝐑𝐃𝐈😔」🎲'}, type: 1}]
+buttonMessage = {
+    text: "𝐄𝐒𝐓𝐎𝐔 𝐅𝐀𝐙𝐄𝐍𝐃𝐎 𝐀 𝐉𝐎𝐆𝐀𝐃𝐀,𝐀𝐆𝐔𝐀𝐑𝐃𝐄....",
+    footer: '( ͠° ͟ʖ ͡°)',
+    buttons: buttons,
+    headerType: 1
+}
+sendMsg =  conn.sendMessage(from, buttonMessage, {quoted: selo}) 
+break
+
+case 'ganhei':
+return reply (`𝐹𝑂𝐼 𝑈𝑀𝐴 𝐵𝐸𝐿𝐴 𝐽𝑂𝐺𝐴𝐷𝐴 ${pushname} 😉👌`)
+break
+
+case 'perdi':
+return reply('𝑂𝐻...𝑄𝑈𝐸 𝑃𝐸𝑁𝐴😔 𝑻𝑬𝑵𝑻𝑬 𝑴𝑨𝑰𝑺 𝑼𝑴𝑨 𝑱𝑶𝑮𝑨𝑫𝑨😉')
+break
+
+//==========(TTPS/ATTP/TTM)============\\
+case 'attp':
+case 'Attp':
+if (args.length == 0) return reply(`Exemplo: ${prefix + command} Sad`)
+reply(enviar.espere)
+buffer = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`)
+await conn.sendMessage(from, {sticker: buffer}, {quoted: info}).catch(e => {
+reply('ERROR, ALGUM PROBLEMA NA API, EU ACHO.. ')  
+})
+break
+
+case 'Ttp':
+case 'ttp':
+try {
+reply(enviar.espere)
+string = args.join(' ') || 'Texto indefinido'
+post = `http://aleatoryapi.herokuapp.com/api/ttp?texto=${string}&apikey=${keyale}`
+sendStickerFromUrl(from, post, {quoted: info})
+} catch {
+reply('ERROR!!')
+}
+break
+
+
+//======================================\\
+
+
+//===(ZOUEIRAS/BRINCADEIRAS/HUMOR)===\\
+
+case '+18':
+case 'nsfw':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isNsfw) return reply('O modo nsfw já está ativo')
+nsfw.push(from)
+fs.writeFileSync('./datab/grupos/nsfw.json', JSON.stringify(nsfw))
+reply(`\`\`\`✓Ativado com sucesso o modo nsfw +18 no grupo\`\`\` *${groupMetadata.subject}*`)
+} else if (Number(args[0]) === 0) {
+if (!isNsfw) return reply('O modo nsfw já está Desativado')  
+nsfw.splice(from, 1)
+fs.writeFileSync('./datab/grupos/nsfw.json', JSON.stringify(nsfw))
+reply(`\`\`\`✓Modo Nsfw +18 desativado com sucesso no grupo\`\`\` *${groupMetadata.subject}*`)
+} else {
+reply('1 para ativar, 0 para desligar')
+}
+break 
+
+case 'modobrincadeira':
+case 'modobrincadeiras':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isModobn) return reply('o modobrincadeira já está ativo')
+modobn.push(from)
+fs.writeFileSync('./datab/grupos/brincadeiras.json', JSON.stringify(modobn))
+reply(`\`\`\`✓Ativado com sucesso o modobrincadeiras no grupo\`\`\` *${groupMetadata.subject}*`)
+} else if (Number(args[0]) === 0) {
+if (!isModobn) return reply('o modobrincadeira já está Desativado')  
+modobn.splice(from, 1)
+fs.writeFileSync('./datab/grupos/brincadeiras.json', JSON.stringify(modobn))
+reply(`\`\`\`✓Modo brincadeiras desativado com sucesso no grupo\`\`\` *${groupMetadata.subject}*`)
+} else {
+reply('1 para ativar, 0 para desligar')
+}
+break 
+
+case 'nick':
+case 'gerarnick':
+case 'fazernick':
+nick = args.join(' ')
+if(!nick) return reply('Escreva o Nick ou nome que você quer personalizar.')
+axios.get(`https://aleatoryapi.herokuapp.com/api/fazernick?nome=${nick}&apikey=${keyale}`)
+.then(dados => {
+const emoji = `🔮`
+nicks = dados.data
+txt = '💈Nicks Gerados Com Sucesso!💈\n\n'
+for (let i = 0; i < nicks.length; i++) {
+txt += `${emoji} ${nicks[i]}\n`
+}
+txt += `\n\n
+➣   ▉║█▐▉▉▐▐▍█║▍▉▏▍▍
+➣   ▉║█▐▉▉▐▐▍█║▍▉▏▍▍`
+reply(`${txt.trim()}`)
+}).catch(e => {
+reply('Não pode incluir letras modificadas nem emojis, ou pode ser que a api caiu, mas volta logo logo...')  
+})
+break
+
+case 'pl':
+anu = await getBuffer('https://telegra.ph/file/0855427ea91c9c74eb290.mp4')
+conn.sendMessage(from, {video: anu, mimetype: 'video/mp4'}, {quoted: info})
+break
+
+case 'chance':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)  
+var avb = body.slice(7)
+if (args.length < 1) return conn.sendMessage(from, {text: `Você precisa digitar da forma correta\nExemplo: ${prefix}chance do luuck ser gay`}, {quoted: info})
+random = `${Math.floor(Math.random() * 100)}`
+hasil = `A chance ${body.slice(8)}\n\né de... ${random}%`
+await conn.sendMessage(from, {text: hasil, contextInfo: {mentionedJid: [sender]}}, {quoted: info})
+break
+
+case 'gay':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(5)
+reply(' ❰ Pesquisando a sua ficha de gay : '+rate+' aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imggay}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+feio = random
+boiola = random
+if (boiola < 20 ) {bo = 'hmm... você é hetero😔'} else if (boiola == 21 ) {bo = '+/- boiola'} else if (boiola == 23 ) {bo = '+/- boiola'} else if (boiola == 24 ) {bo = '+/- boiola'} else if (boiola == 25 ) {bo = '+/- boiola'} else if (boiola == 26 ) {bo = '+/- boiola'} else if (boiola == 27 ) {bo = '+/- boiola'} else if (boiola == 2 ) {bo = '+/- boiola'} else if (boiola == 29 ) {bo = '+/- boiola'} else if (boiola == 30 ) {bo = '+/- boiola'} else if (boiola == 31 ) {bo = 'hmmmm tenho minha desconfiança...😑'} else if (boiola == 32 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 33 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 34 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 35 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 36 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 37 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 3 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 39 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 40 ) {bo = 'tenho minha desconfiança...😑'} else if (boiola == 41 ) {bo = 'vix você é né?😏'} else if (boiola == 42 ) {bo = 'vix você é né?😏'} else if (boiola == 43 ) {bo = 'vix você é né?😏'} else if (boiola == 44 ) {bo = 'vix você é né?😏'} else if (boiola == 45 ) {bo = 'vix você é né?😏'} else if (boiola == 46 ) {bo = 'vix você é né?😏'} else if (boiola == 47 ) {bo = 'vix você é né?😏'} else if (boiola == 4 ) {bo = 'vix você é né?😏'} else if (boiola == 49 ) {bo = 'vix você é né?😏'} else if (boiola == 50 ) {bo = 'você é ou não?🧐'} else if (boiola > 51) {bo = 'ihhh baitola kkkkk🤣🤣'
+}
+await conn.sendMessage(from, {image: wew, caption: '  O quanto você é gay? \n\n 「 '+rate+' 」Você é: ❰ '+random+'% ❱ gay 🏳️‍🌈\n\n '+bo+' ', thumbnail:null}, {quoted: info})
+}, 7000)
+break
+
+case 'feio':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(6)
+reply(' ❰ Pesquisando a sua ficha de feio : '+rate+', aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imgfeio}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+feio = random
+if (feio < 20 ) {bo = 'É não é feio'} else if (feio == 21 ) {bo = '+/- feio'} else if (feio == 23 ) {bo = '+/- feio'} else if (feio == 24 ) {bo = '+/- feio'} else if (feio == 25 ) {bo = '+/- feio'} else if (feio == 26 ) {bo = '+/- feio'} else if (feio == 27 ) {bo = '+/- feio'} else if (feio == 2 ) {bo = '+/- feio'} else if (feio == 29 ) {bo = '+/- feio'} else if (feio == 30 ) {bo = '+/- feio'} else if (feio == 31 ) {bo = 'Ainda tá na média'} else if (feio == 32 ) {bo = 'Da pra pegar umas(ns) novinha(o) ainda'} else if (feio == 33 ) {bo = 'Da pra pegar umas(ns) novinha(o) ainda'} else if (feio == 34 ) {bo = 'É fein, mas tem baum coração'} else if (feio == 35 ) {bo = 'Tá na média, mas não deixa de ser feii'} else if (feio == 36 ) {bo = 'Bonitin mas é feio com orgulho'} else if (feio == 37 ) {bo = 'Feio e preguiçoso(a), vai se arrumar praga feia'} else if (feio == 3 ) {bo = 'tenho '} else if (feio == 39 ) {bo = 'Feio, mas um banho E se arrumar, deve resolver'} else if (feio == 40 ) {bo = 'FeiN,  mas não existe gente feia, existe gente que não conhece os produtos jequity'} else if (feio == 41 ) {bo = 'você é Feio, mas é legal, continue assim'} else if (feio == 42 ) {bo = 'Nada que uma maquiagem e se arrumar, que não resolva 🥴'} else if (feio == 43 ) {bo = 'Feio que dói de ver, compra uma máscara que melhora'} else if (feio == 44 ) {bo = 'Feio mas nada que um saco na cabeça não resolva né!?'} else if (feio == 45 ) {bo = 'você é feio, mas tem bom gosto'} else if (feio == 46 ) {bo = 'Feio mas tem muitos amigos'} else if (feio == 47 ) {bo = 'Feio mas tem lábia pra pegar várias novinha'} else if (feio == 4 ) {bo = 'Feio e ainda não sabe se vestir, vixi'} else if (feio == 49 ) {bo = 'Feiooo'} else if (feio == 50 ) {bo = 'você é Feio, mas não se encherga 🧐'} else if (feio > 51) {bo = 'você é Feio demais 🙈'} 
+
+await conn.sendMessage(from, {image: wew, caption: '  O quanto você é feio? \n\n 「 '+rate+' 」Você é: ❰ '+random+'% ❱ feio\n\n '+bo+' '}, {quoted: info})
+ }, 7000)
+break 
+
+case 'matar':
+case 'mata':  
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('marque o alvo que você quer matar')
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+susp = `Você Acabou de matar o(a) @${mentioned[0].split('@')[0]} 😈👹` 
+jrpp = await getBuffer(`${matarcmd}`)
+await conn.sendMessage(from, {video: jrpp, gifPlayback: true, caption: susp}, {quoted: info})
+break 
+
+case 'corno':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(7)
+reply(' ❰ Pesquisando a ficha de corno : '+rate+', aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imgcorno}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+await conn.sendMessage(from, {image: wew, caption: '  O quanto você é corno? \n\n 「 '+rate+' 」Você é: ❰ '+random+'% ❱  corno 🐃'}, { quoted: info})
+}, 7000)
+break
+
+case 'vesgo':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(7)
+reply(' ❰ Pesquisando a ficha de vesgo : '+rate+', aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imgvesgo}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+await conn.sendMessage(from, {image: wew, caption: 'O quanto você é vesgo? \n\n「 '+rate+' 」Você é: ❰ '+random+'% ❱  Vesgo 🙄😆'}, {quoted: info})
+}, 7000)
+break 
+
+case 'bebado':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(7)
+reply(' ❰ Pesquisando a ficha de bebado : '+rate+', aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imgbebado}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+await conn.sendMessage(from, {image: wew, caption: 'O quanto você é bebado? \n\n「 '+rate+' 」Você é: ❰ '+random+'% ❱ Bêbado 🤢🥵🥴'}, {quoted: info})
+}, 7000)
+break 
+
+case 'gado':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(6)
+reply(' ❰ Pesquisando a ficha de gado : '+rate+', aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imggado}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+await conn.sendMessage(from, {image: wew, caption: 'O quanto você é gado? \n\n「 '+rate+' 」Você é: ❰ '+random+'% ❱  gado 🐂'}, {quoted: info})
+}, 7000)
+break 
+
+case 'metadinha':
+bla = await fetchJson(`http://aleatoryapi.herokuapp.com/api/metadinha?apikey=${keyale}`
+)
+conn.sendMessage(from, {image: await getBuffer(bla.link1)})
+conn.sendMessage(from, {image: await getBuffer(bla.link2)})
+break
+
+case 'Porno':
+case 'porno':
+case 'sex':
+case 'Sex':
+if (!isNsfw) return reply(`Ative o +18 no grupo\nExemplo: ${prefix}nsfw 1 ou ${prefix}+18 1`)
+if (isBanned) return 
+try {
+var porno = await fetchJson(`https://mnazria.herokuapp.com/api/porn?search=${encodeURIComponent(q)}`, {method: 'get'})
+} catch {
+return await conn.sendMessage(from, {text: 'Pesquisa não encontrada! Teste novamente com outras palavras.'}, {quoted: info})
+}
+const xvideos = []
+for (let x of porno.result) {
+let data = {
+rowId: `${prefix}xvideos `+ x.url,
+title: x.title,
+description: `Duração: ${x.duration}`
+}
+xvideos.push(data)
+}
+
+const listMessageXvideos = {
+text: `Pesquisado por: ${q}`,
+footer: '_Selecione uma das opções e aperte em "Enviar"_',
+title: "🔞𝙋𝙊𝙍𝙉𝙊 𝙀𝙉𝘾𝙊𝙉𝙏𝙍𝘼𝘿𝙊🔞",
+buttonText: "𝙑𝘼𝙄 𝙎𝙀𝙍 𝙁𝙀𝙇𝙄𝙕😈😈",
+sections: [
+{
+title: "Vídeos 🔞",
+rows: xvideos
+}
+]
+}
+sendMsg = await conn.sendMessage(from, listMessageXvideos, {quoted: selo})
+break
+
+case 'xvd':			
+case 'xvds':
+case 'xvideos':
+case 'xvideo':
+if (!isNsfw) return reply(`É necessário que o comando seja ativado por um adm\nExemplo: ${prefix}nsfw 1`)
+if (isBanned) return 
+try {
+if (args.length < 1) return reply(`Você precisa colocar um link!\n Use: xvdss mia khalifa (por exemplo) e use o link.`)
+if (!isUrl(args[0]) && !args[0].includes('https://xvideos.com/')) return reply('aguarde...')
+reply(enviar.espere)
+res = await fetchJson(`https://mnazria.herokuapp.com/api/porndownloadxvideos?url=${args[0]}`, {method: 'get'})
+buffer = await getBuffer(res.mp4)
+conn.sendMessage(from, {video: buffer, mimetype: 'video/mp4'}, {quoted: info})
+} catch (e) {
+console.log(`Erro:`, color(e,'red'))
+reply(`${e}`)
+}
+break
+
+case 'gostoso':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(9)
+reply(' ❰ Pesquisando a sua ficha de gostoso : '+rate+' aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imggostoso}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+await conn.sendMessage(from, {image: wew, caption: '  O quanto você é gostoso? 😏\n\n「 '+rate+' 」Você é: ❰ '+random+'% ❱ gostoso 😝', gifPlayback: true}, {quoted: info})
+}, 7000)
+break 
+
+case 'gostosa':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(9)
+reply(' ❰ Pesquisando a sua ficha de gostosa : '+rate+' aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imggostosa}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+await conn.sendMessage(from, {image: wew, caption: 'O quanto você é gostosa? 😏\n\n「 '+rate+' 」Você é: ❰ '+random+'% ❱  gostosa 😳'}, {quoted: info})
+}, 7000)
+break
+
+case 'beijo':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('Marque alguém que vc quer da um beijo')
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+susp = `Você deu um beijo gostoso na(o) @${mentioned[0].split('@')[0]} 😁👉👈❤` 
+wew = await getBuffer(`${beijocmd}`)
+await conn.sendMessage(from, {video: wew, gifPlayback: true, caption: susp}, {quoted: info})
+break
+
+case 'tapa':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for, apenas digite ${prefix}modobrincadeira 1`)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('marque o alvo que você quer dá o tapa')
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+susp = `Você Acabou de da um tapa na raba da😏 @${mentioned[0].split('@')[0]} 🔥` 
+jrq = await getBuffer(`${tapacmd}`)
+await conn.sendMessage(from, {video: jrq, gifPlayback: true, caption: susp}, {quoted: info})
+break
+
+case 'chute':
+case 'chutar':  
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('marque o alvo que você quer dá um chute')
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+susp = `Você Acabou de da um chute em @${mentioned[0].split('@')[0]} 🤡` 
+jry = await getBuffer(`${chutecmd}`)
+await conn.sendMessage(from, {video: jry, gifPlayback: true, caption: susp}, {quoted: info})
+break 
+
+case 'dogolpe':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+if (args.length < 1) return await conn.sendMessage(from, {text: 'coloca um nome'}, {quoted: info})
+pkt = body.slice(9)
+random = `${Math.floor(Math.random() * 100)}`
+jpr = `*GOLPISTA ENCONTRADO👉🏻*\n\n*GOLPISTA* : *${args[0]}*\n*PORCENTAGEM DO GOLPE* : ${random}%😂\n\nEle(a) gosta de ferir sentimentos 😢`
+reply(jpr)
+break
+
+case 'shipo':
+teks = args.join(" ")
+if(teks.length < 10) return reply('Marque uma pessoa do grupo para encontrar o par dela')
+membrr = []
+const suamae111 = groupMembers
+const suamae211 = groupMembers
+const teupai111 = suamae111[Math.floor(Math.random() * suamae111.length)]
+const teupai211 = suamae211[Math.floor(Math.random() * suamae211.length)]
+var shipted1 = ["1%", `2%`, `3%`, `4%`, `5%`, `6%`, `7`, `%`, `9%`, `10`, `11%`, `12%`,`13%`, `14%`, `15%`, `16%`, `17%`, `1%`, `19%`, `20%`, `21%`, `22`, `23%`, `24%`, `25%`, `26%`, `27%`, `2%`, `27%`, `2%`, `29%`, `30%`, `31%`, `32%`, `33%`, `34%`, `35%`, `36%`, `37%`, `3%`, `39%`, `40%`, `41%`, `42%`, `43%`, `44%`, `45%`, `46%`, `47%`, `4%`, `49%`, `50%`, `51%`, `52%`, `53%`, `54%`, `55%`, `56%`, `57%`, `5%`, `59%`, `60%`, `61%`, `62%`, `63%`, `64%`, `65%`, `66%`, `67%`, `6%`, `69%`, `70%`, `71%`, `72%`, `73%`, `74%`, `75%`, `76%`, `77%`, `7%`, `79%`, `0%`, `1%`, `2%`, `5%`, `4%`, `5%`, `6%`, `7%`, `%`, `9%`, `90%`, `91%`, `92%`, `93%`, `94%`, `95%`, `96%`, `97%`, `9%`, `99%`, `100%`]
+const shiptedd = shipted1[Math.floor(Math.random() * shipted1.length)]
+jet = `*Hmmm.... Eu Shipo eles 2💘💘*\n\n1 = @${teupai111.id.split('@')[0]}\n && 2 = ${teks} com uma porcentagem de: ${shiptedd}`
+membrr.push(teupai111.id)
+membrr.push(teupai211.id)
+mentions(jet, membrr, true)
+break
+
+case 'casal':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+membr = []
+const suamae11 = groupMembers
+const suamae21 = groupMembers
+const teupai11 = suamae11[Math.floor(Math.random() * suamae11.length)]
+const teupai21 = suamae21[Math.floor(Math.random() * suamae21.length)]
+var shipted1 = ["1%", `2%`, `3%`, `4%`, `5%`, `6%`, `7`, `%`, `9%`, `10`, `11%`, `12%`,`13%`, `14%`, `15%`, `16%`, `17%`, `1%`, `19%`, `20%`, `21%`, `22`, `23%`, `24%`, `25%`, `26%`, `27%`, `2%`, `27%`, `2%`, `29%`, `30%`, `31%`, `32%`, `33%`, `34%`, `35%`, `36%`, `37%`, `3%`, `39%`, `40%`, `41%`, `42%`, `43%`, `44%`, `45%`, `46%`, `47%`, `4%`, `49%`, `50%`, `51%`, `52%`, `53%`, `54%`, `55%`, `56%`, `57%`, `5%`, `59%`, `60%`, `61%`, `62%`, `63%`, `64%`, `65%`, `66%`, `67%`, `6%`, `69%`, `70%`, `71%`, `72%`, `73%`, `74%`, `75%`, `76%`, `77%`, `7%`, `79%`, `0%`, `1%`, `2%`, `5%`, `4%`, `5%`, `6%`, `7%`, `%`, `9%`, `90%`, `91%`, `92%`, `93%`, `94%`, `95%`, `96%`, `97%`, `9%`, `99%`, `100%`]
+const shipted = shipted1[Math.floor(Math.random() * shipted1.length)]
+jet = `*Hmmm.... Eu Shipo eles 2💘💘*\n\n1= @${teupai11.id.split('@')[0]}\ne esse\n2= @${teupai21.id.split('@')[0]}\ncom uma porcentagem de: ${shipted}`
+membr.push(teupai11.id)
+membr.push(teupai21.id)
+mentions(jet, membr, true)
+break
+
+case 'nazista':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+rate = body.slice(9)
+reply(' ❰ Pesquisando a sua ficha de nazista : '+rate+' aguarde... ❱')
+ setTimeout(async() => {
+wew = await getBuffer(`${imgnazista}`)
+zxzz = 
+random = `${Math.floor(Math.random() * 110)}`
+await conn.sendMessage(from, {image: wew, caption: 'O quanto você é nazista? \n\n「 '+rate+' 」Você é: ❰ '+random+'% ❱  nazista 卐'}, {quoted: info})
+}, 7000)
+break 
+
+case 'rankativo':
+case 'rankativos':  
+if (!isGroup) return reply(enviar.msg.grupo)
+if(groupIdscount.indexOf(from) < 0) return reply('O bot não tem ainda dados sobre o grupo')
+var ind = groupIdscount.indexOf(from)
+if(countMessage[ind].numbers.length < 3) return reply('Necessita do registro de 3 usuarios')
+countMessage[ind].numbers.sort((a, b) => (a.messages < b.messages) ? 1 : -1)
+mentioned_jid = []
+boardi = '🔥፝⃟    Ranking dos membros mais ativos:\n\n'
+try {
+for (let i = 0; i < 5; i++) {
+if (i == 0) boardi += `${i + 1}º 🥇 : @${countMessage[ind].numbers[i].id.split('@')[0]}\nMensagens: ${countMessage[ind].numbers[i].messages}\nComandos dados: ${countMessage[ind].numbers[i].cmd_messages}\n\n`
+else if (i == 1) boardi += `${i + 1}º 🥈 : @${countMessage[ind].numbers[i].id.split('@')[0]}\nMensagens: ${countMessage[ind].numbers[i].messages}\nComandos dados: ${countMessage[ind].numbers[i].cmd_messages}\n\n`
+else if (i == 2) boardi += `${i + 1}º 🥉 : @${countMessage[ind].numbers[i].id.split('@')[0]}\nMensagens: ${countMessage[ind].numbers[i].messages}\nComandos dados: ${countMessage[ind].numbers[i].cmd_messages}\n\n`
+else if (i == 3) boardi += `${i + 1}º 🥉 : @${countMessage[ind].numbers[i].id.split('@')[0]}\nMensagens: ${countMessage[ind].numbers[i].messages}\nComandos dados: ${countMessage[ind].numbers[i].cmd_messages}\n\n`	
+else if (i == 4) boardi += `${i + 1}º 🥉 : @${countMessage[ind].numbers[i].id.split('@')[0]}\nMensagens: ${countMessage[ind].numbers[i].messages}\nComandos dados: ${countMessage[ind].numbers[i].cmd_messages}\n\n`			
+				
+mentioned_jid.push(countMessage[ind].numbers[i].id)
+} 
+mentions(boardi, mentioned_jid, true)
+} catch (err) {
+			console.log(err)
+await conn.sendMessage(from, {text: `É necessário 5 jogadores para se construir um ranking`}, {quoted: info})
+}
+break
+
+case 'checkativo':
+if (!isGroup) return reply(enviar.msg.grupo)
+if(groupIdscount.indexOf(from) < 0) return reply('O bot não tem ainda dados sobre o grupo')
+var ind = groupIdscount.indexOf(from)
+if (info.message.extendedTextMessage === undefined || info.message.extendedTextMessage === null) return reply('Marque o número que deseja puxar a atividade')
+mentioned = info.message.extendedTextMessage.contextInfo.mentionedJid
+if(numbersIds.indexOf(mentioned[0]) >= 0) {
+var indnum = numbersIds.indexOf(mentioned[0])
+mentions(`𖣘⃟ᗒ Consulta das atividade de\n𖣘⃟ᗒ @${mentioned[0].split('@')[0]} no grupo\n𖣘⃟ᗒ Mensagens: ${countMessage[ind].numbers[indnum].messages}\n𖣘⃟ᗒ Comandos dados: ${countMessage[ind].numbers[indnum].cmd_messages}`, mentioned, true)
+}
+else {
+mentions(`⋆⃟ۣۜ᭪➣ Consulta da atividade de ⋆⃟ۣۜ᭪➣ @${mentioned[0].split('@')[0]} no grupo\n⋆⃟ۣۜ᭪➣ Mensagens: 0\n⋆⃟ۣۜ᭪➣ Comandos dados: 0`, mentioned, true)
+}
+break
+
+case 'ranklevel':
+case 'rl':
+case 'rank':
+_level.sort((a, b) => (a.xp < b.xp) ? 1 : -1)
+let leaderboardlvl = '    🏆《 Rank Niveis 》🏆\n\n'
+let nom = 0
+try {
+for (let i = 0; i < 10; i++) {
+nom++
+leaderboardlvl += `
+┏ ✘🌖 ${setting.NomeDoBot} 🌘✘┓
+┃•────•───────•───•
+┣❲🏆❳ [${nom}] ϟ➠ ${_level[i].id.replace('@s.whatsapp.net', '')}
+┣❲🏆❳「xp」: ϟ${_level[i].xp}
+┣❲🏆❳「Level」 :ϟ➠ ${_level[i].level}
+┗ ──────「★」──────┚\n`
+
+}
+leaderboardlvl += `×•-•-•⟮ 🏆Ranking Level🏆⟯•-•-•×`
+if(verificado === true) {
+conn.sendMessage(from, {text: leaderboardlvl, sendEphemeral: true}, {quoted: selo})
+} else {
+conn.sendMessage(from, {text: leaderboardlvl, sendEphemeral: true}, {quoted: info})
+}
+} catch (err) {
+console.error(err)
+await reply(`Deve conter 10 pessoas com level, e o leveling deve está ativado para que aconteça a evolução de level dos membros, após as interações`)
+}
+break
+
+case 'rankgay':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+try{
+d = []
+ret = '🏳️‍🌈 Rank dos mais gays\n'
+for(i = 0; i < 5; i++) {
+r = Math.floor(Math.random() * groupMetadata.participants.length + 0)
+ret += `🏳️‍🌈❧ @${groupMembers[r].id.split('@')[0]}\n`
+d.push(groupMembers[r].id)
+}
+mentions(ret, d, true)
+} catch (e) {
+console.log(e)
+reply('Deu erro, tente novamente :/')
+}
+break
+
+case 'rankgado':
+case 'rankgados':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+try{
+d = []
+ret = '🐂🐂 Rank dos mais gados do grupo \n'
+for(i = 0; i < 5; i++) {
+r = Math.floor(Math.random() * groupMetadata.participants.length + 0)
+ret += `🐂❧ @${groupMembers[r].id.split('@')[0]}\n`
+d.push(groupMembers[r].id)
+}
+mentions(ret, d, true)
+} catch (e) {
+console.log(e)
+reply('Deu erro, tente novamente :/')
+}
+break
+
+case 'rankcorno':
+case 'rankcornos':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+membr = []
+const corno1 = groupMembers
+const corno2 = groupMembers
+const corno3 = groupMembers
+const corno4 = groupMembers
+const corno5 = groupMembers
+const cornos1 = corno1[Math.floor(Math.random() * corno1.length)]
+const cornos2 = corno2[Math.floor(Math.random() * corno2.length)]
+const cornos3 = corno3[Math.floor(Math.random() * corno3.length)]
+const cornos4 = corno4[Math.floor(Math.random() * corno4.length)]
+const cornos5 = corno5[Math.floor(Math.random() * corno5.length)]
+var porcentagemcorno = ["1%", `2%`, `3%`, `4%`, `5%`, `6%`, `7`, `%`, `9%`, `10`, `11%`, `12%`,`13%`, `14%`, `15%`, `16%`, `17%`, `1%`, `19%`, `20%`, `21%`, `22`, `23%`, `24%`, `25%`, `26%`, `27%`, `2%`, `27%`, `2%`, `29%`, `30%`, `31%`, `32%`, `33%`, `34%`, `35%`, `36%`, `37%`, `3%`, `39%`, `40%`, `41%`, `42%`, `43%`, `44%`, `45%`, `46%`, `47%`, `4%`, `49%`, `50%`, `51%`, `52%`, `53%`, `54%`, `55%`, `56%`, `57%`, `5%`, `59%`, `60%`, `61%`, `62%`, `63%`, `64%`, `65%`, `66%`, `67%`, `6%`, `69%`, `70%`, `71%`, `72%`, `73%`, `74%`, `75%`, `76%`, `77%`, `7%`, `79%`, `0%`, `1%`, `2%`, `5%`, `4%`, `5%`, `6%`, `7%`, `%`, `9%`, `90%`, `91%`, `92%`, `93%`, `94%`, `95%`, `96%`, `97%`, `9%`, `99%`, `O chifre desse ai bate na lua ksksksk`]
+const porcentagemc = porcentagemcorno[Math.floor(Math.random() * porcentagemcorno.length)]
+const porcentag = porcentagemcorno[Math.floor(Math.random() * porcentagemcorno.length)]
+const porcent = porcentagemcorno[Math.floor(Math.random() * porcentagemcorno.length)]
+const porcl = porcentagemcorno[Math.floor(Math.random() * porcentagemcorno.length)]
+const porg = porcentagemcorno[Math.floor(Math.random() * porcentagemcorno.length)]
+const prg = porcentagemcorno[Math.floor(Math.random() * porcentagemcorno.length)]
+ytb = `
+Esses são os cornos do grupo ${groupName}\n@${cornos1.id.split('@')[0]}\nCom uma porcentagem de ${porcent}\n@${cornos2.id.split('@')[0]}\nCom uma porcentagem de ${porcentag}\n@${cornos3.id.split('@')[0]}\nCom uma porcentagem de ${porcl}\n@${cornos4.id.split('@')[0]}\nCom uma porcentagem de ${porg}\n@${cornos5.id.split('@')[0]}\nCom uma porcentagem de ${prg}\n\n⚡ ${setting.NomeDoBot} ⚡`
+membr.push(cornos1.id)
+membr.push(cornos2.id)
+membr.push(cornos3.id)
+membr.push(cornos4.id)
+membr.push(cornos5.id)
+mentions(ytb, membr, true)
+break
+
+case 'rankgostosos':
+case 'rankgostoso':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+member = []
+const p01 = groupMembers
+const p02 = groupMembers
+const p03 = groupMembers
+const p04 = groupMembers
+const p05 = groupMembers
+const o01 = p01[Math.floor(Math.random() * p01.length)]
+const o02 = p02[Math.floor(Math.random() * p02.length)]
+const o03 = p03[Math.floor(Math.random() * p03.length)]
+const o04 = p04[Math.floor(Math.random() * p04.length)]
+const o05 = p05[Math.floor(Math.random() * p05.length)]
+luy = `
+Parados!🤚🤚\n\n1=🤚🤭@${o01.id.split('@')[0]}🤚🤭\n\n\n2=🤚🤭@${o02.id.split('@')[0]}🤚🤭\n\n\n3=🤚🤭@${o03.id.split('@')[0]}🤚🤭\n\n\n4=🤚🤭@${o04.id.split('@')[0]}🤚🤭\n\n\n5=🤚🤭@${o05.id.split('@')[0]}🤚🤭\n\n\nMulta por serem gostosos dms😳 pague pena trabalhando em nossa agência de modelos 😊 by: ${NomeDoBot}`
+member.push(o01.id)
+member.push(o02.id)
+member.push(o03.id)
+member.push(o04.id)
+member.push(o05.id)
+mentions(luy, member, true)
+break
+
+case 'rankgostosas':
+case 'rankgostosa':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+member = []
+const p1 = groupMembers
+const p2 = groupMembers
+const p3 = groupMembers
+const p4 = groupMembers
+const p5 = groupMembers
+const o1 = p1[Math.floor(Math.random() * p1.length)]
+const o2 = p2[Math.floor(Math.random() * p2.length)]
+const o3 = p3[Math.floor(Math.random() * p3.length)]
+const o4 = p4[Math.floor(Math.random() * p4.length)]
+const o5 = p5[Math.floor(Math.random() * p5.length)]
+luy = `
+Paradas!🤚🤚\n\n1=🤚🤭@${o1.id.split('@')[0]}🤚🤭\n\n\n2=🤚🤭@${o2.id.split('@')[0]}🤚🤭\n\n\n3=🤚🤭@${o3.id.split('@')[0]}🤚🤭\n\n\n4=🤚🤭@${o4.id.split('@')[0]}🤚🤭\n\n\n5=🤚🤭@${o5.id.split('@')[0]}🤚🤭\n\n\nMultas por serem gostosas dms😳 pague pena enviando nud no PV do dono😊 by Bot`
+member.push(o1.id)
+member.push(o2.id)
+member.push(o3.id)
+member.push(o4.id)
+member.push(o5.id)
+mentions(luy, member, true)
+break
+
+case 'ranknazista':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+try{
+if(!isGroup) return reply(enviar.msg.grupo)
+d = []
+teks = '💂‍♂️Rank dos mais nazistas do gp\n'
+for(i = 0; i < 5; i++) {
+r = Math.floor(Math.random() * groupMetadata.participants.length + 0)
+teks += `💂‍♂️❧ @${groupMembers[r].id.split('@')[0]}\n`
+d.push(groupMembers[r].id)
+}
+mentions(teks, d, true)
+} catch (e) {
+console.log(e)
+reply('Deu erro, tente novamente :/')
+}
+break
+
+case 'rankotakus':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+membr = []
+const otaku1 = groupMembers
+const otaku2 = groupMembers
+const otaku3 = groupMembers
+const otaku4 = groupMembers
+const otaku5 = groupMembers
+const otaku6 = groupMembers
+const otaku7 = groupMembers
+const otaku = groupMembers
+const otaku9 = groupMembers
+const otaku10 = groupMembers
+const otakus1 = otaku1[Math.floor(Math.random() * otaku1.length)]
+const otakus2 = otaku2[Math.floor(Math.random() * otaku2.length)]
+const otakus3 = otaku3[Math.floor(Math.random() * otaku3.length)]
+const otakus4 = otaku4[Math.floor(Math.random() * otaku4.length)]
+const otakus5 = otaku5[Math.floor(Math.random() * otaku5.length)]
+const otakus6 = otaku6[Math.floor(Math.random() * otaku6.length)]
+const otakus7 = otaku7[Math.floor(Math.random() * otaku7.length)]
+const otakus = otaku[Math.floor(Math.random() * otaku.length)]
+const otakus9 = otaku9[Math.floor(Math.random() * otaku9.length)]
+const otakus10 = otaku10[Math.floor(Math.random() * otaku10.length)]
+ytb = `esses são os otakus fedidos do grupo\n@${otakus1.id.split('@')[0]}\n@${otakus2.id.split('@')[0]}\n@${otakus3.id.split('@')[0]}\n@${otakus4.id.split('@')[0]}\n@${otakus5.id.split('@')[0]}\n@${otakus6.id.split('@')[0]}\n@${otakus7.id.split('@')[0]}\n@${otakus.id.split('@')[0]}\n@${otakus9.id.split('@')[0]}\n@${otakus10.id.split('@')[0]}\n\n⚡ ${setting.NomeDoBot} ⚡`
+membr.push(otakus1.id)
+membr.push(otakus2.id)
+membr.push(otakus3.id)
+membr.push(otakus4.id)
+membr.push(otakus5.id)
+membr.push(otakus6.id)
+membr.push(otakus7.id)
+membr.push(otakus.id)
+membr.push(otakus9.id)
+membr.push(otakus10.id)
+mentions(ytb, membr, true)
+break
+
+case 'rankpau':
+if(!isGroup) return reply('Só pode ser utilizado este comando, em grupo.')
+if(!isModobn) return reply(`Este tipo de comando só pode ser utilizado com o modobrincadeira ativo, fale com um adm ou se você for um, apenas digite ${prefix}modobrincadeira 1`)
+membr = []
+const pauz1 = groupMembers
+const pauz2 = groupMembers
+const pauz3 = groupMembers
+const pauz4 = groupMembers
+const pauz5 = groupMembers
+const paus1 = pauz1[Math.floor(Math.random() * pauz1.length)]
+const paus2 = pauz2[Math.floor(Math.random() * pauz2.length)]
+const paus3 = pauz3[Math.floor(Math.random() * pauz3.length)]
+const paus4 = pauz4[Math.floor(Math.random() * pauz4.length)]
+const paus5 = pauz5[Math.floor(Math.random() * pauz5.length)]
+var pcpau1 = ["Minuscúlo", `Pequenino`, `Pequeno`, `Médio`, `Grandinho`, `Grande`, `Grandão`, `Gigante`, `Gigantesco`, `Enorme`, `BATENDO NA LUA`, `QUEIMADO, TÃO GRANDE QUE BATEU NO SOL E QUEIMOU ksksksk`]
+var pcpau2 = ["Minuscúlo", `Pequenino`, `Pequeno`, `Médio`, `Grandinho`, `Grande`, `Grandão`, `Gigante`, `Gigantesco`, `Enorme`, `BATENDO NA LUA`, `QUEIMADO, TÃO GRANDE QUE BATEU NO SOL E QUEIMOU ksksksk`]
+var pcpau3 = ["Minuscúlo", `Pequenino`, `Pequeno`, `Médio`, `Grandinho`, `Grande`, `Grandão`, `Gigante`, `Gigantesco`, `Enorme`, `BATENDO NA LUA`, `QUEIMADO, TÃO GRANDE QUE BATEU NO SOL E QUEIMOU ksksksk`]
+var pcpau4 = ["Minuscúlo", `Pequenino`, `Pequeno`, `Médio`, `Grandinho`, `Grande`, `Grandão`, `Gigante`, `Gigantesco`, `Enorme`, `BATENDO NA LUA`, `QUEIMADO, TÃO GRANDE QUE BATEU NO SOL E QUEIMOU ksksksk`]
+var pcpau5 = ["Minuscúlo", `Pequenino`, `Pequeno`, `Médio`, `Grandinho`, `Grande`, `Grandão`, `Gigante`, `Gigantesco`, `Enorme`, `BATENDO NA LUA`, `QUEIMADO, TÃO GRANDE QUE BATEU NO SOL E QUEIMOU ksksksk`]
+const pc1 = pcpau1[Math.floor(Math.random() * pcpau1.length)]
+const pc2 = pcpau2[Math.floor(Math.random() * pcpau2.length)]
+const pc3 = pcpau3[Math.floor(Math.random() * pcpau3.length)]
+const pc4 = pcpau4[Math.floor(Math.random() * pcpau4.length)]
+const pc5 = pcpau5[Math.floor(Math.random() * pcpau5.length)]
+pdr = `Esses são os caras com o menor e maior pau do Grupo\n${groupName}\n\n@${paus1.id.split('@')[0]}\n${pc1}\n@${paus2.id.split('@')[0]}\n${pc2}\n@${paus3.id.split('@')[0]}\n${pc3}\n@${paus4.id.split('@')[0]}\n${pc4}\n@${paus5.id.split('@')[0]}\n${pc5}\n\n ${setting.NomeDoBot}`
+membr.push(paus1.id)
+membr.push(paus2.id)
+membr.push(paus3.id)
+membr.push(paus4.id)
+membr.push(paus5.id)
+mentions(pdr, membr, true)
+break 
+
+case 'jogodavelha':
+if(!isGroup) return reply('comando apenas para grupos')
+joguinhodavelhajs.push(sender)
+fs.writeFileSync('./datab/usuarios/joguinhodavelha.json', JSON.stringify(joguinhodavelhajs))
+joguinhodavelhajs2.push(from)
+fs.writeFileSync('./datab/usuarios/joguinhodavelha2.json', JSON.stringify(joguinhodavelhajs2))
+if (fs.existsSync(`./armor/tictactoe/db/${from}.json`)) {
+const boardnow = setGame(`${from}`);
+const matrix = boardnow._matrix;
+const chatMove = `*🎮Ꮐ̸Ꭺ̸Ꮇ̸Ꭼ̸ Ꭰ̸Ꭺ̸ Ꮩ̸Ꭼ̸Ꮮ̸Ꮋ̸Ꭺ̸🕹️*
+     
+[❗] Alguém está jogando no momento...\n\n@${boardnow.X} VS @${boardnow.O}
+     
+❌ : @${boardnow.X}
+⭕ : @${boardnow.O}
+     
+ Sua vez : @${boardnow.turn == "X" ? boardnow.X : boardnow.O}
+     
+${matrix[0][0]}  ${matrix[0][1]}  ${matrix[0][2]}
+${matrix[1][0]}  ${matrix[1][1]}  ${matrix[1][2]}
+${matrix[2][0]}  ${matrix[2][1]}  ${matrix[2][2]}
+`;
+conn.sendMessage(from, {text: chatMove}, {quoted: info,
+contextInfo: {
+mentionedJid: [
+boardnow.X + "@s.whatsapp.net",
+boardnow.O + "@s.whatsapp.net",
+],
+},
+});
+return;
+}
+if (argss.length === 1)
+return reply(`*⟅❗⟆ Jogue com Alguem!!!!*
+*para inicar a partida : ${prefix + command} @membro do gp*`);
+const boardnow = setGame(`${from}`);
+console.log(`Start No jogodavelha ${boardnow.session}`);
+boardnow.status = false;
+boardnow.X = sender.replace("@s.whatsapp.net", "");
+boardnow.O = argss[1].replace("@", "");
+fs.writeFileSync(`./armor/tictactoe/db/${from}.json`,
+JSON.stringify(boardnow, null, 2)
+);
+const strChat = `*『📌ᎬՏᏢᎬᎡᎪΝᎠϴ ϴ ϴᏢϴΝᎬΝͲᎬ⚔️』*
+     
+@${sender.replace("@s.whatsapp.net",
+"")} _está te desafiando para uma partida de jogo da velha..._
+_[ ${argss[1]} ] Use *『S』* para aceitar ou *『N』* para não aceitar..._
+     `;
+conn.sendMessage(from, {text: strChat}, {quoted: info,
+contextInfo: {
+mentionedJid: [sender, argss[1].replace("@", "") + "@s.whatsapp.net"],
+},
+});
+break
+
+case 'resetarvelha':
+case 'resetavelha':  
+case 'resetarv':
+case 'resetav': 
+case 'resetvelha':
+case 'rv': 
+if (!isJoguin && !isGroupAdmins) return reply(`Fale com quem iniciou o jogo, só ele pode resetar, ou então algum ADM`)
+if (fs.existsSync("./armor/tictactoe/db/" + from + ".json")) {
+fs.unlinkSync("./armor/tictactoe/db/" + from + ".json");
+reply(`Jogo da velha resetado com sucesso nesse grupo!`);
+joguinhodavelhajs.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha.json', JSON.stringify(joguinhodavelhajs))
+joguinhodavelhajs2.splice([])
+fs.writeFileSync('./datab/usuarios/joguinhodavelha2.json', JSON.stringify(joguinhodavelhajs2))
+} else {
+reply(`Não a nenhuma sessão em andamento...`);
+}
+break
+
+case "ppt":
+if (args.length < 1) return reply(`Você deve digitar ${prefix}ppt pedra, ${prefix}ppt papel ou ${prefix}ppt tesoura`)
+ppt = ["pedra", "papel", "tesoura"]
+ppy = ppt[Math.floor(Math.random() * ppt.length)]
+ppg = Math.floor(Math.random() * 1) + 10
+pptb = ppy
+if ((pptb == "pedra" && args == "papel") ||
+(pptb == "papel" && args == "tesoura") ||
+(pptb == "tesoura" && args == "pedra")) {
+var vit = "vitoria"
+} else if ((pptb == "pedra" && args == "tesoura") ||
+(pptb == "papel" && args == "pedra") ||
+(pptb == "tesoura" && args == "papel")) {
+var vit = "derrota"
+} else if ((pptb == "pedra" && args == "pedra") ||
+(pptb == "papel" && args == "papel") ||
+(pptb == "tesoura" && args == "tesoura")) {
+var vit = "empate"
+} else if (vit = "undefined") {
+return reply(`Você deve digitar ${prefix}ppt pedra, ${prefix}ppt papel ou ${prefix}ppt tesoura`)
+}
+if (vit == "vitoria") {
+var tes = "Vitória do jogador"
+}
+if (vit == "derrota") {
+var tes = "A vitória é do BOT"
+}
+if (vit == "empate") {
+var tes = "O jogo terminou em empate"
+}
+reply(`${NomeDoBot} jogou: ${pptb}\nO jogador jogou: ${args}\n\n${tes}`)
+if (tes == "Vitória do jogador") {
+reply(pph)
+}
+break
+
+case 'cassino':
+ //CASSINO
+ const soto = [
+'🍊 : 🍒 : 🍐',
+'🍒 : 🔔 : 🍊',
+'🍇 : 🍇 : 🍇',
+'🍊 : 🍋 : 🔔',
+'🔔 : 🍒 : 🍐',
+'🔔 : 🍒 : 🍊',
+'🍊 : 🍋 : ??',		
+'🍐 : 🍒 : 🍋',
+'🍐 : 🍐 : 🍐',
+'🍊 : 🍒 : 🍒',
+'🔔 : 🔔 : 🍇',
+'🍌 : 🍒 : 🔔',
+'🍐 : 🔔 : 🔔',
+'🍊 : 🍋 : 🍒',
+'🍋 : 🍋 : 🍌',
+'🔔 : 🔔 : 🍇',
+'🔔 : 🍐 : 🍇',
+'🔔 : 🔔 : 🔔',
+'🍒 : 🍒 : 🍒',
+'🍌 : 🍌 : 🍌'
+]		
+const somtoy2 = sotoy[Math.floor(Math.random() * sotoy.length)]
+if ((somtoy2 == '🥑 : 🥑 : 🥑') ||(somtoy2 == '🍉 : 🍉 : 🍉') ||(somtoy2 == '🍓 : 🍓 : 🍓') ||(somtoy2 == '🍎 : 🍎 : 🍎') ||(somtoy2 == '🍍 : 🍍 : 🍍') ||(somtoy2 == '🥝 : 🥝 : 🥝') ||(somtoy2 == '🍑 : 🍑 : 🍑') ||(somtoy2 == '🥥 : 🥥 : 🥥') ||(somtoy2 == '🍋 : 🍋 : 🍋') ||(somtoy2 == '🍐 : 🍐 : 🍐') ||(somtoy2 == '🍌 : 🍌 : 🍌') ||(somtoy2 == '🍒 : 🍒 : 🍒') ||(somtoy2 == '🔔 : 🔔 : 🔔') ||(somtoy2 == '🍊 : 🍊 : 🍊') ||(somtoy2 == '🍇 : 🍇 : 🍇')) {
+var Vitória = "Você ganhou!!!"
+} else {
+var Vitória = "Você perdeu..."
+}
+	const cassino = `
+┏━━━━❪🎰❫━━━━
+┣► ${somtoy2}◄┛
+┗━━━━❪💰❫━━━━
+
+*${Vitória}*`
+reply(cassino)
+if (Vitória == "Você ganhou!!!") {
+reply('Parabéns')
+}
+await limitAdd(sender)
+break
+
+case 'quizanimais':
+if(!isGroup) return reply('Comando apenas para grupos')
+const animaisquiz = Math.floor(Math.random() * quizanimais.length)
+if(!isGroupAdmins) return reply('Comando apenas para admins')
+if(args.length == 0) return reply('use 1 para ativar o jogo \npara desativar use quizanimais 0')
+if (args.join(' ') === '1') {
+if(fs.existsSync(`./armor/quizanim-${from}.json`)) {
+let dataAnagrama2 = JSON.parse(fs.readFileSync(`./armor/quizanim-${from}.json`))
+imagemtexto =`                             「❓Quiz❓」`
+wew = await getBuffer(`${dataAnagrama2.foto}`)   
+await conn.sendMessage(from, {image: wew, caption: imagemtexto, thumbnail: wew}, {quoted: selo})
+} else {
+fs.writeFileSync(`./armor/quizanim-${from}.json`, `${JSON.stringify(quizanimais[animaisquiz])}`)
+imagemtexto =`                             「❓Quiz❓」`
+wew = await getBuffer(`${dataAnagrama2.foto}`)  
+if(verificado === true) {
+await conn.sendMessage(from, {image: wew, caption: imagemtexto, thumbnail: wew}, {quoted: selo})
+} else {
+await conn.sendMessage(from, {wew: image, caption: imagemtexto, thumbnail: wew}, {quoted: info})
+}
+}
+} else if (args.join(' ') ==='0') {
+if(!fs.existsSync(`./armor/quizanim-${from}.json`)) return reply('Não tem como desativar o jogo pôs ele não foi ativado')
+fs.unlinkSync(`./armor/quizanim-${from}.json`)
+reply("Desativado com sucesso")
+}
+await limitAdd(sender)
+break
+
+case 'anagrama':
+if(!isGroup) return reply('comando apenas para grupos')
+const anaaleatorio = Math.floor(Math.random() * palavrasANA.length)
+if(!isGroupAdmins) return reply('comando apenas para admins')
+if(args.length == 0) return reply('use 1 para ativar o jogo do anagrama\npara desativar use anagrama 0')
+if (args.join(' ') === '1') {
+if(fs.existsSync(`./armor/anagrama-${from}.json`)) {
+let dataAnagrama2 = JSON.parse(fs.readFileSync(`./armor/anagrama-${from}.json`))
+reply(`o jogo já foi iniciado neste grupo:
+palavra: ${dataAnagrama2.embaralhada}
+dica: ${dataAnagrama2.dica}
+`)} else {
+fs.writeFileSync(`./armor/anagrama-${from}.json`, `${JSON.stringify(palavrasANA[anaaleatorio])}`)
+conn.sendMessage(from, {text: `
+╭─────≽「 👾 ANAGRAMA 👾 」
+│➽ DESCUBRA A PALAVRA
+│➽ ANAGRAMA: ${palavrasANA[anaaleatorio].embaralhada}
+│➽ DICA: ${palavrasANA[anaaleatorio].dica}
+╰────────────────────────
+`})
+}
+} else if (args.join(' ') ==='0') {
+if(!fs.existsSync(`./armor/anagrama-${from}.json`)) return reply('não tem como desativar o jogo do anagrama pôs ele não foi ativado')
+fs.unlinkSync(`./armor/anagrama-${from}.json`)
+reply("desativado com sucesso")
+}
+await limitAdd(sender)
+break
+
+case 'revelaranime':
+case 'revelaanime':  
+if (!isGroupAdmins) return reply('somente adms')
+let dataAnagrama = JSON.parse(fs.readFileSync(`./armor/quizanime-${from}.json`))
+reply (`${dataAnagrama.original}`)
+break
+
+case 'revelaranimal':
+case 'revelaanimal':  
+if (!isGroupAdmins) return reply('somente adms')
+let dataAnagramaa = JSON.parse(fs.readFileSync(`./armor/quizanim-${from}.json`))
+reply (`${dataAnagramaa.original}`)
+break
+
+//=======(FIM-BRINCADEIRAS-JOGOS)========\\
+
+
+
+//=(CASE-SIMIH-INTELIGÊNCIA-ARTIFICIAL)=\\
+
+case 'simi':
+if(isSimi) return reply('Desativado')
+sduy = args.join(" ")
+data = await fetchJson(`https://api.simsimi.net/v2/?text=${sduy}&lc=pt`, {method: 'get'})
+simi = `${data.success}`  
+reply(simi)
+break
+
+case 'simih':
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isSimi) return reply('O modo Simi está ativo')
+samih.push(from)
+fs.writeFileSync('./datab/usuarios/simi.json', JSON.stringify(samih))
+reply('Ativado com sucesso o modo simi neste grupo 😗')
+} else if (Number(args[0]) === 0) {
+if(!isSimi) return reply('Já está Desativado.')
+samih.splice(from, 1)
+fs.writeFileSync('./datab/usuarios/simi.json', JSON.stringify(samih))
+reply('Desativado modo simi com sucesso neste grupo 😡️')
+} else {
+reply('1 para ativar, 0 para desativar, lerdao vc em KKKKK')
+}
+break
+
+case 'simih2':
+if (!isGroupAdmins) return reply(enviar.msg.adm)
+if (args.length < 1) return reply('Hmmmm')
+if (Number(args[0]) === 1) {
+if (isSimi2) return reply('O modo Simi está ativo')
+samih2.push(from)
+fs.writeFileSync('./armor/simi.json', JSON.stringify(samih2))
+reply('Ativado com sucesso o modo simi neste grupo 😗, Este simih2 ele aprende as respostas e perguntas das pessoas, conforme vai falando, por isso, só recomendo utilizar ele no termux, pois no site ou lugar diferente do termux que você utilizar, ele não vai armazenar os dados nescessarios')
+} else if (Number(args[0]) === 0) {
+if(!isSimi2) return reply('Já está Desativado.')
+samih2.splice(from, 1)
+fs.writeFileSync('./armor/simi.json', JSON.stringify(samih2))
+reply('Desativado modo simi com sucesso neste grupo 😡️')
+} else {
+reply('1 para ativar, 0 para desativar, lerdao vc em KKKKK')
+}
+break
+
+//========================================\\
+
+
+//==(AUDIOS/DE-MUSICA/ZOUEIRA/ETC..)===\\
+case 'bot':
+const soundft = fs.readFileSync('audios/chato.mp3')
+await conn.sendMessage(from, {audio: soundft, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+break
+
+case 'bote':
+const cmdoo = fs.readFileSync('audios/bote.mp3')
+await conn.sendMessage(from, {audio: cmdoo, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+break 
+
+//=======================================\\
+
+
+//=====(ALTERADOR-DE-AUDIO/VIDEO)=======\\
+
+case 'videocontrario':
+case 'reversevid':
+if (!isQuotedVideo) return reply('Marque um vídeo')
+reply(enviar.espere)
+encmedia = isQuotedVideo ? info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage : info.message.videoMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'video')
+fs.writeFileSync(rane, buffimg)
+media = rane
+ran = getRandom('.mp4')
+exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
+fs.unlinkSync(media)
+if (err) return reply(`Err: ${err}`)
+buffer453 = fs.readFileSync(ran)
+conn.sendMessage(from, {video: buffer453, mimetype: 'video/mp4'}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break 
+
+case 'videolento':
+case 'slowvid':  
+if (!isQuotedVideo) return reply('Marque um vídeo')
+reply(enviar.espere) 
+encmedia = isQuotedVideo ? info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage : info.message.videoMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'video')
+fs.writeFileSync(rane, buffimg)
+media = rane
+ran = getRandom('.mp4')
+exec(`ffmpeg -i ${media} -filter_complex "[0:v]setpts=2*PTS[v];[0:a]atempo=0.5[a]" -map "[v]" -map "[a]" ${ran}`, (err) => {
+fs.unlinkSync(media)
+if (err) return reply(`Err: ${err}`)
+buffer453 = fs.readFileSync(ran)
+conn.sendMessage(from, {video: buffer453, mimetype: 'video/mp4'}, {quoted: info })
+fs.unlinkSync(ran)
+})
+break
+
+case 'videorapido':
+case 'fastvid':  
+if (!isQuotedVideo) return reply('Marque um vídeo')
+reply(enviar.espere)
+encmedia = isQuotedVideo ? info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage : info.message.videoMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'video')
+fs.writeFileSync(rane, buffimg)
+media = rane
+ran = getRandom('.mp4')
+exec(`ffmpeg -i ${media} -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2[a]" -map "[v]" -map "[a]" ${ran}`, (err) => {
+fs.unlinkSync(media)
+if (err) return reply(`Err: ${err}`)
+buffer453 = fs.readFileSync(ran)
+conn.sendMessage(from, {video: buffer453, mimetype: 'video/mp4'}, {quoted: info })
+fs.unlinkSync(ran)
+})		
+break
+
+case 'grave2':
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -filter:a "atempo=1.6,asetrate=22100" ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'grave':
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -filter:a "atempo=0.9,asetrate=44100" ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'adolesc':
+case 'vozmenino':  
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break  
+
+case 'tomp3':
+case 'audio':
+case 'Audio':
+case 'áudio':
+if (!isQuotedVideo) return reply('Marque o video pfv')
+reply(enviar.espere)
+encmedia = isQuotedVideo ? info.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage : info.message.videoMessage
+rane = getRandom('.'+await getExtension(encmedia.mimetype))
+buffimg = await getFileBuffer(encmedia, 'video')
+fs.writeFileSync(rane, buffimg)
+media = rane 
+ran = getRandom('.mp4')
+exec(`ffmpeg -i ${media} ${ran}`, (err) => { 
+fs.unlinkSync(media)
+if (err) return reply('❌ Falha ao converter vídeo para mp3 ❌')
+buffer = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: buffer, mimetype: 'audio/mp4'}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'bass3':
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -af equalizer=f=20:width_type=o:width=2:g=15 ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'bass': 
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -af equalizer=f=20:width_type=o:width=2:g=15 ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'bass2': 
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'estourar': 
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -af equalizer=f=90:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'fast':
+case 'audiorapido':  
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -filter:a "atempo=0.9,asetrate=95100" ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Erro')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'esquilo':
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -filter:a "atempo=0.7,asetrate=65100" ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+case 'audiolento': 
+case 'slow':
+if (!isQuotedAudio) return reply('Marque um áudio')
+reply(enviar.espere)
+muk = isQuotedAudio ? info.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage : info.message.audioMessage
+rane = getRandom('.'+await getExtension(muk.mimetype))
+buffimg = await getFileBuffer(muk, 'audio')
+fs.writeFileSync(rane, buffimg)
+gem = rane
+ran = getRandom('.mp3')
+exec(`ffmpeg -i ${gem} -filter:a "atempo=0.9,asetrate=44100" ${ran}`, (err, stderr, stdout) => {
+fs.unlinkSync(gem)
+if (err) return reply('Error!')
+hah = fs.readFileSync(ran)
+conn.sendMessage(from, {audio: hah, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+fs.unlinkSync(ran)
+})
+break
+
+//=========(FIM-ALTERAR-AUDIO)===========\\
+
+
+//=======(JOGO-DA-VELHA-COM-MAQUINA)=======\\
+
+case 'tttme':
+if (!isGroup) return reply('SÓ EM GRUPO')
+const checkTTTIdMe = getTTTId(sender)
+if (checkTTTIdMe === undefined) addTTTId(sender)
+conn.sendMessage(from, {text: tttme(pushname, getTTTwins(sender), getTTTdefeats(sender), getTTTties(sender), getTTTpoints(sender))}, {quoted: info})
+break
+
+case 'tttrank':
+if (!isGroup) return reply(enviar.msg.grupo)
+tictactoe.sort((a, b) => (a.points < b.points) ? 1 : -1)
+mentioned_jid = []
+let board = '*🔥Ranking dos melhores players🔥*\n\n'
+try {
+for (let i = 0; i < 3; i++) {
+if (i == 0) {board += `${i + 1}º 🥇 : @${tictactoe[i].id.split('@')[0]}\n➻❥ *Ganhou: ${tictactoe[i].wins}*\n➻❥ *Perdeu: ${tictactoe[i].defeats}*\n➻❥ *Empates: ${tictactoe[i].ties}*\n*➻❥ Pontuação: ${tictactoe[i].points}*\n\n`
+
+} else if (i == 1) {board += `${i + 1}º 🥈 : @${tictactoe[i].id.split('@')[0]}\n➻❥ *Ganhou: ${tictactoe[i].wins}*\n➻❥ *Perdeu: ${tictactoe[i].defeats}*\n➻❥ *Empates: ${tictactoe[i].ties}*\n*➻❥ Pontuação: ${tictactoe[i].points}*\n\n`
+  
+} else if (i == 2) {board += `${i + 1}º 🥉 : @${tictactoe[i].id.split('@')[0]}\n➻❥ *Ganhou: ${tictactoe[i].wins}*\n➻❥ *Perdeu: ${tictactoe[i].defeats}*\n➻❥ *Empates: ${tictactoe[i].ties}*\n*➻❥ Pontuação: ${tictactoe[i].points}*\n\n`
+  
+}
+mentioned_jid.push(tictactoe[i].id)
+} 
+mentions(board, mentioned_jid, true)
+} catch (err) {
+console.log(err)
+await conn.sendMessage(from, {text: `*É necessário 3 jogadores para se construir um ranking*`}, {quoted: info})
+}
+break
+
+case 'jogar':
+tttset.playertest = sender
+if (!isGroup) {
+reply(ptbr.group())
+} else if (tttset.tttstatus == "off") {
+reply(`*O jogo não foi iniciado*\n*Digite ${prefix}ttt <dificukdade> para iniciar*`)
+} else if (tttset.player != tttset.playertest) {
+reply(`*O jogo já foi iniciado por outro player, aguarde ele terminar...*`)
+  
+} else if (tttset.tttantibug == "on") {
+reply(`Aguarde a ação anterior ser concluída...`)
+
+} else {
+tttset.tttantibug = "on"
+const coordX = args
+if (coordX != 'a1' && coordX != 'a2' && coordX != 'a3' &&
+coordX != 'b1' && coordX != 'b2' && coordX != 'b3' && coordX != 'c1' && coordX != 'c2' && coordX != 'c3') {
+reply(`*Diga a cordenada*\nExemplo: ${prefix}coord a1`)
+tttset.tttantibug = "off"
+} else {
+  
+switch (args[0]) {
+  
+case 'a1':
+if (esp.a1 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.a1 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+
+case 'a2':
+if (esp.a2 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.a2 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+
+case 'a3':
+if (esp.a3 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.a3 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+
+case 'b1':
+if (esp.b1 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.b1 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+                
+case 'b2':
+if (esp.b2 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.b2 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+                
+case 'b3':
+if (esp.b3 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.b3 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+                
+case 'c1':
+if (esp.c1 != "🔲") {
+ reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.c1 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+                
+case 'c2':
+if (esp.c2 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.c2 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+                
+case 'c3':
+if (esp.c3 != "🔲") {
+reply('Esse espaço ja foi marcado, tente outro')
+} else {
+esp.c3 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+
+}
+tttset.reActivate1 = "on"
+reply(`🌀1️⃣2️⃣3️⃣\n🅰️${esp.a1}${esp.a2}${esp.a3}\n🅱️${esp.b1}${esp.b2}${esp.b3}\n©️${esp.c1}${esp.c2}${esp.c3}`)
+var randomTTTXP = 0
+            
+if (WinnerX()) {
+if (isCmd) {
+switch (tttset.tttdifficulty) {
+              
+case "EASY":
+randomTTTXP = Math.floor(Math.random() * 25) + 25
+addLevelingXp(tttset.player, randomTTTXP)
+break
+
+case "NORMAL":
+randomTTTXP = Math.floor(Math.random() * 75) + 75
+addLevelingXp(tttset.player, randomTTTXP)
+break
+
+case "HARD":
+randomTTTXP = Math.floor(Math.random() * 200) + 200
+addLevelingXp(tttset.player, randomTTTXP)
+break
+                
+case "IMPOSSIBLE":
+randomTTTXP = Math.floor(Math.random() * 1000) + 1000
+addLevelingXp(tttset.player, randomTTTXP)
+break
+}
+conn.sendMessage(from, {text: `*VOCÊ VENCEU, PARABENS*\n\n *VOCÊ GANHOU ${randomTTTXP}XP*`})
+} else {
+conn.sendMessage(from,{text: `*VOCÊ VENCEU, PARABENS*`},)
+}
+
+const currentTTTwins = getTTTwins(tttset.player)
+const checkTTTIdWin = getTTTId(tttset.player)
+if (currentTTTwins === undefined && checkTTTIdWin === undefined) addTTTId(tttset.player)
+addTTTwin(tttset.player, 1)
+addTTTpoints(tttset.player, randomTTTXP)
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.waitingTime = "on"
+} else if (WinnerO()) {
+				  
+if (isCmd) {
+switch (tttset.tttdifficulty) {
+case "EASY":
+randomTTTXP = 0 - (Math.floor(Math.random() * 200) + 200)
+addLevelingXp(tttset.player, randomTTTXP)
+break
+					
+case "NORMAL":
+randomTTTXP = 0 - (Math.floor(Math.random() * 75) + 75)
+addLevelingXp(tttset.player, randomTTTXP)
+break
+					
+case "HARD":
+randomTTTXP = 0 - (Math.floor(Math.random() * 25) + 25)
+addLevelingXp(tttset.player, randomTTTXP)
+break
+					
+case "IMPOSSIBLE":
+randomTTTXP = 0
+addLevelingXp(tttset.player, randomTTTXP)
+break
+
+}	
+conn.sendMessage(from, {text: `*Você perdeu*\n\n AGORA VC PAGARÁ: ${randomTTTXP}XP`})
+	
+} else {
+conn.sendMessage(from, {text: `*Você perdeu*`})
+}
+const currentTTTdefeats = getTTTdefeats(tttset.player)
+const checkTTTIdDefeat = getTTTId(tttset.player)
+if (currentTTTdefeats === undefined && checkTTTIdDefeat === undefined) addTTTId(tttset.player)
+addTTTdefeat(tttset.player, 1)
+addTTTpoints(tttset.player, randomTTTXP)
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.waitingTime = "on"
+				
+} else if (Tie()) {
+if (isCmd) {
+conn.sendMessage(from, {text: `*JOGO EMPATADO, NÃO HOUVE PERDAR*`})
+} else {
+conn.sendMessage(from, {text: `*JOGO, EMPATADO, TENHA UM BOM DIA*`})
+}
+
+const currentTTTties = getTTTties(tttset.player)
+const checkTTTIdTie = getTTTId(tttset.player)
+if (currentTTTties === undefined && checkTTTIdTie === undefined) addTTTId(tttset.player)
+addTTTtie(tttset.player, 1)
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.waitingTime = "on"
+}
+tttset.tttantibug = "off"
+}
+}
+break
+				
+case 'ttt':
+const limitrl = getLimit(sender, daily)
+if (!isGroup) {
+reply(enviar.espere)
+} else if (tttset.tttstatus == "on") {
+reply(`Alguém já está jogando no momento\nPor favor aguarde um instante...`)
+} else if (tttset.waitingTime == "on") {
+reply(`Alguém jogou recentemente\nPor favor aguarde o tempo de espera...`)
+} else if (args == 0 || (args != 'easy' && args != 'Easy' && args != 'EASY' && args != 'normal' && args != 'Normal' && args != 'NORMAL' && args != 'hard' && args != 'Hard' && args != 'HARD'&& args != 'impossible'&& args != 'Impossible' && args != 'IMPOSSIBLE')) {
+reply(`Defina a dificuldade\nEx.: ${prefix}ttt easy\n\nDificuldades: easy, normal, hard e impossible`)
+
+} else {
+tttset.tttstatus = "on"
+tttset.player = sender
+tttset.playerName = pushname
+tttset.mentionPlayer = info
+tttset.local = from
+if (args == 'easy' || args == 'Easy' || args == 'EASY') {
+tttset.tttdifficulty = "EASY"
+} else if (args == 'normal' || args == 'Normal' || args == 'NORMAL') {
+tttset.tttdifficulty = "NORMAL"
+} else if (args == 'hard' || args == 'Hard' || args == 'HARD') {
+tttset.tttdifficulty = "HARD"
+} else if (args == 'impossible' || args == 'Impossible' || args == 'IMPOSSIBLE') {
+tttset.tttdifficulty = "IMPOSSIBLE"
+}
+const randomStartIA = Math.floor(Math.random() * 3)
+if (randomStartIA == 0) {
+IA()
+tttset.reActivate1 = "on"	
+}
+blat =  `🌀1️⃣2️⃣3️⃣\n🅰️${esp.a1}${esp.a2}${esp.a3}\n🅱️${esp.b1}${esp.b2}${esp.b3}\n©️${esp.c1}${esp.c2}${esp.c3}`
+conn.sendMessage(from, {text: `${blat}\n\nCaso não saiba como jogar digite: ${prefix}ttthelp`})
+setTimeout( () => {
+tttset.waitingTime = "off"
+tttset.autoEndTime = "on"
+}, 12000) //2 minutos
+addLimit(sender, daily)
+}
+break
+
+case 'ttthelp':
+conn.sendMessage(from, {text: ttthelp(prefix)})
+break
+//==========(EFEITOS-MARCAR)==========\\
+
+case 'triggered':
+try {
+if(!isQuotedImage) return reply("Marque uma imagem")
+if ((isMedia && !info.message.videoMessage || isQuotedImage || isQuotedVideo ) && args.length == 0) {
+boij = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo : info
+imagem = await downloadContentFromMessage(boij, 'image')
+owgi = Buffer.from([])
+for await(const send of imagem) { owgi = Buffer.concat( [ owgi, send ] ) }
+res = await upload(owgi)
+post = await fetchJson(`https://aleatoryapi.herokuapp.com/canvas/trigger?url=${res}&apikey=${keyale}`)
+sendStickerFromUrl(from, {sticker: post}, {quoted:info})
+} else {
+reply('error')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'togif':
+if (!isQuotedSticker) return reply('[ ❗ ] Marque a figurinha animada!')
+if ((isMedia && !info.message.videoMessage || isQuotedSticker) && args.length == 0) {
+buff = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage, 'sticker')
+reply('*「 ❗ 」 Aguarde, convertendo a figu em gif...*')
+a = await webp_mp4(buff)
+mp4 = await getBuffer(a)
+conn.sendMessage(from, {video: mp4, gifPlayback: true, filename: `stick.gif`}, {quoted: info})
+fs.unlinkSync(buff)
+}
+break
+
+case 'rename':
+case 'roubar':  
+if (!isQuotedSticker) return reply('Marque uma figurinha...')
+encmediats = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage, 'sticker')
+var kls = q
+var pack = kls.split("/")[0];
+var author2 = kls.split("/")[1];
+if (!q) return reply('*E o autor e o nome do pacote?*')
+if (!pack) return reply(`*por favor escreve o formato certo: ${prefix + command} sad/bla*`)
+if (!author2) return reply(`*por favor escreve o formato certo: ${prefix + command} sad/dms*`)
+reply(enviar.espere)
+bas64 = `data:image/jpeg;base64,${encmediats.toString('base64')}`
+var mantap = await convertSticker(bas64, `${author2}`, `${pack}`)
+var sti = new Buffer.from(mantap, 'base64');
+conn.sendMessage(from, {sticker: sti, contextInfo: { externalAdReply:{title: `${pack}|${author2}`,body:"", previewType:"PHOTO",thumbnail: sti}}}, {quoted: info})
+.catch((err) => {
+reply(`❎ Error, tenta mais tarde`); 
+})
+break
+
+case 'rip':  
+case 'morto':  
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+postt = await getBuffer(`http://aleatoryapi.herokuapp.com/canvas/rip?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'lgbt':  
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+postt = await getBuffer(`https://aleatoryapi.herokuapp.com/canvas/lgbt?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'trash':
+case 'lixo':  
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+reply(enviar.espere)
+link = await upload(base64)
+postt = await getBuffer(`http://aleatoryapi.herokuapp.com/canvas/trash?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'comporn':
+try {
+txt = body.slice(9)
+jrr = txt.split("/")[0];
+jrr1 = txt.split("/")[1];
+if(!txt.includes("/")) return reply(`Cade a /\nExemplo: ${prefix + command} Sad/demais`)
+reply(enviar.espere)
+buffer = await getBuffer(`https://aleatoryapi.herokuapp.com/canvas/phub?nome=${jrr}&msg=${jrr1}&foto=https://telegra.ph/file/954832554bf2b2e40f932.jpg&apikey=${keyale}`)
+await conn.sendMessage(from, {image: buffer}, {quoted: info})
+} catch {
+reply('ERROR')
+}
+break 
+
+case 'preso':
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+postt = await getBuffer(`https://aleatoryapi.herokuapp.com/canvas/jail?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'legenda':
+try {
+gh = args.join(" ")        
+txt1 = gh.split('/')[0] || ''
+txt2 = gh.split('/')[1] || ''
+if(!gh.includes("/")) return reply(`Cade a / mano?\nExemplo: ${prefix + command} Sad/Demais`)  
+if ((isMedia && !info.message.videoMessage || isQuotedImage || isQuotedSticker)) {
+base64 = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage, 'image')
+link = await upload(base64)
+postt = await getBuffer(`https://aleatoryapi.herokuapp.com/api/legenda?url=${link}&texto1=${encodeUrl(txt1)}&texto2=${encodeUrl(txt2)}&apikey=${keyale}`) 
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('Error!!')
+}
+break
+
+case 'zombie':
+case 'zumbi':  
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+jrd = await fetchJson(`https://jonaz-api-v2.herokuapp.com/zombie?url=${link}`)
+zumb = await getBuffer(jrd.result)
+conn.sendMessage(from, {image: zumb}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR, DESCULPE.')
+}
+break
+
+case 'borrar':
+case 'figuborrada':
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+postt = await getBuffer(`https://aleatoryapi.herokuapp.com/canvas/blur?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'hitler':
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+postt = await getBuffer(`http://aleatoryapi.herokuapp.com/canvas/hitler?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'deletef':
+try {
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+postt = await getBuffer(`http://aleatoryapi.herokuapp.com/canvas/delete?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info})
+} else {
+reply('Selecione uma imagem...!')
+}
+} catch {
+reply('ERROR')
+}
+break
+
+case 'wanted':
+case 'procurado':
+if ((isMedia && !info.message.videoMessage || isQuotedImage)) {
+post = isQuotedImage ? JSON.parse(JSON.stringify(info).replace('quotedM','m')).message.extendedTextMessage.contextInfo.message.imageMessage : info
+reply(enviar.espere)
+imagem = await downloadContentFromMessage(post, 'image')
+base64 = Buffer.from([])
+for await(const send of imagem) { base64 = Buffer.concat( [ base64, send ] ) }
+link = await upload(base64)
+postt = await getBuffer(`http://aleatoryapi.herokuapp.com/canvas/procurado?url=${link}&apikey=${keyale}`)
+conn.sendMessage(from, {image: postt}, {quoted: info}).catch(e => {
+reply("Error!!")  
+})
+} else {
+reply('Selecione uma imagem...!')
+}
+break
+
+//=======(FIM-EFEITOS-MARCAR)=========\\
+
+default:
+
+//===(CRÉDITOS : ALEATORY CONTEÚDOS)==\\
+
+if(isBotGroupAdmins && isAntiCtt && type === 'contactMessage') {
+if(isGroupAdmins) return conn.sendMessage(from, {text: 'Contato detectado, você é adm, então não irei ti remover'}, {quoted: info})
+await conn.sendMessage(from, {text: 'opa fechado pelo bot detectado trava contato ou vcard, caso for um engano, fale com algum adm.'}, {quoted: selo})
+await conn.groupSettingUpdate(from, 'announcement')
+await sleep(2000);
+Kic = `${sender.split("@")[0]}@s.whatsapp.net`
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'o grupo sera limpado para evitar fazer efeito da trava'}, {quoted:selo})
+await sleep(3000);
+clear = `🗑️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🗑️\n❲❗❳ *Lɪᴍᴘᴇᴢᴀ ᴅᴇ Cʜᴀᴛ Cᴏɴᴄʟᴜɪ́ᴅᴀ* ✅`
+conn.sendMessage(from, {text: clear}, {quoted: selo, contextInfo : { forwardingScore: 500, isForwarded:true}})
+await sleep(3000);
+await conn.sendMessage(from, { text: 'agora enviarei destrava aguarde '}, {quoted:selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, { text: 'reporte ao adm o ocorrido '}, {quoted:selo})
+await sleep(5000);
+await conn.groupSettingUpdate(from, 'not_announcement')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'Aberto nao marque a trava ou levara ban✅'}, {quoted:selo})
+}
+
+if(isBotGroupAdmins && isAntiCtt && type === 'contactsArrayMessage') {
+if(isGroupAdmins) return conn.sendMessage(from, {text: 'Contato detectado, você é adm, então não irei ti remover'}, {quoted: info})
+await conn.sendMessage(from, {text: 'opa fechado pelo bot detectado trava contatos'}, {quoted: selo})
+await conn.groupSettingUpdate(from, 'announcement')
+await sleep(2000);
+Kic = `${sender.split("@")[0]}@s.whatsapp.net`
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'o grupo sera limpado para evitar fazer efeito da trava'}, {quoted:selo})
+await sleep(3000);
+clear = `🗑️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🗑️\n❲❗❳ *Lɪᴍᴘᴇᴢᴀ ᴅᴇ Cʜᴀᴛ Cᴏɴᴄʟᴜɪ́ᴅᴀ* ✅`
+conn.sendMessage(from, {text: clear}, {quoted: selo, contextInfo : { forwardingScore: 500, isForwarded:true}})
+await sleep(3000);
+await conn.sendMessage(from, { text: 'agora enviarei destrava aguarde '}, {quoted:selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, { text: 'reporte ao adm o ocorrido '}, {quoted:selo})
+await sleep(5000);
+await conn.groupSettingUpdate(from, 'not_announcement')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'Aberto nao marque a trava ou levara ban✅'}, {quoted:selo})
+}
+
+if(isBotGroupAdmins && Antiloc && type === 'locationMessage') {
+if(isGroupAdmins) return conn.sendMessage(from, {text: 'Localização detectada, você é adm, então não irei ti remover'}, {quoted: info})
+await conn.sendMessage(from, {text: 'opa fechado pelo bot, detectado trava Localização ou localização comum, caso for um engano, fale com algum adm.'}, {quoted: selo})
+await conn.groupSettingUpdate(from, 'announcement')
+await sleep(2000);
+Kic = `${sender.split("@")[0]}@s.whatsapp.net`
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'o grupo sera limpado para evitar fazer efeito da trava'}, {quoted:selo})
+await sleep(3000);
+clear = `🗑️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🗑️\n❲❗❳ *Lɪᴍᴘᴇᴢᴀ ᴅᴇ Cʜᴀᴛ Cᴏɴᴄʟᴜɪ́ᴅᴀ* ✅`
+conn.sendMessage(from, {text: clear}, {quoted: selo, contextInfo : { forwardingScore: 500, isForwarded:true}})
+await sleep(3000);
+await conn.sendMessage(from, { text: 'agora enviarei destrava aguarde '}, {quoted:selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, { text: 'reporte ao adm o ocorrido '}, {quoted:selo})
+await sleep(5000);
+await conn.groupSettingUpdate(from, 'not_announcement')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'Aberto nao marque a trava ou levara ban✅'}, {quoted:selo})
+}
+
+if(isBotGroupAdmins && isAnticatalogo && type === 'productMessage') {
+if(isGroupAdmins) return conn.sendMessage(from, {text: 'Catalogo detectado, você é adm, então não irei ti remover'}, {quoted: info})
+await conn.sendMessage(from, {text: 'opa fechado pelo bot, detectado trava Catalogo ou Catalogo comum, caso for um engano, fale com algum adm.'}, {quoted: selo})
+await conn.groupSettingUpdate(from, 'announcement')
+await sleep(2000);
+Kic = `${sender.split("@")[0]}@s.whatsapp.net`
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'o grupo sera limpado para evitar fazer efeito da trava'}, {quoted:selo})
+await sleep(3000);
+clear = `🗑️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🗑️\n❲❗❳ Lɪᴍᴘᴇᴢᴀ ᴅᴇ Cʜᴀᴛ Cᴏɴᴄʟᴜɪ́ᴅᴀ ✅`
+conn.sendMessage(from, {text: clear}, {quoted: selo, contextInfo : { forwardingScore: 500, isForwarded:true}})
+await sleep(3000);
+await conn.sendMessage(from, { text: 'agora enviarei destrava aguarde '}, {quoted:selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, {text: destrava(prefix)}, {quoted: selo})
+await sleep(2000);
+await conn.sendMessage(from, { text: 'reporte ao adm o ocorrido '}, {quoted:selo})
+await sleep(5000);
+await conn.groupSettingUpdate(from, 'not_announcement')
+await sleep(2000);
+await conn.sendMessage(from, { text: 'Aberto nao marque a trava ou levara ban✅'}, {quoted:selo})
+}
+
+if (budy.length >= limitefl) { 
+if(!isAntiFlood) return
+if(isAntiFlood && isGroupAdmins && isBotGroupAdmins && isPremium) {
+if(isBot) return 
+reply('Link detectado, porém usuário é admin')
+} else {
+if(SoDono) return
+if(isGroupAdmins) return
+if(isPremium) return
+var Kic = `${sender.split("@")[0]}@s.whatsapp.net`  
+setTimeout( () => {
+if(!SoDono  && !isnit && !issupre && !ischyt && !info.key.fromMe && !isGroupAdmins) return reply('Muitas características enviadas, eu afirmo que pode ser trava, por precauções, eu irei remover.')
+console.log(color('deram Spam','red'))
+}, 100)
+setTimeout( () => {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+setTimeout( () => {
+}, 0)
+}
+}
+
+//INICIO DE COMANDOS SEM PREFIXO
+switch(testat){
+}
+
+
+if (budy.includes("bot corno") || (budy.includes("Bot corno"))){
+reply("Corno é você otaru '-'")
+}
+
+if (budy.includes("bot") || (budy.includes("Bot"))){
+if(info.key.fromMe) return
+reply(`𝑂𝑙𝑎 ${pushname} 𝐶𝑜𝑚𝑜 𝑝𝑜𝑠𝑠𝑜 𝑙ℎ𝑒 𝑎𝑗𝑢𝑑𝑎𝑟?`)
+}
+
+if (budy.includes("Bom dia") || (budy.includes("bom dia"))){
+if(info.key.fromMe) return
+reply(`𝐁𝐎𝐌 𝐃𝐈𝐀 ${pushname} ☕🥰`)
+}
+
+if (budy.includes("Boa noite") || (budy.includes("boa noite"))){
+if(info.key.fromMe) return
+reply(`𝐁𝐎𝐀 𝐍𝐎𝐈𝐓𝐄 ${pushname} 🥱`)
+}
+
+if (budy.includes("Boa tarde") || (budy.includes("boa tarde"))){
+if(info.key.fromMe) return
+reply(`𝐁𝐎𝐀 𝐓𝐀𝐑𝐃𝐄 ${pushname} 🌅`)
+}
+
+if (budy.includes("boa noite") || (budy.includes("Boa noite"))){
+if(info.key.fromMe) return
+bla = fs.readFileSync("./sticker/noite.webp")
+conn.sendMessage(from, {sticker: bla} , {quoted: info})
+}
+
+if (budy.includes("adivinha meu celular") || (budy.includes("Adivinha meu celular") || (budy.includes("Adivinha Meu celular") || (budy.includes("Adivinha Meu Celular") || (budy.includes("bot qual meu celular")))) )){
+adivinha = info.key.id.length > 21 ? 'Android 🤣' : info.key.id.substring(0, 2) == '3A' ? 'IOS😂😂😅' : 'Zap zap web 😂😂☝🏼😅';
+await conn.sendMessage(from, {text: adivinha}, {quoted: info})
+}
+
+if (budy.includes("Corno") || (budy.includes("corno"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/corno.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Oiê") || (budy.includes("oie"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/Oiê.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Mlk") || (budy.includes("mlk"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/mlk.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Gemendo") || (budy.includes("gemendo"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/não.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("lugar") || (budy.includes("Lugar"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/sukuna.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Sukuna") || (budy.includes("sukuna"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/fim.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Pensando") || (budy.includes("pensando"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/pensando.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Nossa") || (budy.includes("nosaa"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/nossa.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("inútil") || (budy.includes("Inútil"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/voce.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Feliz") || (budy.includes("feliz"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/feliz.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (messagesC == "kkkkk"){
+tujuh = fs.readFileSync('./audios/kkk.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("Obaa") || (budy.includes("oba"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/Obaaa.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+if (budy.includes("cu") || (budy.includes("Cu"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/idiota.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("tmnc") || (budy.includes("Tmnc"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/lugar.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("saco") || (budy.includes("tédio"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/saco.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("humanos") || (budy.includes("usando"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/difícil.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("motivo") || (budy.includes("matar"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/vou.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("humor") || (budy.includes("Humor"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/humor.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+
+if (budy.includes("ganbare") || (budy.includes("Ganbare"))){
+if(info.key.fromMe) return
+tujuh = fs.readFileSync('./audios/ganbare.mp3');
+await conn.sendMessage(from, {audio: tujuh, mimetype: 'audio/mp4', ptt:true}, {quoted: info})
+}
+//==============(ANTILINK)===============\\
+
+switch(ants){
+} 
+
+ //=========[--ANTI PALAVRÃO --]==========\\
+if (isGroup && isPalavrao) { //CREDITOS TIAGO
+ if (palavra.includes(budy)) {
+ if (!isGroupAdmins) {
+ conn.sendMessage(from, {text: `SEM PALAVRÃO!! 😠!!`}, {quoted : info})       
+setTimeout( () => {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 2000)
+reply("2")
+setTimeout( () => {
+reply("1")
+}, 1000)
+setTimeout( () => {
+conn.sendMessage(from, {text: `*「 🗣️ANTI PALAVRÃO🗣️ 」*\nVocê será banido do gp, Na proxima tenha ética ao falar!!`}, {quoted : info}).catch(e => {
+conn.sendMessage(from, {text: `InFelizmente, não sou um administrador, entt não posso te banir!!`}, {quoted : info})
+})       							
+}, 0)
+} else {
+return reply(`VOCÊ PODE ${pushname} 😇`)
+}
+}
+}
+//=======================================\\
+
+if(isAntiLink) { 
+if(!isUrl(bady)) return 
+if(type === 'stickerMessage') return 
+if(type === 'audioMessage') return 
+if(type === 'imageMessage') return   
+if(budy.includes("https://") || (budy.includes(".net") || (budy.includes(".com" ) || (budy.includes("//s.kwai.app/") || (budy.includes("//vm.tiktok") || (budy.includes("www.") || (budy.includes("chat.whatsapp") || (budy.includes(".xml") || (budy.includes("youtube.com") || (budy.includes("//t.me/") || (budy.includes(".css")))))))))))) {
+linkgpp = await conn.groupInviteCode(from)
+if(budy.match(`${linkgpp}`)) return reply('Link do nosso grupo, não irei remover.. ')  
+if (!isGroup) return
+if (isGroupAdmins) return reply(`*Vc é admin do gp,fica tranquilo que não irei te banir.*`)
+setTimeout( () => {
+}, 1100)
+setTimeout( () => {
+conn.groupParticipantsUpdate(from, [sender], 'remove')
+}, 1000)
+}
+}
+//========================================\\
+
+
+//================(SIMIH-2)=================\\
+
+if (isSimi2 && !isCmd && isGroup) {
+if (type == 'conversation' || type == 'extendedTextMessage') {
+if (info.key.fromMe) return
+if (type == 'extendedTextMessage' && prefix.includes(info.message.extendedTextMessage.contextInfo.quotedMessage.conversation[0])) return
+insert(type, info)
+const sami = await response(budy)
+
+if (sami) conn.sendMessage(from, {text: sami, thumbnail: fs.readFileSync('./logos/logo2.jpg', 'base64')}, {quoted: info});
+}
+}
+
+ //===============(SIMIH-1)===============\\
+    
+if (isGroup && isSimi && budy != undefined) {
+if(type == 'imageMessage') return 
+if(type == 'audioMessage') return 
+if(type == 'stickerMessage') return   
+if(info.key.fromMe) return 
+console.log(budy)
+muehe = await simih(budy)
+console.log(muehe)
+reply(muehe)
+}
+
+//========================================\\
+hora2 = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+
+if (isCmd) {
+r = (Date.now() / 1000) - info.messageTimestamp
+			uptime = process.uptime()
+ sections = [
+     {
+	title: "𝚅𝙾𝙲𝙴 𝙳𝙸𝙶𝙸𝚃𝙾𝚄 𝚄𝙼 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙴𝚁𝚁𝙰𝙳𝙾",
+	rows: [
+	    {title: "𝑴𝑬𝑵𝑼", rowId: `${prefix}help`,description: "𝐒𝐔𝐊𝐔𝐍𝐀-𝐁𝐎𝐓"}]
+    },
+]
+listMessage = {
+  text: `⚠️❗𝑬𝑺𝑺𝑬 𝑪𝑶𝑴𝑨𝑵𝑫𝑶 𝑵𝑨𝑶 𝑬𝑿𝑰𝑺𝑻𝑬 ︎シ︎${pushname}\n\n|°𝐇𝐎𝐑𝐀➪ ${hora2}\n\n|°𝐃𝐀𝐓𝐀➪ ${date}\n\n ➪𝑉𝐸𝑅𝐼𝐹𝐼𝑄𝑈𝐸 𝑂 𝑀𝐸𝑁𝑈 𝐴𝐵𝐴𝐼𝑋𝑂☟︎︎︎`,
+
+  buttonText: "➪𝐌𝐄𝐍𝐔✔️",
+  sections
+}
+
+sendMsg = await conn.sendMessage(from, listMessage)
+}
+
+//========================================\\
+
+}
+} catch (erro) {
+console.log(erro)
+}
+})
+
+conn.ev.on('creds.update', saveState)
+
+}
+
+startAle()
