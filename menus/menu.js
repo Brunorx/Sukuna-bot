@@ -161,6 +161,10 @@ ________________________________
 │   ☺️ 𝙄𝙉𝙁𝙊𝙍𝙈𝘼𝘾̧𝘼̃𝙊 ☺️
 ├─━─━─━─ ⊱❀⊰ ─━─━─✿
 │❀╭╯
+│❀ ${prefix}criador
+|
+│❀ ${prefix}donoofc
+|
 │❀ ${prefix}Idiomas 
 |
 │❀ ${prefix}Bug 『 QUESTIONE 』 

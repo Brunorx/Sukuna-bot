@@ -12348,5 +12348,25 @@
         "cmd_messages": 0
       }
     ]
+  },
+  {
+    "groupId": "120363021534998092@g.us",
+    "numbers": [
+      {
+        "id": "553398195857@s.whatsapp.net",
+        "messages": 23,
+        "cmd_messages": 14
+      },
+      {
+        "id": "",
+        "messages": 20,
+        "cmd_messages": 0
+      },
+      {
+        "id": "5511972223986@s.whatsapp.net",
+        "messages": 2,
+        "cmd_messages": 2
+      }
+    ]
   }
 ]

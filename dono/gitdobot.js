@@ -21,7 +21,7 @@ termux-setup-storage
 
 (3) - - - - - - - - - - -
 
-cd /sdcard && git clone https://github.com/SUKUNA-M/SUKUNA-MD && cd /sdcard/SUKUNA-MD
+cd /sdcard/past do bot
 
 (4) - - - - - - - - - - -
 
@@ -31,7 +31,7 @@ sh start.sh
 
 Quando fechar o termux, para ligar, é só abrir o termux novamente, e desses 2 comandos:
 
-cd /sdcard/SUKUNA-MD
+cd /sdcard/pasta do Bot
 
 sh start.sh
 

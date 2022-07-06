@@ -84,7 +84,7 @@ const getRandom = (ext) => {
 const spinner = { 
   "interval": 150,
   "frames": [
-"A",
+"S",
 "SU",
 "SUKU",
 "SUKUNA",
@@ -116,7 +116,7 @@ const close = (id, text) => {
 }
 
 
-const banner2 = cfonts.render(('BY-SR.COLLINS😀😀'), {
+const banner2 = cfonts.render(('BY-SR.COLLINS\nCANAL:Sr.Collins\n QUALQUER DUVIDA ENTRE NO GRUPO "CHAT-BOT" LINK NO MENU DO BOT\n OBG POR UTILIZAR O SUKUNA-BOT\nESPERO QUE GOSTEM :)'), {
 font: 'console',
 align: 'center',
 gradrient: [`${cor4}`,`${cor2}`], 
@@ -229,7 +229,7 @@ authorname = 'SUKUNA-MD V-3'
 packname = '-sr-'
   
 function addMetadata(packname, author) {	
-if (!packname) packname = '-JR-'; if (!author) author = 'ALEATORY-MD-2.0';	
+if (!packname) packname = '-SR-'; if (!author) author = 'SUKUNA-MD-2.0';	
 author = author.replace(/[^a-zA-Z0-9]/g, '');	
 let name = `${author}_${packname}`
 if (fs.existsSync(`./armor/stickers/${name}.exif`)) return `./armor/stickers/${name}.exif`

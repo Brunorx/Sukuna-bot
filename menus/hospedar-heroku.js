@@ -73,7 +73,7 @@ Cole o e-mail do heroku, aperte enter, depois coloque a senha e dê enter..
 
 > 1 Categoria >
 
-cd /sdcard/SUKUNA-BOT-OFC
+cd /sdcard/pasta do Bot
 
 > 2 Categoria >
 
@@ -161,9 +161,6 @@ Caso continue bugando apague o qrcode "auth_info_multi.json", que se localizara 
  sh heroku.sh
  
  Vai atualizar pro heroku, qualquer problema, entre no grupo do Chat SUKUNA, e me procure e mostre o print do Error, depois que lançar esse comando, e atualizar, você vai retornar ao site e ligar o botão, e boa sorte na caminhada, amigo(a) 😁
- 
-})
-
 `
 }
 
