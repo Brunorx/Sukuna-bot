@@ -1,3 +1,3 @@
 Leia com atenção....
 
-Bot criado por : Sr.Collins
+Bot criado por : Zankz
